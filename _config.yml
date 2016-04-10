@@ -9,7 +9,7 @@
 title: Nuno Alexandre
 email: nunombalexandre at gmail
 description: > # this means to ignore newlines until "baseurl:"
-  An aspiring software craftsmen's blog
+  An aspiring software craftsman's blog
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://nunoalexandre.github.io" # the base hostname & protocol for your site
 linkedin_username: nunombalexandre
