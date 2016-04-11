@@ -3,6 +3,7 @@ layout: post
 title:  "Object Thinking – A Ball and A Dog"
 date:   2015-11-04 19:00:39 +0100
 categories: object-thinking
+comments: true
 ---
 >A Ball and A Dog
 >In true object-oriented programming, objects are living creatures, like you and me. They are living organisms, with their own behavior, properties and a life cycle.

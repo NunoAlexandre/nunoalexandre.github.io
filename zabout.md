@@ -2,6 +2,8 @@
 layout: page
 title: About
 permalink: /about/
+comments: true
+id: /about/
 ---
 
 Writing code since 2010, I’m a passionate and enthusiast software developer aspiring software craftsmanship. I love to code and it really drives me to develop better software everyday. I keep developing myself by devouring books, blogs and talks from software craftsmen and by taking online courses. I take design patterns and principles as both science and art. I’m very interested in behaviour driven development and in functional programming.

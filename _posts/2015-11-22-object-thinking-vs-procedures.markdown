@@ -3,8 +3,9 @@ layout: post
 title:  "Object Thinking – Behaviour vs Procedures"
 date:   2015-11-22 16:00:39 +0100
 categories: object-thinking
+comments: true
 ---
-Consider we need to work with a list of numbers and find the need to encapsulate some methods to help us out.
+Consider that we need to work with a list of numbers and find the need to encapsulate some methods to help us out.
 
 The first impulse would be to make something like a static IntegersListUtils. 
 Then, if for example we needed to get the maximum number, we would do IntegersListUtils.sort(list).get(0).

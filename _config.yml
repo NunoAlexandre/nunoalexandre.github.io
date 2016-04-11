@@ -14,6 +14,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://nunoalexandre.github.io" # the base hostname & protocol for your site
 linkedin_username: nunombalexandre
 github_username: nunoalexandre
-
+disqus_shortname: "nunoalexandre"
+permalink: :year/:month/:day/:title
 # Build settings
 markdown: kramdown

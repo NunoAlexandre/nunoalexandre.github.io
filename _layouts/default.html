@@ -9,12 +9,17 @@
 
     <div class="page-content">
       <div class="wrapper">
-        {{ content }}
+        {{ content }} 
+      </div>
+      <div class="wrapper">
+         {% include comments.html %}
       </div>
     </div>
+   
 
     {% include footer.html %}
 
+    <script id="dsq-count-scr" src="//nunoalexandre.disqus.com/count.js" async></script>  
   </body>
 
 </html>
