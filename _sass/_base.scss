@@ -110,16 +110,31 @@ a {
  * Blockquotes
  */
 blockquote {
-    color: $grey-color;
+    color: #5F5F5F;
+    background: #f9f9f9;
     border-left: 4px solid $grey-color-light;
-    padding-left: $spacing-unit / 2;
-    font-size: 18px;
+    padding: $spacing-unit * 0.75;
+    font-size: 16px;
     letter-spacing: 1px;
-    font-style: italic;
+    quotes: "\201C""\201D""\2018""\2019";
+    margin: 16px 0px;
 
     > :last-child {
         margin-bottom: 0;
     }
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+  text-align: justify;
 }
 
 
