@@ -6,11 +6,10 @@ categories: languages programming
 comments: true
 ---
 
-Some advocate that programming languages are no more than mere tools. 
-We can say the same about Mathematics but we are missing a lot.
+To some people programming languages are no more than mere tools. 
+We can say the same about Mathematics but we would be missing a lot.
 
 The design involved in a programming language marks a tremendous difference on how it makes you think and what code you write.
-In general we hate to hear that we are wrong and this affects our way of choosing and approaching programmming languages. 
 
 
 <img src="/images/languages-perspective.jpg"/>
@@ -19,10 +18,9 @@ In general we hate to hear that we are wrong and this affects our way of choosin
  > A language that doesn’t affect the way you think about programming, is not worth knowing. – **Alan Perlis**
 
 
-Usually juniors _love_ `PHP` because _"you don't have to set types and it just works! Ah, and no need to compile it!"_. Doesn't it sound like when we wishes our parents were as cool as our friend's ones that gave him all he wanted when he wanted?
+Usually juniors _love_ `PHP` because _"you don't have to set types and it just works!"_. Doesn't it sound like when we wished our parents were as cool as our friend's that gave him all he wanted when he wanted? Well, I hate `PHP`. It's just a piece of bad design and if you are going to do `PHP` please consider some framework like [Laravel](http://laravel.com).
 
-Well, I hate `PHP`. It's just a piece of bad design and if you are going to do `PHP` please consider some framework like [Laravel](http://laravel.com).
-
+In general we hate to hear that we are wrong and this affects our way of choosing and approaching programmming languages. 
 We prefer to have our code running at first and have have 20 iteractions to solve a bug than to just have our code running after 5 attemps and having it working correctly.
 
 I remember of my first semester at university learning Java and being frustrated that it simply wouldn't compile "_just_" because a type was not quite right. 
