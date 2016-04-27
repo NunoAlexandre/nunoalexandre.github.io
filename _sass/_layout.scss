@@ -257,7 +257,11 @@
 .face {
     position: relative;
     width: 100px;
-    margin: 0px auto 20px auto;
+    margin: 12px auto 20px auto;
+}
+
+.face img {
+    border-radius: 50%;
 }
 
 h1, h2, h3, h4, h5, h6 {
