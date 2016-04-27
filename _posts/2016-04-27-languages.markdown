@@ -13,6 +13,9 @@ The design involved in a programming language marks a tremendous difference on h
 In general we hate to hear that we are wrong and this affects our way of choosing and approaching programmming languages. 
 
 
+<img src="/images/languages-perspective.jpg"/>
+
+
  > A language that doesn’t affect the way you think about programming, is not worth knowing. – **Alan Perlis**
 
 
