@@ -228,7 +228,7 @@
     margin-bottom: $spacing-unit;
 
     h2 {
-        font-size: 32px;
+        font-size: 28px;
 
         @include media-query($on-laptop) {
             font-size: 28px;
@@ -236,7 +236,7 @@
     }
 
     h3 {
-        font-size: 26px;
+        font-size: 22px;
 
         @include media-query($on-laptop) {
             font-size: 22px;
@@ -244,10 +244,12 @@
     }
 
     h4 {
-        font-size: 20px;
+        font-size: 18px;
+        text-transform: uppercase;
+
 
         @include media-query($on-laptop) {
-            font-size: 18px;
+            font-size: 1px;
         }
     }
 }
@@ -255,5 +257,24 @@
 .face {
     position: relative;
     width: 100px;
-    margin: 0px auto;
+    margin: 0px auto 20px auto;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.post-content a {
+    border-bottom: 1px dashed #acacac;
+}
+
+.social-media-list li {
+    display: inline-block !important;
+}
+
+.icon--linkedin > svg  {
+    width: 23px;
+    height: 23px;
+}
+
