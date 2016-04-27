@@ -27,7 +27,7 @@ I remember of my first semester at university learning Java and being frustrated
 
 **My programming languages timeline is something like this:**
 
-`Pascal` > `PHP` > `SQL` > `Javascript` > `Assembly` > `Java` > `ShellScript` > `C` > `Haskell` > `Objective-C` > `Prolog` > `NodeJS` > `JESS` > `JEE` > `Ruby` > `Swift` > `AngularJS` 
+`Pascal` > `PHP` > `SQL` > `Javascript` > `Assembly` > `Java` > `ShellScript` > `C` > `Haskell` > `Objective-C` > `Prolog` > `NodeJS` > `JESS` > `JEE` > `Ruby` > `Swift` > `Scala` > `AngularJS` 
 
 
 At first `PHP` seemed amazing and my first professional projects were in `PHP` and I felt like such a coder but, at the same time, I always felt like I was always working around to reach my solution. `Javascript`/`JQuery` at the time looked like a monster that I was quite affraid to face... until I did.
