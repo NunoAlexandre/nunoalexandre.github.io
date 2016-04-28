@@ -26,7 +26,9 @@
 
 .site-description {
     text-align:center;
-    color: #828282;
+    color: #8e8e8e;
+    font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
 .site-nav {
@@ -269,6 +271,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 10px;
 }
 
+.post-list h3 {
+     margin-top: 5px;
+}
+
 .post-content a {
     border-bottom: 1px dashed #acacac;
 }
@@ -280,5 +286,8 @@ h1, h2, h3, h4, h5, h6 {
 .icon--linkedin > svg  {
     width: 23px;
     height: 23px;
+}
+a.page-link:hover {
+    color: #2a7ae2; /*#acacac;*/
 }
 
