@@ -1,0 +1,99 @@
+---
+layout: post
+title:  "Comments"
+date:   2016-04-29 20:00:39 +0100
+categories: programming principles
+comments: true
+---
+
+When programming we are using some programming language to describe a solution for a problem, to define behaviour or the flow of a computation. And we do it using a language that is not human, and it's not our mother language, therefore we inevitably feel the need to leave comments and make it as readable as possible. By other words, most of the times we comment to balance the unreadability of our code.
+
+
+So the challenge is to comment only if really necessary and inevitable and not as **the** solution. Only comment when it really needs to be, when you need to explain why a certain unexpected expression or value is there and you can not let it express with clear code.
+
+The software we develop should read as much as possible as a narrative. The ultimate source of truth is the code itself while the comments easily become obsolent or even a lie upon the code. 
+
+Comments are a discret way of making us worse developers and a great convinence to our lazyness.
+
+Also, to comment usually comes together with breaking the `Tell, Don't Ask` principle.
+
+
+Let's jump to an example:
+
+
+{% highlight java %}
+
+int numberOfItemsEligibleForDiscount(Sale sale) {
+  int eligibleItems = 0;
+  for ( Item item : sale.items() ) {
+    // if this item cost more than 50 euros and it's from the music category...
+    if ( item.cost() > 50.0 && i.category().equals("music") )
+      eligibleItems++; //then we increment the eligibleItems
+  } 
+  return eligibleItems;
+}
+
+{% endhighlight %}
+
+
+Alright. What does exactly mean to an item to cost more than 50 euros and being from the music category? 
+It means it's eligible for discount!
+So why having this knowledhe within a function whose porpuse it to tells us how many items from a sale are eligile to have discount? 
+Next to this, how can we reduce the ammount of code written here?
+
+
+{% highlight java %}
+
+int numberOfItemsEligibleForDiscount(Sale sale) {
+  return sale.items().stream().filter(item -> item.cost() > 50 && i.category().equals("music")).count();
+}
+
+{% endhighlight %}
+
+
+_"Oh cool, we can use java 8 streams!"_
+So we go and we refactor this code. We reduce it by 5 lines and we make it somewhat more declarative.
+Still confusing. And, more than that, we keep having, within this function, business logic knowledge that should have a meaning and existence on its own, by itself.
+
+So this code would be better written like:
+
+
+{% highlight java %}
+
+int numberOfItemsEligibleForDiscount(Sale sale) {
+  return sale.items().stream().filter(item -> eligibleForDiscount(item)).count();
+}
+
+{% endhighlight %}
+
+
+Somewhat better. But we are still asking for things, breaking encapsulation and make it happen on our own.
+
+
+One way we could improve this would be to have this method whithin the Sale class, that would take a `Discount` as parameter, being `Discount` an super type and therefore this would be polimorphic.
+
+
+And then we would end up having:
+
+ 
+{% highlight java %}
+
+int itemsEligibleForDiscount(Discount discount) {
+  return items.stream().filter(item -> discount.appliesTo(item)).count();
+}
+
+{% endhighlight %}
+
+
+
+So we end up with no need to have comments, we have a clean way of applying knlowdge upon a context and we endup with a much flexible design.  
+
+
+`The Clean Code` has a great chapter on this that will affect your way of programming and keeping your code clean at all times, as it affected mine.
+
+
+And what about class documentation? [Check this.](http://programmers.stackexchange.com/questions/285787/clean-code-comments-vs-class-documentation)
+
+
+
+
