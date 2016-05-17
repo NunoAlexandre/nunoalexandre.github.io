@@ -7,9 +7,9 @@ comments: true
 ---
 
 I wanted to write a little grep program that prints the lines of a given file that contain a given term.<br>
-So I choose to write it in ```Haskell```, ```Ruby```, ```Java```, ```Scala``` and ```Python```. 
+I choose to write it in ```Haskell```, ```Ruby```, ```Java```, ```Scala``` and ```Python``` and see how different the thinking process and the result would be.
 
-The aim was to get an idea on these points:
+The aim was to get an idea of these points:
 
 - how different these languages deal with IO
 - how conditional flows could be managed
@@ -17,7 +17,7 @@ The aim was to get an idea on these points:
 - LOC
 
 
-So as baseline I defined the following points:
+ And as baseline I defined the following requirements:
 
 - usage is grep term file (the term and the file to grep would be taken as program arguments)
 - in case of incorrect usage (not enough arguments), prints the usage. 
@@ -160,7 +160,7 @@ def grep(term, file):
     with open(file) as file:
         for line in file:
             if term in line: 
-                print line      
+                print line
 
 if len(sys.argv) < 3 :
     print "usage: grep term file"
@@ -173,9 +173,9 @@ else:
 
 <br>
 I think the Ruby version ends up with a very readable core and looks quite clean, but that's all.<br>
-the Python version doesn't look very interesting apart from the simplified syntax (like Ruby) without all the curly brackets that Java and Scala end up with. 
+The Python version doesn't look very interesting apart from the simplified syntax (like Ruby) without all the curly brackets that Java and Scala end up with. 
 
-The Haskell version ends up being, in my view, the cleanest solution. If I would not expecify the function types (which I don't prefer) I would endup with only 6 lines to satisfy the requirements.<br>
+The Haskell version ends up being, in my view, the cleanest solution. If I would not specify the function types I would endup with only 6 lines to satisfy the requirements.<br>
 The fact that I don't need to define flows in a if-else way but, instead, with functions and pattern matching, the way it reads so nicely and the way the language deals with IO as something apart (which I find more interesting and challenging)... It's just something else!
 
 
