@@ -15,6 +15,7 @@ The aim was to get an idea of these points:
 - how conditional flows could be managed
 - how clean the code would be
 - LOC
+- Performance
 
 
  And as baseline I defined the following requirements:
@@ -33,7 +34,8 @@ To give a quick simple example of what this implies, a String value obtained fro
 
 ## Haskell version:
 
-Lines: 9
+LOC: 9
+Average Time: real 0m0.047s | user 0m0.042s | sys 0m0.004s
 
 {% highlight haskell %}
 import Data.List
@@ -59,7 +61,8 @@ Both seem to me like fine solutions so I just decided to leave it like this.
 
 ## Java version:
 
-Lines: ±24
+LOC: ±24
+Average Time: real 0m0.239s | user 0m0.354s | sys 0m0.050s
 
 {% highlight java %}
 import java.io.IOException;
@@ -101,7 +104,8 @@ Apart form that, not much.
 
 ## Ruby version:
 
-Lines: 10 
+LOC: 10
+Average Time: real 0m0.060s | user 0m0.040s | sys 0m0.016s 
 
 {% highlight ruby %}
 def grep(term, file)
@@ -122,7 +126,8 @@ Ok, maybe the foreach could be line-breaked but this looks pretty clean and read
 
 ## Scala version:
 
-Lines: 18
+LOC: 18
+Average Time:  real 0m0.421s | user 0m0.551s | sys 0m0.092s
 
 {% highlight scala %}
 import scala.io.Source
@@ -151,7 +156,8 @@ object Grep {
 
 ## Python version:
 
-Lines: 12
+LOC: 12
+Average Time: real 0m0.038s | user 0m0.018s | sys 0m0.015s
 
 {% highlight python %}
 import sys
@@ -171,13 +177,25 @@ else:
 
 {% endhighlight %} 
 
-<br>
+
+## General conclusions
+
 I think the Ruby version ends up with a very readable core and looks quite clean, but that's all.<br>
-The Python version doesn't look very interesting apart from the simplified syntax (like Ruby) without all the curly brackets that Java and Scala end up with. 
+The Python version doesn't look very interesting apart from the simplified syntax (like Ruby) without all the curly brackets that Java and Scala take but that is a  superficial difference. 
 
 The Haskell version ends up being, in my view, the cleanest solution. If I would not specify the function types I would endup with only 6 lines to satisfy the requirements.<br>
 The fact that I don't need to define flows in a if-else way but, instead, with functions and pattern matching, the way it reads so nicely and the way the language deals with IO as something apart (which I find more interesting and challenging)... It's just something else!
 
+## Performance 
+In terms of performance I was a bit surprised with Scala, not just because it took longer than the other languages but also because of its time variation. Sometimes it took almost up to 1.165s, while the other languages always kept a very small and constant time range. 
+
+**Rating**
+
+1. Python     ± 0m0.038s
+2. Haskell    ± 0m0.047s
+3. Ruby       ± 0m0.060s
+4. Java       ± 0m0.239s
+5. Scala      ± 0m0.421s
 
 Find the [source repository here](https://github.com/NunoAlexandre/grep)
 
