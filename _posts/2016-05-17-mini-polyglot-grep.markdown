@@ -29,7 +29,7 @@ The aim was to get an idea of these points:
 <br>
 So I started with Haskell. <br>
 Haskell has a very interesting way of dealing with IO. IO is part of the "dirty" world, not of the pure one. <br>
-So computation that happens to do IO work is binded and "isolated" from the pure code and this separation is explicit, through the IO Monad.<br>
+So computation that happens to do IO work is bound and "isolated" from the pure code and this separation is explicit, through the IO Monad.<br>
 To give a quick simple example of what this implies, a String value obtained from a IO operation has type of IO String and not just String.
 
 ## Haskell version:
@@ -97,8 +97,8 @@ public class Main {
 {% endhighlight %}
 
 
-Java 8 introduced Files which makes this work nicer than the tradicional while getLine().
-Apart form that, not much.
+Java 8 introduced Files which makes this work nicer than the traditional while getLine().
+Apart from that, not much.
 
 
 
@@ -183,8 +183,8 @@ else:
 I think the Ruby version ends up with a very readable core and looks quite clean, but that's all.<br>
 The Python version doesn't look very interesting apart from the simplified syntax (like Ruby) without all the curly brackets that Java and Scala take but that is a  superficial difference. 
 
-The Haskell version ends up being, in my view, the cleanest solution. If I would not specify the function types I would endup with only 6 lines to satisfy the requirements.<br>
-The fact that I don't need to define flows in a if-else way but, instead, with functions and pattern matching, the way it reads so nicely and the way the language deals with IO as something apart (which I find more interesting and challenging)... It's just something else!
+The Haskell version ends up being, in my view, the cleanest solution. If I would not specify the function types, I would end up with only 6 lines to satisfy the requirements.<br>
+The fact that I don't need to define flows in an if-else way but, instead, with functions and pattern matching, the way it reads so nicely and the way the language deals with IO as something apart (which I find more interesting and challenging)... It's just something else!
 
 ## Performance 
 I used a 4.2MB plain text file for as target file. 
