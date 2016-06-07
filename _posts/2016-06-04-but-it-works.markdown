@@ -182,11 +182,11 @@ It is also important to be aware of what the language we are using can do for us
 
 {% highlight java %}
 public List<Integer> getList() {
-	List<Integer> list = new ArrayList<>();
-	for (int i = 0; i <= this.list; i++) {
-		list.add(this.list.get(i));
+	List<Integer> newList = new ArrayList<>();
+	for (int i = 0; i < this.list.size(); i++) {
+		newList.add(this.list.get(i));
 	}
-	return list;
+	return newList;
 }
 {% endhighlight %}
 
