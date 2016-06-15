@@ -291,3 +291,11 @@ a.page-link:hover {
     color: #2a7ae2; /*#acacac;*/
 }
 
+
+@media screen and (max-width: 800px) {
+    .wrapper {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}
+
