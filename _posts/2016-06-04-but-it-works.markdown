@@ -105,13 +105,14 @@ boolean isThree (int number) {
 First, there is still a place for error since you still can misplace the ```true : false``` and second, this is unnecessary.
 If what we want is to evaluate a logic condition and output its result, we shouldn't be calculating the condition result and based on that return a value that is directly related. If we wanted to do something based on that condition, that a different story. 
 
-Consider the steps taken when calling ```isThree(3)```:
-0. return 3 == 3 ? true : false;
-1. return true ? true : false;
+Consider the steps taken when calling ```isThree(3)```:<br>
+0. return 3 == 3 ? true : false;<br>
+1. return true ? true : false;<br>
 2. return true;
 
-This translate "if x equals to 3 return true, otherwise return false". 
-What about simply “return x equals to 3" ?  __Avoid unnecessary computation.__
+This translate "if x equals to 3 return true, otherwise return false". <br>
+What about simply “return x equals to 3"? <br>
+__Avoid unnecessary computation.__
 
 
 So in Haskell we would have:
