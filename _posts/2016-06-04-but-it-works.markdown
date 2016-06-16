@@ -195,7 +195,7 @@ instead of this:
 
 {% highlight java %}
 public List<Integer> getList() {
-	return new ArrayList<>(getList);
+	return new ArrayList<>(list);
 }
 {% endhighlight %}
 
