@@ -200,11 +200,11 @@
 .post-link {
     display: block;
     clear: both;
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 600;
     line-height: 32px;
     margin-bottom: 9.5px;
-    font-family: sans-serif;
+    font-family: $second-font-family;
 }
 
 
@@ -217,7 +217,7 @@
 }
 
 .post-title {
-    font-size: 42px;
+    font-size: 38px;
     letter-spacing: -1px;
     line-height: 1;
 
@@ -269,6 +269,7 @@
 h1, h2, h3, h4, h5, h6 {
     margin-top: 35px;
     margin-bottom: 10px;
+    font-family: $second-font-family;
 }
 
 .post-list h3 {
