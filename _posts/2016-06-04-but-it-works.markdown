@@ -112,7 +112,6 @@ Consider the steps taken when calling ```isThree(3)```:<br>
 
 This translate "if x equals to 3 return true, otherwise return false". <br>
 What about simply “return x equals to 3"? <br>
-__Avoid unnecessary computation.__
 
 
 So in Haskell we would have:
