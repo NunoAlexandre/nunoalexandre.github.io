@@ -111,7 +111,7 @@ a {
  */
 blockquote {
     color: #3c3c3c;
-    background: #f9f9f9;
+    background: #fcfcfc;
     border-left: 4px solid $grey-color-light;
     padding: $spacing-unit * 0.75;
     font-size: 15px;
@@ -129,15 +129,15 @@ blockquote:before {
   color: #ccc;
   content: open-quote;
   font-size: 4em;
+  text-style: italic;
   line-height: 0.1em;
   margin-right: 0.25em;
   vertical-align: -0.4em;
 }
 blockquote p {
-  display: inline;
+  display: block;
   text-align: justify;
 }
-
 
 
 /**
