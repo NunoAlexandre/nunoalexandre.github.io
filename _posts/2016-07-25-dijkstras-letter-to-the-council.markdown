@@ -30,7 +30,6 @@ It is not only the violin that shapes the violinist, we are all shaped by the to
 Austin, 12 April 2001<br>
 Edsger W. Dijkstra
 </p>
-<br>
 </blockquote>
 
 A PDF of <a href="http://www.cs.utexas.edu/users/EWD/OtherDocs/To%20the%20Budget%20Council%20concerning%20Haskell.pdf" target="_blank">the original letter can be find here</a>
