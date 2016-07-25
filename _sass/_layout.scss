@@ -299,6 +299,9 @@ a.page-link:hover {
         padding-left: 50px;
     }
 }
+p + p {
+        margin-bottom: 14px;
+}
 
 blockquote {
     h1, h2, h3, h4, h5, h6 {
@@ -306,9 +309,6 @@ blockquote {
     }
     p {
        font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
-    }
-    p + p {
-        margin-bottom: 14px;
     }
 }
 
