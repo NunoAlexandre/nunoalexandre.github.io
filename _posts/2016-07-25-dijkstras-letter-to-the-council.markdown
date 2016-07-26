@@ -6,7 +6,7 @@ categories: languages
 comments: true
 ---
 
-A while ago, when I started to learn Haskell more seriously, I found this beautiful piece of history. 15 years ago Dijkstra saw the Budget Council of his University giving steps to replace the introductory language of the Computer Science degree.
+A while ago, when I started to learn Haskell more seriously, I found this beautiful piece of history. 15 years ago Dijkstra saw the Budget Council of his University giving steps to replace the CS introductory language Haskell by Java.
 
 Here follows the letter he had sent to the council as response to those intents (that sadly went ahead despite his efforts). 
 
