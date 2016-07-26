@@ -32,5 +32,5 @@ Edsger W. Dijkstra
 </p>
 </blockquote>
 
-A PDF of <a href="http://www.cs.utexas.edu/users/EWD/OtherDocs/To%20the%20Budget%20Council%20concerning%20Haskell.pdf" target="_blank">the original letter can be find here</a>
+A PDF of <a href="http://www.cs.utexas.edu/users/EWD/OtherDocs/To%20the%20Budget%20Council%20concerning%20Haskell.pdf" target="_blank">the original letter can be found here</a>
 <br>
