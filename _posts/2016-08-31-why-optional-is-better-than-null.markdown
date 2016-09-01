@@ -7,7 +7,7 @@ comments: true
 ---
 
 ``` null ``` returning and checking is everywhere and it developed deep roots in the imperative programming world.
-It's more than time to stop using it and to look into better ways of designing fallible computation result types.
+It's more than time to stop using it and to look into better ways to deal with fallible computation.
 
 Some attempts were made to work around this such as the ```Null Object Pattern ``` which I don't really like because it's a solution to be applied to every class that might be used as return type where null might be returned instead.
 
@@ -26,7 +26,7 @@ Let's consider the following method declaration:
 public final Category findCategoryById(long categoryId);
 {% endhighlight %} 
 
-This method declares that it returns a ```Category``` object, having it's category id.<br>
+This method declares that it returns a ```Category``` object, having its category id.<br>
 But, is it really? I mean, can I trust this code and relax? 
 
 What if I implement that method like this?
@@ -101,7 +101,7 @@ We can better have:
 
 {% highlight java %}
 Optional<Category> category = findCategoryById(x);
-log.info(category.map(Category::name).orElse("<< Wrong category id >>"));
+log(category.map(Category::name).orElse("<< Wrong category id >>"));
 {% endhighlight %}
 
 Now imagine the impact that such different design and approach will have in your system as a whole...  
