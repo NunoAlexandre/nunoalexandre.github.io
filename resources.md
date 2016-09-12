@@ -14,7 +14,7 @@ permalink: /resources/
 * [Structures and Interpretation of Computer Programms](http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871/ref=sr_1_1?s=books&ie=UTF8&qid=1461772786&sr=1-1&keywords=SCIP)
 * [Object Thinking](http://www.amazon.com/Object-Thinking-Developer-Reference-David/dp/0735619654)
 * [Scala by Example](http://www.scala-lang.org/docu/files/ScalaByExample.pdf)
-Patterns of Enterprise Application Architecture
+* [Patterns of Enterprise Application Architecture](https://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420)
 * [Learn You a Haskell for a Great Good](http://learnyouahaskell.com)
 * [Design Patterns](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612/ref=sr_1_1?s=books&ie=UTF8&qid=1461772945&sr=1-1&keywords=design+patterns) 
 
