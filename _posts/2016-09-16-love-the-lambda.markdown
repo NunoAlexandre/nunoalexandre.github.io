@@ -13,7 +13,7 @@ Lambdas Expressions are a normal feature in functional languages but just few ti
 ## Why is it important?
 If you are like me, you will be pleased with writing as less code as possible without losing expressiveness. And that's one of the great advantages of lambdas.
 
-It allows you to write shorter, more objective, more concise and more expressive code. And more function, which is cool!
+It allows you to write shorter, more objective, more concise and more expressive code. And all this using functional programming style, which is cool!
 
 If you are familiar with [Anynomous classes](https://www.google.pt/search?client=safari&rls=en&q=anynomous+classes&ie=UTF-8&oe=UTF-8&gfe_rd=cr&ei=FQTbV5ShFajA8geOw7-YBQ), lambdas will feel like a breeze to you. 
 If you are not, no worries.
