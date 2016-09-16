@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Love the Lambda"
-date:   2016-09-15 19:46:39 +0100
+date:   2016-09-16 19:46:39 +0100
 categories: languages Haskell java concepts lambda
 comments: true
 ---
