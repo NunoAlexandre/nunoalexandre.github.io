@@ -105,10 +105,9 @@ return x = Just x
 {% endhighlight %}
 
 
-This next example of presented in the [Understanding Monads](https://en.wikibooks.org/wiki/Haskell/Understanding_monads) guide.
-
-
 ### Family Tree with the Maybe Monad
+
+This next example of presented in the [Understanding Monads](https://en.wikibooks.org/wiki/Haskell/Understanding_monads) guide.
 
 To build a family tree - from the 20th century - we need to find the mother or/and the father of a concrete Person.
 But it's not certain that the mother or the father of a person X will be found, so it's a Maybe.
