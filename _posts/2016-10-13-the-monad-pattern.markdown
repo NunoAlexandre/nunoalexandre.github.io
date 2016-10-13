@@ -45,10 +45,10 @@ public interface Song {
 }
 {% endhighlight %}
 
-So this means that now anything that you can play() that produces Music is a song. 
-This might not be true in real life but in this universe, we are building it is.
+So this means that now anything that you can play() that gives you Music is a song. 
+This might not be true in real life but, in this universe that we are building, it is.
 
-As a ```Song``` is something that _can be played__, producing ```Music```, a Monad is something that can be governed by two (monadic) laws: ```unit``` and ```bind```. 
+As a ```Song``` is something that _can be played_, that gives you ```Music```, a Monad is something that can be governed by two (monadic) laws: ```unit``` and ```bind```. 
 
 The Monad Class declaration of these laws in Haskell gives us a pretty neat view of what's involved:
 
