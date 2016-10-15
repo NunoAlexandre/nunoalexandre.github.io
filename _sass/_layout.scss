@@ -159,7 +159,7 @@
       }
 
       .excerpt p {
-         font-size: 19px;
+         font-size: 17px;
       }
    }   
 }
@@ -212,10 +212,13 @@ h1, h1.post-title {
     }
 
     p {
-      font-family: 'Merriweather', serif;
-      font-weight: 300;
       font-size: 18px;
     }
+}
+
+.post-content p, .post-list .post .excerpt p {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
 }
 
 .face {
