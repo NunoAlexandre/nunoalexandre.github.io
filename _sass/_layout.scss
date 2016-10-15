@@ -154,7 +154,8 @@
          font-weight: 600;
          line-height: 32px;
          margin-bottom: 9.5px;
-         font-family: $second-font-family;
+         font-family: $base-font-family;
+         font-weight: 900;
       }
 
       .excerpt p {
@@ -239,7 +240,8 @@
 h1, h2, h3, h4, h5, h6 {
     margin-top: 35px;
     margin-bottom: 10px;
-    font-family: $second-font-family;
+    font-family: $base-font-family;
+    font-weight: 900;
 }
 
 .post-content a {
