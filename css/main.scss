@@ -8,7 +8,7 @@
 // Our variables
 
 $base-font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$base-font-size:   18px;
+$base-font-size:   16px;
 $base-font-weight: 400;
 $second-font-family: Menlo, "Andale Mono", Monaco, monospaced;
 $small-font-size:  $base-font-size * 0.875;
@@ -16,7 +16,7 @@ $base-line-height: 1.75;
 
 $spacing-unit:     30px;
 
-$text-color:       #2a2a2a;
+$text-color:       rgba(0,0,0,0.8);/*#2a2a2a;*/
 $background-color: #fdfdfd;
 $brand-color:      #2a7ae2;
 
