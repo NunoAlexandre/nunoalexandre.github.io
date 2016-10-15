@@ -7,14 +7,21 @@ layout: default
   <br> 
   <ul class="post-list">
     {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <li class="post">
         <h3>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h3>
+        <div class="post-meta">
+           <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+               {{ post.date | date: "%b %-d, %Y" }}
+           </time>
+           <span class="seperator dot">•</span>
+           <span class="reading=time">
+               {{ content | number_of_words | divided_by:180 }} min read
+            </span>
+        </div>
         <p>{{post.excerpt}}</p>
       </li>
-      <br>
     {% endfor %}
   </ul>
 
