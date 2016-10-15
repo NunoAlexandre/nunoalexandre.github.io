@@ -22,6 +22,12 @@ I take design patterns, principles and programming in itself as a joyful mix of 
 I enjoy learning different languages and different paradigms.
 The experience of learning to think about code in a total different way is very enriching and I advise it to every developer.
 
+### A blog as a notebook
+
+Aside from my job I keep a certain study discipline of some hours a week where I keep learning.
+As Uncle Bob Martin says in his book “The Clean Coder”, the 8h hours of work must be performance time rather than learning time; to practice and to learn must be our own duty and responsibility to do outside the work time.
+
+Hopefully what I will be posting here can be a useful resource to someone, giving some direction or inspiration to develop beautiful and well-thought code through examples on how to improve bad code or how to think about code in different ways.
 
 ### Some background
 
@@ -36,10 +42,3 @@ Studying full time while keeping my volunteer work and a part-time remote positi
 If you are a student in the same area my great advice to you is to not limit yourself to what’s given to you in the classroom but take it home and go deeper on things and you will see, independently of the marks you get, how much more you will learn, grow and develop a critical thinking.
 
 Now I’m working full-time remotely from Portugal to [Worth Internet Systems](http://worth.systems) with regular visits to their office. Working remotely is a challenge but working with great people makes it all easier!
-
-### A blog as a notebook
-
-Aside from my job I keep a certain study discipline of some hours a week where I keep learning.
-As Uncle Bob Martin says in his book “The Clean Coder”, the 8h hours of work must be performance time rather than learning time; to practice and to learn must be our own duty and responsibility to do outside the work time.
-
-Hopefully what I will be posting here can be a useful resource to someone, giving some direction or inspiration to develop beautiful and well-thought code through examples on how to improve bad code or how to think about code in different ways.
