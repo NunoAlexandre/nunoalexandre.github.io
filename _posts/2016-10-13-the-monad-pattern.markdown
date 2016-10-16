@@ -16,7 +16,7 @@ And then I released that Monad is actually a design pattern and it all made sens
 These two videos below are great resources to understand what Monads are and why they are useful.
 Although I'm going to add my breadcrumb on this more below, I might not be of a better help than to listen to these talks.
 
-### Monads To The Rescue 
+### Monads To The Rescue
 
 While following the online course [Functional Programming in Haskell @ FutureLearn](https://www.futurelearn.com/courses/functional-programming-haskell/), I've got to know about [Katie Miller](http://www.codemiller.com) and her great talk about Monads.
 
@@ -64,7 +64,7 @@ I like to think of Monad as a container:
 The _rule_ defines that every interaction with the container is passed to and is handled by and within the container and its output never come out of the container.
 
 <small>
-[ If know about [Docker](http://docker.com) containers this behaviour might sound familiar ]
+[ If you know about [Docker](http://docker.com) containers this behaviour might sound familiar ]
 </small>
 
 If we were to stop here, we would actually be talking about [Monoids](https://www.quora.com/What-is-the-difference-between-monoid-and-monad).
@@ -110,13 +110,12 @@ Now, those two arguments are:
    1. A Monad ```m a```, this is, a specific type of container holding a value of type ```a```.
    2. A function that receives a value of that same type ```a``` and returns a container of the same type received in the first argument, holding a value of any type (maybe the same, ```a```, or not).
 
-<br>
 But it's not over yet. <br>
 This two rules must be enough to fullfill the following __three (monadic) laws__:
 
-__Left identity__:   ```return a >>= f    ≡    f a```<br>
-__Right identity__:  ```m >>= return    ≡      m```<br>
-__Associativity__: ```(m >>= f) >>= g    ≡    m >>= (\x -> f x >>= g)```<br>
+* __Left identity__:   ```return a >>= f```  __≡__  ```f a```<br>
+* __Right identity__:  ```m >>= return```  __≡__  ```m```<br>
+* __Associativity__: ```(m >>= f) >>= g```  __≡__  ```m >>= (\x -> f x >>= g)```<br>
 
 
 And that's it. It might be scary at first, but it's actually simple and it's great to be able to think of code in terms of mathematics.
@@ -124,7 +123,7 @@ And that's it. It might be scary at first, but it's actually simple and it's gre
 
 ## Maybe Monad
 
-A very known Monad is the ```Maybe``` Monad. (Optional in Java, Option in Scala,...)
+A very known Monad is the ```Maybe``` Monad. (Optional in Java, Option in Scala, etc)
 
 It is defined as follows in Haskell:
 
@@ -138,7 +137,7 @@ And the Monadic rules for the ```Maybe``` Monad are implemented as follows:
 return :: a -> Maybe a
 return x = Just x
 
-(>>=)  :: Maybe a -> (a -> Maybe b) -> Maybe b
+(>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
 (>>=) Nothing  g = Nothing
 (>>=) (Just x) g = g x
 {% endhighlight %}
