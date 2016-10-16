@@ -67,7 +67,7 @@ figcaption {
  * Lists
  */
 ul, ol {
-    margin-left: $spacing-unit;
+    margin-left: $spacing-unit * 1.65;
 }
 
 li {
@@ -111,14 +111,14 @@ a {
  */
 blockquote {
     color: #3c3c3c;
-    background: #fcfcfc;
-    border-left: 4px solid $grey-color-light;
-    padding: $spacing-unit * 0.75;
-    font-size: 15px;
+    background: #fafafa;
+    border-left: 6px solid $grey-color-light;
+    padding: $spacing-unit * 1.35;
     font-weight: 400;
-    letter-spacing: 1px;
-    quotes: "\201C""\201D""\2018""\2019";
-    margin: 16px 0px;
+    margin: 25px 0px 35px 0px;
+    font-style: italic;
+    text-align: justify;
+
 
     > :last-child {
         margin-bottom: 0;
@@ -127,7 +127,7 @@ blockquote {
 
 blockquote:before {
   color: #ccc;
-  content: open-quote;
+  content: "\201C";
   font-size: 4em;
   text-style: italic;
   line-height: 0.1em;

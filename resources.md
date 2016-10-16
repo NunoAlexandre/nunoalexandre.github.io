@@ -5,7 +5,7 @@ comments: true
 permalink: /resources/
 ---
 
-#### Books 
+### Books 
 
 * [The Passionate Programmer](https://www.amazon.com/Passionate-Programmer-Remarkable-Development-Pragmatic/dp/1934356344)
 * [Structures and Interpretation of Computer Programms](http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871/ref=sr_1_1?s=books&ie=UTF8&qid=1461772786&sr=1-1&keywords=SCIP)
@@ -22,7 +22,7 @@ permalink: /resources/
 
 
 
-#### Blogs
+### Blogs
 
 * [Martin Fowler](http://www.martinfowler.com)
 * [Coding Horror](http://blog.codinghorror.com)
@@ -31,7 +31,7 @@ permalink: /resources/
 
 
 
-#### Studying online
+### Studying online
 
 * [edX](http://www.edx.org)
 * [CodeSchool](http://codeschool.com)

@@ -52,7 +52,7 @@ Wikipedia says:
 <blockquote>In functional programming, monads are a way to build computer programs by joining simple components in predictable and robust ways.</blockquote>
 
 So, this is interesting as it brings some key points. 
-A Monad is a design pattern that consists of allowing complex computation to be built by composing very simple components in an explicit and controlled manner. Some say that Monads are _thy_ way of achieving it.
+A Monad is a design pattern that consists of allowing complex computation to be built by composing very simple components in an explicit and controlled manner. Some say that Monads are **_the_** way of achieving it.
 
 
 I like to think of Monad as a container:
@@ -69,7 +69,7 @@ The _rule_ defines that every interaction with the container is passed to and is
 
 If we were to stop here, we would actually be talking about [Monoids](https://www.quora.com/What-is-the-difference-between-monoid-and-monad).
 
-__A simple example__
+#### A simple example
 
 From what has been said above, a simple example to visualize these concepts is to think of a clock.
 
@@ -89,7 +89,7 @@ class  Monad m  where
 
 Think of the lower ```m``` has a specific type of container, and of ```a``` and ```b``` has data types.
 
-Having that in mind, what we have is that for something to be a Monad, ```m```, it must define the following __two__ operations as they are intended:
+Having that in mind, what we have is that for something to be a Monad, ```m```, it must define the following __two operations__ as they are intended:
 
 __First - ```return```__ (nothing to do with the _return_ keyword you are used to)
 

@@ -16,19 +16,19 @@ $base-line-height: 1.75;
 
 $spacing-unit:     30px;
 
-$text-color:       rgba(0,0,0,0.8);/*#2a2a2a;*/
+$text-color:       rgba(0,0,0,0.8);
 $background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
+$brand-color:      #41b7d8;
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    800px;
+$content-width:    750px;
 
-$on-palm:          600px;
-$on-laptop:        800px;
+$on-palm:          590px;
+$on-laptop:        750px;
 
 
 

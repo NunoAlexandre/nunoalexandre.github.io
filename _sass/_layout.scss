@@ -189,7 +189,11 @@
 
 
 h1, h1.post-title {
-    font-size: 40px;
+   font-size: 40px;
+}
+
+h1.post-title {
+   margin-bottom: 0px;
 }
 
 .post-content {
@@ -204,22 +208,33 @@ h1, h1.post-title {
     }
 
     h4 {
-        font-size: 21px;
+        font-size: 22px;
     }
 
     h5 {
         font-size: 16px;
     }
 
-    p {
+    p, ul, ol, blockquote {
       font-size: 18px;
+    }
+
+    li + li {
+      margin-top: 0.5em;
+    }
+
+    ul, ol, .highlight {
+      margin-top: $spacing-unit * 0.68;
+      margin-bottom: $spacing-unit * 1.30;
     }
 }
 
-.post-content p, .post-list .post .excerpt p {
+.post-content p, .post-list .post .excerpt p, ul, ol, blockquote  {
       font-family: 'Merriweather', serif;
       font-weight: 300;
 }
+
+
 
 .face {
     position: relative;
@@ -238,8 +253,21 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 900;
 }
 
+iframe {
+   margin: $spacing-unit/2 auto;
+   max-width: 100%;
+}
+
 .post-content a {
-    border-bottom: 1px dashed #acacac;
+    font-size: 0.963em;
+    color: $brand-color;
+
+}
+
+.post-content li a {
+   border-bottom: 1px dashed rgba(0,0,0,0.24);
+   font-size: 1em;
+   color: $text-color;
 }
 
 .social-media-list li {
@@ -251,9 +279,13 @@ h1, h2, h3, h4, h5, h6 {
     height: 23px;
 }
 a.page-link:hover {
-    color: #2a7ae2; /*#acacac;*/
+    color: $brand-color;
 }
 
+
+.wrapper {
+   text-align: justify;
+}
 
 @media screen and (max-width: 800px) {
     .wrapper {
@@ -266,15 +298,12 @@ p + p {
 }
 
 li.post {
-   margin-bottom: 70px;
+   margin-bottom: $spacing-unit * 2.33;
 }
 
 blockquote {
     h1, h2, h3, h4, h5, h6 {
         margin-top: 0px;
-    }
-    p {
-       font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
     }
 }
 
