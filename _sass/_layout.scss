@@ -251,9 +251,10 @@ h1.post-title {
 
 h1, h2, h3, h4, h5, h6 {
     margin-top: 35px;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     font-family: $base-font-family;
     font-weight: 700;
+    line-height: 1.175em;
 }
 
 iframe {
@@ -277,10 +278,48 @@ iframe {
     display: inline-block !important;
 }
 
-.icon--linkedin > svg  {
-    width: 23px;
-    height: 23px;
+.social-media-list .icon svg path {
+     -webkit-transition: all 1000ms linear;
+     -moz-transition: all 1000ms linear;
+     -o-transition: all 1000ms linear;
+     -ms-transition: all 1000ms linear;
+     transition: all 1000ms linear;
 }
+
+.social-media-list span.icon {
+   display: block;
+   width: 26px;
+}
+
+
+.icon--linkedin:hover svg path {
+   fill: #007bb6;
+}
+
+.icon--rss:hover svg path {
+   fill: #f60;
+   bottom: -3px;
+   position: relative;
+}
+
+.icon--github:hover svg path {
+   fill: #800080;
+}
+
+.icon--mail:hover svg path {
+   fill: #d14836;
+}
+
+.icon--linkedin svg {
+    width: 25px;
+    height: 25px;
+}
+
+.icon--rss svg, .icon--mail svg {
+   width: 20px;
+   height: 20px;
+}
+
 a.page-link:hover {
     color: $brand-color;
 }
