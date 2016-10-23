@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "One year remotely"
-date:   2016-10-21 20:20:39 +0100
+date:   2016-10-30 20:20:39 +0100
 categories: human-factors life 
 comments: true
 ---
