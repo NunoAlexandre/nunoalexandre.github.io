@@ -23,7 +23,7 @@ The following is my retrospective on the bad and good bits of being remotely.
 
 A truly terrible position to be at.
 No one has seen you working, no one as seen you struggling and the last way left to prove it... doesn't exist.
-Truly crapy.
+Truly crappy.
 I shared this few times with my team lead and what they said was right: It's a matter of trust. And I was always privileged to count with their trust.
 Apart from the trust, a practical way to deal with this is by keeping a close report to yourself of what you went through during the day. This will bring peace to your own mind and it's something concrete that you can present to your team instead of just nothing.
 
