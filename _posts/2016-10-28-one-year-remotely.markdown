@@ -17,12 +17,12 @@ The fact that I was going to be the only guy working remotely became a factor of
 So when I started, and for quite some time, I felt vulnerable.
 I felt bad that my team had to make the effort of preparing a video call (get speakers and some silence) to make the standup possible for me. Also, the idea that they had to get up and either cycle, get a bus or a train to get to work while I was in my comfortable place.
 
-I will try to resume the worst parts of working remotely:
+The following is my retrospective on the bad and good bits of being remotely.
 
 ### Having nothing to show at the end of the day
 
 A truly terrible position to be at.
-No one has seen you working, no one as seen you struggling and the last way left to proof it... doesn't exist.
+No one has seen you working, no one as seen you struggling and the last way left to prove it... doesn't exist.
 Truly crapy.
 I shared this few times with my team lead and what they said was right: It's a matter of trust. And I was always privileged to count with their trust.
 Apart from the trust, a practical way to deal with this is by keeping a close report to yourself of what you went through during the day. This will bring peace to your own mind and it's something concrete that you can present to your team instead of just nothing.
@@ -92,6 +92,11 @@ Tell your team when you go for lunch and when you are back is also helpful to ma
 
 Make sure you have a good microphone and some earphones. 
 It's very annoying when people can't even hear you and when they hear themselves while talking to you.
+
+Take care of your working environment and conditions. 
+Get yourself a proper chair, a proper desk and further material you need. 
+Being home doesn't mean being minimal.
+
 
 Also, make the effort of keeping in touch with everyone around the company. It's important to make you feel part not just of your team but of the bigger team as well. Making regular visits to the office will be a great help and opportunity to do this. 
 
