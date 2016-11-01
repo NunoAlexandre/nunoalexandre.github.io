@@ -25,6 +25,8 @@ permalink: /resources/
 ### Blogs
 
 * [Martin Fowler](http://www.martinfowler.com)
+* [Chad Fowler](http://chadfowler.com)
+* [Sandi Metz](http://www.sandimetz.com/blog/)
 * [Coding Horror](http://blog.codinghorror.com)
 * [Clean Coder](http://blog.cleancoder.com)
 * [Yegor 256](http://www.yegor256.com)
