@@ -330,9 +330,14 @@ a.page-link:hover {
         padding-left: 50px;
     }
 }
+
 p + p {
         margin-top: 28px;
 }
+
+.post-list p + p {
+   margin-top: 16px;
+} 
 
 li.post {
    margin-bottom: $spacing-unit * 2.33;
