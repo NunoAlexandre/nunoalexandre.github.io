@@ -18,7 +18,7 @@ If your employer understands or is interested in investing in your education, ta
 
 ### Time to perform
 
-Working time should be performance time. No doubt that unless you are very comfortable with what you are working on, you always end up learning during work time. <br>
+Working time should be performance time. No doubt that unless you are very comfortable with what you are working on, you always end up learning during work time.
 But note that in this case, it is a side effect and not the main point.
 
 Think of a music band. They deal to play a concert in a festival. But they expect the festival organiser to cover their practising time and their education on some new technique - at home and on stage. 
@@ -27,6 +27,13 @@ It doesn't sound reasonable, right?
 The band is responsible for their practising and for their education. 
 
 When they are paid to get on stage, they got to show what they got. They got to make the invested money in them worth it.
+
+### Seize the opportunity
+[Chad Fowler](http://chadfowler.com) tells that he had this colleague who would practice his piano skills in every 15 min break. 
+
+It's not easy to make time every day. We have to deal with stress, tiredness, find time for family or other things we love and need us more than our career. 
+
+Everything is made up of very tiny atoms. You can take that analogy here. Seize *every* sensible bit available to give a tiny step forward. Or just be intentional and take half and hour a day. Half and hour a day mean 2.5h a week plus possible more time during the weekend. It takes few effort, and although it's not a lot, it's definitely better than nothing. 
 
 ### YAAP - You As A Product
 
@@ -61,9 +68,9 @@ A small investment can have a great trade-off.
 
 Just like we enjoy your favourite systems or apps getting improved regularly by getting faster, get rid of bugs, become more user-friendly, so will the business that pays for your living appreciate having your with more skills, and so will you too.
   
-I believe that it is not all about technical skills. Improving the way we deal with certain situations during work, about how to approach people and become a better team player are also important and I include them in all this.
+This is not all about technical skills! Improving the way we deal with certain situations during work, about how to approach people and become a better team player are also important and I include them in all this.
 
-If you are (still) convinced that it is your employer's responsibility to invest in your education, and if your employer decides to do so, you start it wrong. You probably think *"they finally understood!"*. So although you have someone investing in yourself, which will be good to you, you missed understanding that that person should have been yourself from the beginning. 
+If you are (still) convinced that it is your employer's responsibility to invest in your education, and if your employer decides to do so, you start it wrong. You probably think *"they finally understood!"*. So, although you have someone investing in yourself - which will be good to you - you missed understanding that it should have come from you. 
 
 Now, I believe that - in general - you might want to be in a company that understands the importance in investing in you. Not because it will make it easier for you, but because it says enough about the approach and culture that you are surrounded by at work.
 
@@ -78,4 +85,6 @@ It will help you doing a better job, which means that the 8h a day will feel lik
 
 You will feel happier. And you will more easily have the control over your career because you know what's there, what's coming next and what you see yourself working on.
 
-And at the end of the day, this is isn't just about one individual but about getting as many people engaged as possible. It's a snowball of improvement, support and bigger goals.
+We work in one of the most amazing and exciting fields of work! If you are taking your job like if you would as a supermarket bagger, you are missing it big time!  
+
+And at the end of the day, this is isn't just about one individual. It is about getting as many people engaged as possible. It's a snowball of improvement, support and bigger goals. It's about sharing and growing together.
