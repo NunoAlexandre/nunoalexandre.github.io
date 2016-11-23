@@ -6,9 +6,11 @@ categories: Haskell java concepts programming feature functional-programming
 comments: true
 ---
 
-Pattern Matching is a beautiful way to specify the different behaviours a function has depending on its arguments. By other words, Pattern Matching is the dispatch mechanism of deciding the correct definition of a function to be applied based on the presence of the parts of a pattern.
+Pattern Matching is a beautiful way to specify the different behaviours a function has depending on its arguments. 
 
-This might sound a bit too high level but it's pretty straightforward and since it has roots in mathematical notations, you might have seen it before.
+By other words, Pattern Matching is the dispatch mechanism of deciding the correct definition of a function to be applied based on the presence of the parts of a defined pattern.
+
+This might sound a bit too high level, or confusing, but it's pretty straightforward and since it has roots in mathematical notations, you might have seen it before:
 
 <img src="/images/function-definition.png"/>
 
@@ -46,16 +48,21 @@ A switch-case reads as _"given x, case it matches this value, perform this compu
 The previous example is a classic pattern matching on primitive types. 
 But there is much more.
 
-Imagine that having a list of numbers, we want to divide every two elements, in sequence. If there is one left alone, it is divided by 3. 
+Imagine that having a list of numbers, we want to divide every two elements, in sequence.
+If the second element of the pair is 0, the first should be divided by 7.
+If there is one left alone, it is divided by 3. 
 
 So we have to think about:
-    * the empty list case
-    * the case of having a list with a single element
-    * the default case 
+
+* the empty list case
+* the case of having a list with a single element
+* the case where the second element is 0
+* the default case 
 
 {% highlight haskell %}
 everyTwo [] = []
 everyTwo [x] = [x/3]
+everyTwo (x:0:xs) = everyTwo (x:7:xs) 
 everyTwo (x:y:xs) = x/y : everyTwo xs 
 {% endhighlight %}  
 
