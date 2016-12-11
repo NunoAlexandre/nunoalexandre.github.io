@@ -15,7 +15,7 @@ I am a passionate and enthusiast software developer aspiring software craftsmans
 I thrive for beautiful code, good design and cool programming technology. 
 It really drives me to develop better software every day and to be a true team player.
 
-I keep developing myself by devouring books, blogs, academic papers (reading is so important!) and talks from software craftsmen and by taking online courses. Also by spending time on side-projects to get my hands dirty building stuff to get a concrete understanding of either some concept or technology.
+I keep improving myself by devouring books, blogs, academic papers (reading is so important!) and talks from software craftsmen and by taking online courses. Also by spending time on side-projects to get my hands dirty building stuff to get a concrete understanding of either some concept or technology.
 
 I take design patterns, principles and programming in itself as a joyful mix of science and art.
 
