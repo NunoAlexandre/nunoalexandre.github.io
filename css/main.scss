@@ -7,7 +7,7 @@
 
 // Our variables
 
-$base-font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-family: 'Merriweather Sans', "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $base-font-size:   17px;
 $base-font-weight: 400;
 $second-font-family: Merriweather, Georgia, serif;
@@ -16,11 +16,11 @@ $base-line-height: 1.75;
 
 $spacing-unit:     30px;
 
-$text-color:       rgba(0,0,0,0.8);
+$text-color:       rgba(0,0,0,0.785);
 $background-color: #fdfdfd;
 $brand-color:      #41b7d8;
 
-$grey-color:       rgba(0, 0, 0, 0.4);
+$grey-color:       rgba(0, 0, 0, 0.35);
 $grey-color-light: lighten($grey-color, 80%);
 $grey-color-dark:  darken($grey-color, 25%);
 

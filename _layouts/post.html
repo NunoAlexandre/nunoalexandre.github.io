@@ -12,7 +12,7 @@ permalink: pretty
          <span itemprop="name">{{ page.author }}</span></span>
       {% endif %}
       <span class="mid-dot-divider">•</span>
-      <span class="reading=time">
+      <span class="reading-time">
          {{ content | number_of_words | divided_by:180 }} min read
       </span>
     </p>
@@ -21,4 +21,6 @@ permalink: pretty
   <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
+
+</ul>
 </article>

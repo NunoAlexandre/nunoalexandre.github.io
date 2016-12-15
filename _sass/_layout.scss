@@ -15,7 +15,7 @@ padding-top: 5px;
     font-weight: 300;
     letter-spacing: 0.33px;
     font-family: $second-font-family, Georgia, serif;
-    font-size: $small-font-size;
+    font-size: $base-font-size - 2;
 }
 
 .site-nav {
@@ -29,10 +29,13 @@ padding-top: 5px;
     .page-link {
         color: $text-color;
         line-height: $base-line-height;
+        /*text-transform: lowercase;*/
+        font-size: $base-font-size - 2;
+
 
         // Gaps between nav items, but not on the last one
         &:not(:last-child) {
-            margin-right: 20px;
+            margin-right: $spacing-unit;
         }
     }
 }
@@ -137,23 +140,35 @@ padding-top: 5px;
       .post-link {
          display: block;
          clear: both;
-         font-size: 31px;
+         font-size: 28px; /*31px;*/
          line-height: 32px;
-         margin-bottom: 9.5px;
          font-family: $base-font-family;
          font-weight: 700;
       }
 
       .excerpt p {
-         font-size: 17px;
+         font-size: $base-font-size;
       }
    }   
 }
 
+.post-link, h1, h2, h3, h4, h5, h6 {
+   letter-spacing: -.0206em;
+}
+
+.post-list .post-meta {
+   font-size: $base-font-size - 2;
+}
+
+.post .post-meta {
+   font-size: $base-font-size - 1;
+}
+
+
 .post-meta {
-    font-size: $base-font-size;
     color: $grey-color;
     font-weight: 400;
+    margin-top: 4.5px;
     font-family: $base-font-family;
 
     .mid-dot-divider {
@@ -177,7 +192,7 @@ padding-top: 5px;
 
 
 h1, h1.post-title {
-   font-size: 42px;
+   font-size: 37px;
 }
 
 h1.post-title {
@@ -188,23 +203,24 @@ h1.post-title {
     margin-bottom: $spacing-unit * 2;
 
     h2 {
-        font-size: 34px;
+        font-size: 30px;
     }
 
     h3 {
-        font-size: 28px;
+        font-size: 25px;
     }
 
     h4 {
-        font-size: 23px;
+        font-size: 20px;
     }
 
     h5 {
-        font-size: 17px;
+        font-size: 15px;
     }
 
     p, ul, ol, blockquote {
-      font-size: 18px;
+      font-size: $base-font-size+1;
+      /*letter-spacing: 0.012em;*/
     }
 
     li + li {
@@ -220,6 +236,7 @@ h1.post-title {
 .post-content p, .post-list .post .excerpt p, ul, ol, blockquote  {
       font-family: $second-font-family;
       font-weight: 300;
+
 }
 
 
@@ -235,7 +252,7 @@ h1.post-title {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 47px;
+    margin-top: 50px;
     margin-bottom: 12px;
     font-family: $base-font-family;
     font-weight: 700;
@@ -317,7 +334,7 @@ a.page-link:hover {
 }
 
 p + p {
-        margin-top: 28px;
+        margin-top: 26px;
 }
 
 .post-list p + p {
