@@ -7,10 +7,11 @@ id: /about/
 ---
 
 
-**Nuno Alexandre - 23 - Portugal - BSc Computer Science**
+Nuno Alexandre - 23 - Portugal - BSc Computer Science
 
 ## Hi!
 
+<p><img width="100%" src="/images/meandaslan.jpeg"/></p>
 I am a passionate and enthusiast software developer aspiring software craftsmanship. 
 I thrive for beautiful code, good design and cool programming technology. 
 It really drives me to develop better software every day and to be a true team player.

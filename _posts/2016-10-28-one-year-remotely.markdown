@@ -2,7 +2,7 @@
 layout: post
 title: "One Year Remotely"
 date: 2016-10-28 23:20:39 +0100
-categories: human factors life 
+categories: human-factors life 
 comments: true
 ---
 

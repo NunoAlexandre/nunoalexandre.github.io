@@ -111,7 +111,7 @@ a {
  */
 blockquote {
     color: #3c3c3c;
-    background: #fafafa;
+    background: #f9f9f9;
     border-left: 6px solid $grey-color-light;
     padding: $spacing-unit * 1.35;
     font-weight: 400;
@@ -145,16 +145,17 @@ blockquote p {
  */
 pre,
 code {
-    font-size: 15px;
-    border: 1px solid $grey-color-light;
+    font-size: $base-font-size - 2;
+    border: 1.3px solid $grey-color-light;
     border-radius: 3px;
     background-color: #fdf6e3;
     font-family: 'Andale Mono', monospace;
 }
 
 code {
-    padding: 1px 5px;
+    padding: 2px 5px;
 }
+
 
 pre {
     padding: 8px 12px;

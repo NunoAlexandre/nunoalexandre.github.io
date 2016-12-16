@@ -2,7 +2,7 @@
 layout: post
 title: "The Joy of Pattern Matching"
 date: 2016-11-17 20:06:39 +0100
-categories: Haskell java concepts programming feature functional-programming
+categories: Haskell Java concepts language-features fp
 comments: true
 ---
 
@@ -31,7 +31,7 @@ In Java, we would do:
 int f(int x) {
     return x == 1 ? 0 : 1;
 }
-{% endhighlight %}  
+{% endhighlight %}
 
 Although the Haskell equivalent is arguably more elegant and readable, this one in Java looks alright. But note that if the function happens to have to deal with more cases, the Java solution has to change to either if-else or switch-cases, which will become ugly.
 

@@ -8,14 +8,16 @@ permalink: pretty
     <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
     <p class="post-meta">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
-      {% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-         <span itemprop="name">{{ page.author }}</span></span>
-      {% endif %}
       <span class="mid-dot-divider">•</span>
       <span class="reading-time">
          {{ content | number_of_words | divided_by:180 }} min read
-      </span>
+      </span> 
     </p>
+    <span class="tags">
+      {% for category in page.categories %}
+         <code class="highlighter-rouge">{{ category }}</code>
+      {% endfor %}
+    </span>
   </header>
 
   <div class="post-content" itemprop="articleBody">
