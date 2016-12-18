@@ -16,14 +16,11 @@ padding-top: 5px;
     letter-spacing: 0.33px;
     font-family: $second-font-family, Georgia, serif;
     font-size: $base-font-size - 2;
-}
 
-/*.site-header .wrapper:before {
-   content: '/';
-   font-size: 500%;
-   position: absolute;
-   line-height: 1em;
-}*/
+     @include media-query($on-palm) {
+       font-size: $base-font-size - 3;
+     }
+}
 
 .site-nav {
     text-align: center;
@@ -36,13 +33,19 @@ padding-top: 5px;
     .page-link {
         color: $text-color;
         line-height: $base-line-height;
-        /*text-transform: lowercase;*/
         font-size: $base-font-size - 2;
-
-
-        // Gaps between nav items, but not on the last one
+        letter-spacing: .013em;
+      
         &:not(:last-child) {
             margin-right: $spacing-unit;
+        }
+
+        @include media-query($on-palm) {
+           font-size: $base-font-size - 3;
+
+           &:not(:last-child) {
+               margin-right: $spacing-unit/2;
+           }
         }
     }
 }
@@ -57,13 +60,18 @@ padding-top: 5px;
    font-weight: 400;
    font-style: normal;
    color: rgba(0, 0, 0, 0.44);
-   font-size: 13px;
+   font-size: $base-font-size - 4;
    letter-spacing: 0;
    text-decoration: none;
    background: #fafafa;
    border-radius: 3px;
    border: 1px solid #f0f0f0;
    text-transform: lowercase;
+
+   @include media-query($on-palm) {
+       font-size: $base-font-size - 5;
+       padding: 4px 9px;
+   }
 }
 
 /*
@@ -109,7 +117,7 @@ background: transparent;
 }
 
 .footer-heading {
-    font-size: 18px;
+    font-size: $base-font-size;
     margin-bottom: $spacing-unit / 2;
 }
 
@@ -198,10 +206,15 @@ background: transparent;
       .post-link {
          display: block;
          clear: both;
-         font-size: 28px; /*31px;*/
+         font-size: 28px;
          line-height: 32px;
          font-family: $base-font-family;
          font-weight: 700;
+
+         @include media-query($on-palm) {
+            font-size: 26px;
+            line-height: 30px;
+         }
       }
 
       .excerpt p {
@@ -216,10 +229,16 @@ background: transparent;
 
 .post-list .post-meta {
    font-size: $base-font-size - 2;
+   @include media-query($on-palm) {
+      font-size: $base-font-size - 3;
+   }
 }
 
 .post .post-meta {
    font-size: $base-font-size - 1;
+   @include media-query($on-palm) {
+      font-size: $base-font-size - 2;
+   }
 }
 
 
@@ -251,6 +270,9 @@ background: transparent;
 
 h1, h1.post-title {
    font-size: 37px;
+   @include media-query($on-palm) {
+      font-size: 35px;
+   }
 }
 
 h1.post-title {
@@ -262,23 +284,27 @@ h1.post-title {
 
     h2 {
         font-size: 30px;
+        @include media-query($on-palm) {
+            font-size: 28px;
+        }
     }
 
     h3 {
         font-size: 25px;
+        @include media-query($on-palm) {
+            font-size: 23px;
+        }
     }
 
     h4 {
         font-size: 20px;
+        @include media-query($on-palm) {
+            font-size: 18px;
+        }
     }
 
     h5 {
         font-size: 15px;
-    }
-
-    p, ul, ol, blockquote {
-      font-size: $base-font-size+1;
-      /*letter-spacing: 0.012em;*/
     }
 
     li + li {
@@ -292,12 +318,42 @@ h1.post-title {
 }
 
 .post-content p, .post-list .post .excerpt p, ul, ol, blockquote  {
-      font-family: $second-font-family;
-      font-weight: 300;
+   font-family: $second-font-family;
+   font-weight: 300;
+   font-size: $base-font-size + 1;
 
+   @include media-query($on-palm) {
+      font-size: $base-font-size;
+   }
 }
 
+.post-content {
+    p, ul, ol, blockquote  {
+      font-size: $base-font-size + 1;
 
+      @include media-query($on-palm) {
+         font-size: $base-font-size;
+      }
+    }
+
+   li a {
+      border-bottom: 1px dashed rgba(0,0,0,0.24);
+      font-size: $base-font-size;
+      color: $text-color;
+
+      @include media-query($on-palm) {
+         font-size: $base-font-size - 1;
+      }
+   }
+ }
+
+.post-list .post .excerpt p {
+   font-size: $base-font-size;
+
+   @include media-query($on-palm) {
+      font-size: $base-font-size - 1;
+   }
+}
 
 .face {
     position: relative;
@@ -307,6 +363,14 @@ h1.post-title {
 
 .face img {
     border-radius: 50%;
+}
+
+.post-list, .post {
+   margin-top: $spacing-unit * 1.5;
+}
+
+.post .post-title {
+    margin-top: 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -326,12 +390,6 @@ iframe {
     font-size: 0.963em;
     color: $brand-color;
 
-}
-
-.post-content li a {
-   border-bottom: 1px dashed rgba(0,0,0,0.24);
-   font-size: 1em;
-   color: $text-color;
 }
 
 .social-media-list li {
@@ -382,13 +440,6 @@ iframe {
 
 a.page-link:hover {
     color: $brand-color;
-}
-
-@media screen and (max-width: 800px) {
-    .wrapper {
-        padding-right: 50px;
-        padding-left: 50px;
-    }
 }
 
 p + p {
