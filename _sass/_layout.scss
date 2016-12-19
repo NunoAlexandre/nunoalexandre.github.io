@@ -200,20 +200,20 @@ background: transparent;
 
    .post {
       .title {
-         margin-top: 5px;
+         margin: 0px;
       }
 
       .post-link {
          display: block;
          clear: both;
-         font-size: 28px;
-         line-height: 32px;
+         font-size: 27px;
+         line-height: 31px;
          font-family: $base-font-family;
          font-weight: 700;
 
          @include media-query($on-palm) {
-            font-size: 26px;
-            line-height: 30px;
+            font-size: 25px;
+            line-height: 29px;
          }
       }
 
