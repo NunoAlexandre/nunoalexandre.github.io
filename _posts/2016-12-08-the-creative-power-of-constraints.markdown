@@ -9,7 +9,7 @@ comments: true
 This idea that constraints are something heavy and unwanted, an enemy for the creative, is just not true. Constraints have an enormous creativity power.
 
 I have seen countless examples where constraints were the engine and fuel to creative ideas. 
-We hear of people that could only afford a very small house that end up designing their own super space-efficient furniture, others who suffer serious injuries and make something awesome out of it, [and so much more examples](https://blog.bufferapp.com/7-examples-of-how-creative-constraints-can-lead-to-amazing-work).
+We hear of people that could only afford a very small house that end up designing their own super space-efficient furniture, others who suffer serious injuries and make something awesome out of it, [and so many more examples](https://blog.bufferapp.com/7-examples-of-how-creative-constraints-can-lead-to-amazing-work).
 
 
 ### Time and Other Resources
