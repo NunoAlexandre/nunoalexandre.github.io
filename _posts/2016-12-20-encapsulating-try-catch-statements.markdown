@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Encapsulating Try-Catch Statements"
-date: 2016-12-08 23:20:39 +0100
+date: 2016-12-20 23:20:39 +0100
 categories: abstraction encapsulation programming java
 comments: true
 ---
