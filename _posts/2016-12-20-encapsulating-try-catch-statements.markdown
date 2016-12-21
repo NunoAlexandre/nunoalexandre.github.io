@@ -18,7 +18,7 @@ But there is still _some_ hope and some ways to improve it.
 
 Having said all above, what is a Try-Catch all about? 
 First, it is a very procedural-oriented thingy.
-It defines two blocks, the ```try``` block and the catch```.
+It defines two blocks, the ```try``` block and the ```catch```.
 And within the try block we place statements, from which one or more might fail, and in the catch, we handle those potential failures.
 
 In terms of Java code, this translates to:
