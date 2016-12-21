@@ -13,6 +13,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://nunoalexandre.com" # the base hostname & protocol for your site
 linkedin_username: nunombalexandre
 github_username: nunoalexandre
+twitter_username: nunombalexandre
 disqus_shortname: "nunoalexandre"
 permalink: :year/:month/:day/:title
 # Build settings
