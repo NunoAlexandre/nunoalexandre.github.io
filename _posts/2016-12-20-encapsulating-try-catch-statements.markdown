@@ -40,13 +40,13 @@ Easy, we all know it, no big deal.
 
 Firstly, it is a procedural-oriented solution. Object-Oriented programming is all about objects communicating through messages, so this clearly is not OO.
 
-Secondly, it takes space too much space. 
-If you only have to handle potential exceptions once in your system, that's probably fine, but if it is something you have to be doing often, it gets big and dirty.
+Secondly, it takes too much space. 
+If you only have to handle potential exceptions once in your system that is probably fine, but if it is something you have to be doing often, it gets big and dirty.
 
-Thirdly, it is usually in a way that makes code ugly, not encapsulated and therefore harder to maintain and understand.
+Thirdly, it is usually used in a way that makes code ugly, not encapsulated and therefore harder to maintain and understand.
 
 
-This is what is most frequently see:
+This is what I most frequently see:
 
 {% highlight java %}
 final Object anObject;
