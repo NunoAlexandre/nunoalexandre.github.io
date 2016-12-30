@@ -7,6 +7,8 @@ permalink: /resources/
 
 ### Books 
 
+* [The Art of Creative Thinking](https://www.amazon.co.uk/Art-Creative-Thinking-Rod-Judkins/dp/1444794485)
+* [Change Your Mind](https://www.amazon.com/Change-Your-Mind-Unlock-Creative/dp/174270557X)
 * [The Passionate Programmer](https://www.amazon.com/Passionate-Programmer-Remarkable-Development-Pragmatic/dp/1934356344)
 * [Structures and Interpretation of Computer Programms](http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871/ref=sr_1_1?s=books&ie=UTF8&qid=1461772786&sr=1-1&keywords=SCIP)
 * [Heads First Design Patters](http://www.amazon.com/Head-First-Design-Patterns-Freeman/dp/0596007124/ref=sr_1_1?s=books&ie=UTF8&qid=1461772891&sr=1-1&keywords=heads+first+design+patterns)
@@ -27,6 +29,7 @@ permalink: /resources/
 * [Martin Fowler](http://www.martinfowler.com)
 * [Chad Fowler](http://chadfowler.com)
 * [Sandi Metz](http://www.sandimetz.com/blog/)
+* [Code Miller](http://www.codemiller.com)
 * [Coding Horror](http://blog.codinghorror.com)
 * [Clean Coder](http://blog.cleancoder.com)
 * [Yegor 256](http://www.yegor256.com)
