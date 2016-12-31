@@ -65,6 +65,11 @@ Defining the hierarchy of a content is the process of making different types of 
 
 As I have learned before in UX courses, proximity is a way to say that what is closer is related. Hierarchy involves all that. 
 
+One of the things I most enjoyed when first working in Agile, was that the work to be done was broken down into very clear, separate, small tasks. 
+Not only it was clear what to do and how to start, but also the productivity was constant which made me engaged and willing to keep going.
+
+Reading is very similar. If the spacing (separation) is not good, we just see a block of text ahead, which will take forever to read. It is not engaging like that, and we must make it friendly to the readers not just by writing good content but also by making it easy or even appealing to read.
+
 
 ### Assignments
 
