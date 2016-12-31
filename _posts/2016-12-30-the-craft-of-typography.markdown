@@ -63,7 +63,7 @@ Apart from other spacing metrics such as margins, a very interesting thing I got
 #### Hierarchy
 Defining the hierarchy of a content is the process of making different types of content look different, reflecting the relative importance of different content using a different style.
 
-As I have learned before in UX courses, proximity is a way to say that what is closer is related. Space and hierarchy help
+As I have learned before in UX courses, proximity is a way to say that what is closer is related. Hierarchy involves all that. 
 
 
 ### Assignments
