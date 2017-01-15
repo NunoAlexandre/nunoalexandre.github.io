@@ -21,7 +21,7 @@ In the course, I have learned about:
 
 
 ### A Touch of History
-Since my 8 years of age, I have loved History, so to learn about the history of Type was really cool. 
+I have loved and been interested in History since my young days, so I enjoyed a great deal to learn about the history of Type. 
 In the old times all the typographic work was handcrafted by the scribes but since it was expensive, slow and error-prone, the Type built of metal blocks were created. 
 
 I found particularly interesting to learn that several versions of the same letter were designed in order to make the text look as if it was hand-written.
