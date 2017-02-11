@@ -7,11 +7,10 @@ id: /about/
 ---
 
 
-Nuno Alexandre - 23 - Portugal - BSc Computer Science
-
 ## Hi!
 
 <p><img width="100%" src="/images/meandaslan.jpeg"/></p>
+I am Nuno, 24 years old, Portuguese married with a lovely dutch woman and living in the Netherlands.
 I am a passionate and enthusiast software developer aspiring software craftsmanship. 
 I thrive for beautiful code, good design and cool programming technology. 
 It really drives me to develop better software every day and to be a true team player.
@@ -25,8 +24,10 @@ The experience of learning to think about code in a total different way is very 
 
 ### A blog as a notebook
 
-Aside from my job I keep a certain study discipline of some hours a week where I keep learning.
+Aside from my job I keep a certain study discipline of some hours a week where I keep learning. 
 As Uncle Bob Martin says in his book “The Clean Coder”, the 8h hours of work must be performance time rather than learning time; to practice and to learn must be our own duty and responsibility to do outside the work time.
+
+They say that the best way to learn is to explain, and that is the main goal of this blog: to put to proof my views and understanding and to keep track of it along the way.
 
 Hopefully what I will be posting here can be a useful resource to someone, giving some direction or inspiration to develop beautiful and well-thought code through examples on how to improve bad code or how to think about code in different ways.
 
@@ -42,4 +43,6 @@ Studying full time while keeping my volunteer work and a part-time remote positi
  
 If you are a student in the same area my great advice to you is to not limit yourself to what’s given to you in the classroom but take it home and go deeper on things and you will see, independently of the marks you get, how much more you will learn, grow and develop a critical thinking.
 
-Now I’m working full-time remotely from Portugal to [Worth Internet Systems](http://worth.systems) with regular visits to their office. Working remotely is a challenge but working with great people makes it all easier!
+I have then worked for more than a year remotely from Portugal to [Worth Internet Systems](http://worth.systems) with regular visits to their office. Working remotely is a challenge but working with great people makes it all easier!
+
+Now I have moved with my wife to The Netherlands and I am really exciting to grow with this new adventure.
