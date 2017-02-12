@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "This Is Not Object Oriented"
-date:   2017-02-11 17:58:39 +0100
+date:   2017-02-12 16:54:39 +0100
 categories: oo principles
 comments: true
 ---
