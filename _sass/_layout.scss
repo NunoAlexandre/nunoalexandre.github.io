@@ -35,7 +35,7 @@ padding-top: 5px;
         line-height: $base-line-height;
         font-size: $base-font-size - 2;
         letter-spacing: .013em;
-      
+
         &:not(:last-child) {
             margin-right: $spacing-unit;
         }
@@ -220,7 +220,7 @@ background: transparent;
       .excerpt p {
          font-size: $base-font-size;
       }
-   }   
+   }
 }
 
 .post-link, h1, h2, h3, h4, h5, h6 {
@@ -452,7 +452,7 @@ p + p {
 
 .post-list p + p {
    margin-top: 16px;
-} 
+}
 
 li.post {
    margin-bottom: $spacing-unit * 2.33;
@@ -463,4 +463,3 @@ blockquote {
         margin-top: 0px;
     }
 }
-

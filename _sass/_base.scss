@@ -148,7 +148,7 @@ blockquote p {
  */
 pre,
 code {
-    font-size: $base-font-size - 2;
+    font-size: $base-font-size - 3;
     border: 1.3px solid $grey-color-light;
     border-radius: 3px;
     background-color: #fdf6e3;
@@ -222,5 +222,5 @@ pre {
             fill: $grey-color;
         }
     }
-    
+
 }
