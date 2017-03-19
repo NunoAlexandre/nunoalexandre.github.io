@@ -12,7 +12,21 @@ Does size matter? It does and the conclusion is pretty clear: smaller is better.
 <iframe src="https://www.youtube.com/embed/B3b4tremI5o?ecver=2" width="500" height="275" allowfullscreen></iframe>
 </div>
 
-As a developer, the best way to keep the code clean and maintainable is by keeping it small: instead of having big methods, break them into smaller ones - some end up being classes, others just methods, but all end up being small parts and very clear in what they do.
+Uncle Bob says that the only way to keep a continuous, long-term good pace is by keeping the code clean.
+And I believe the best way to keep the code clean and maintainable is by keeping it small.
+
+What do I mean my small? Well, by smaller I don't necessarily mean fewer lines.
+I rather have 3 understandable lines of code to deal with than a long and squeezed one.
+
+Having that said, what I am really for is to keep _whatever it is_ (classes, modules, functions, interfaces, etc) with a single, well-defined domain of concern.
+
+Classes with more than 100 lines and methods with more than 4 are, most likely, doing more than they should.
+They are concerned with more than one domain and that makes them difficult to maintain.
+They are shallow, difficult to test and don't fit in our heads.
+
+On the contrary, small parts with a single responsibility are far more easy to maintain, to compose and to test.
+
+We want our code to require as low cognitive weight as possible, to fit in a small screen and to have people feeling comfortable to change.
 
 
 ### Getting Small
@@ -21,11 +35,9 @@ A while ago I was helping this friend improving his code.
 He needed to write this piece of code that would fetch certain types of content from a remote server.
 
 When I first looked at it, it looked something as you see below.
+Things got a bit too big, making it difficult to do _anything_ with it.
 
-Things got a bit too big, making it hard to do _anything_ with it.
-
-{% highlight java %}
-
+{% highlight java linenos %}
 public class ImporterBasicUtils {
     private static Log LOGGER = LogFactoryUtil.getLog(ImporterBasicUtils.class);
 
@@ -128,19 +140,20 @@ public class ImporterBasicUtils {
 {% endhighlight %}
 
 
-
 There were a couple of things that had their own domain here:
 
 1. Checking if a server is reachable
 2. Make requests to the source server
 3. Fault-tolerance - retry request n times before giving up
 
+<small><em>There were a few more, which I worked on, but I am focusing on this ones for the sake of simplicity.
+</em></small>
 
 ### 1. Checking if a server is reachable
 
 I wrapped this logic as being a `Ping`:
 
-{% highlight java %}
+{% highlight java linenos %}
 public class Ping {
   private final URL url;
   private final int timeoutInMilliseconds;
@@ -179,24 +192,26 @@ Furthermore, the soap services returned either null, an exception or, by last, t
 
 In the end, there were two cases that matter: the happy path - where the value was fetched successfully - or the failure (no value) one, which was fine enough to happen as long as it as logged.
 
-My approach was therefore to create a `Service` for each of these entities and then wrap them using the `Facade` pattern.
+My approach was, therefore, to create a `Service` for each of these entities and then wrap them using the `Facade` pattern.
 
 Like this, I could wrap the bad bits of these soap services and make it bearable within the project I had to manage.
 
 The `Service` to fetch Users looks like this:
 
-{% highlight java %}
+{% highlight java linenos %}
 final class SourceUserService {
     private final UserServiceSoap service;
     private final String serviceURI = "/user-portlet/api/user-service";
 
-    public SourceUserService(final SourceSettings settings) throws MalformedURLException, ServiceException {
+    public SourceUserService(final SourceSettings settings)
+                                throws MalformedURLException, ServiceException {
         URL serviceURL = new URL(settings.hostname() + serviceURI);
         UserServiceSoapServiceLocator locatorUser = new UserServiceSoapServiceLocator();
         service = locatorUser.getUserService(serviceURL);
         ((UserServiceSoapBindingStub) service).setUsername(settings.username());
         ((UserServiceSoapBindingStub) service)
-                .setPassword(CryptoUtils.cryptoString(settings.encryptedPassword(), settings.decryptKey(), "decrypt"));
+                .setPassword(CryptoUtils.cryptoString(settings.encryptedPassword(),
+                    settings.decryptKey(), "decrypt"));
     }
 
     public final UserSoap getUserByCode(final String code) throws RemoteException {
@@ -208,7 +223,7 @@ final class SourceUserService {
 
 And the Facade looks like this:
 
-{% highlight java %}
+{% highlight java linenos %}
 public final class SimpleSourceAssetsFacade implements SourceAssetsFacade {
   private final SourceUserService userService;
   private final SourceSettings settings;
@@ -242,15 +257,14 @@ That wouldn't work, as I needed to keep the capacity of changing the number of r
 I went, therefore, ahead with creating my own way of tolerating faults.
 
 
-{% highlight java %}
+{% highlight java linenos %}
 public class FaultTolerantAttempt {
-    private final int retryTimeout;
+    private final int retryIntervalInSeconds;
     private final int timesToRetry;
     private static final Log LOG = LogFactoryUtil.getLog(DirectSourceAssetsFacade.class);
 
-
-    public FaultTolerantAttempt(int retryTime, int timesToRetry ) {
-        this.retryTimeout = retryTime * 1000;
+    public FaultTolerantAttempt(int retryTimeInMiliSeconds, int timesToRetry ) {
+        this.retryIntervalInSeconds = retryTimeInMiliSeconds * 1000;
         this.timesToRetry = timesToRetry;
     }
 
@@ -260,7 +274,7 @@ public class FaultTolerantAttempt {
                 return Optional.ofNullable(action.result());
             } catch ( Exception e ) {
                 LOG.info("Exception on FaultTolerantAttempt :: " + (i+1) + "/" + timesToRetry, e);
-                pauseThread(retryTimeout);
+                pauseThread(retryIntervalInSeconds);
             }
         }
         return Optional.empty();
@@ -285,12 +299,19 @@ public interface FallibleAction<T> {
 {% endhighlight %}
 
 
-
 ### Conclusion
+
+Note what we had before and what we have in the end.
+We started with a single know-it-all, 99 lines long class. It had two _static_ methods, one 37, the other 55 lines long. It was procedural and difficult to read.
+
+Through refactoring, we end up having a few well-defined classes, being the biggest class only 30 lines long.
+Not only that, but we also end up with a much richer vocabulary to describe our system.
 
 There were a couple of things I couldn't change.
 For instance, UserServiceSoap (an external service) had no other way to be initialized but to have a locator and those setters in place after the casts. The best I could find was to wrap it as I showed above.
 
 It gave me a great joy to take some of my free time do this refactoring and to increase considerably - I believe - the quality of the code, making it both object-oriented and functional, reusable, readable and maintainable.
 
-Equally joyful was to get my friend who was working on this enthusiast about clean code and about functional programming.
+Equally joyful was to get my friend who was working on this enthusiast about clean code and about functional programming. Win-win!
+
+Ironically, this was my longest post so far.
