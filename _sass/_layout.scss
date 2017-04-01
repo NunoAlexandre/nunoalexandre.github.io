@@ -320,32 +320,22 @@ h1.post-title {
 .post-content p, .post-list .post .excerpt p, ul, ol, blockquote  {
    font-family: $second-font-family;
    font-weight: 300;
-   font-size: $base-font-size + 1;
+   font-size: $base-font-size;
 
    @include media-query($on-palm) {
-      font-size: $base-font-size;
+      font-size: $base-font-size - 1;
    }
 }
 
-.post-content {
-    p, ul, ol, blockquote  {
-      font-size: $base-font-size + 1;
+.post-content li a {
+    border-bottom: 1px dashed rgba(0,0,0,0.24);
+    font-size: $base-font-size - 1;
+    color: $text-color;
 
-      @include media-query($on-palm) {
-         font-size: $base-font-size;
-      }
+    @include media-query($on-palm) {
+       font-size: $base-font-size - 2;
     }
-
-   li a {
-      border-bottom: 1px dashed rgba(0,0,0,0.24);
-      font-size: $base-font-size;
-      color: $text-color;
-
-      @include media-query($on-palm) {
-         font-size: $base-font-size - 1;
-      }
-   }
- }
+}
 
 .post-list .post .excerpt p {
    font-size: $base-font-size;
