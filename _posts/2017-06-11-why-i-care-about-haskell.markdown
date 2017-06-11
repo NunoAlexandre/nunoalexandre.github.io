@@ -2,7 +2,7 @@
 layout: post
 title:  Why I care about Haskell
 date:   2017-06-11 15:30:39 +02
-categories: haskell java functional-programming personal
+categories: talk haskell java functional-programming personal
 comments: true
 ---
 
@@ -11,7 +11,7 @@ Having worked in an environment where Java was predominant, bringing Functional 
 ### Talk
 The talk was hosted by [worth.systems](https://worth.systems).
 
-<em><strong>Disclaimer:</strong></em> Please understand this was my first open talk in English. Also, if you count correctly the number of times I said 'ja' (yes, in Dutch) I might have a price for you :)
+<small><em><strong>Disclaimer:</strong></em> Please understand this was my first open talk in English. Also, if you count correctly the number of times I said 'ja' (yes, in Dutch) I might have a price for you :) </small>
 <div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/pjIw0-xPoZ0?ecver=2" width="640" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>
 
 #### Slides
