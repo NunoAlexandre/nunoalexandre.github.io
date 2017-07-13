@@ -34,6 +34,8 @@ permalink: /resources/
 * [Coding Horror](http://blog.codinghorror.com)
 * [Clean Coder](http://blog.cleancoder.com)
 * [Yegor 256](http://www.yegor256.com)
+* [Ruud van Asseldonk](https://ruudvanasseldonk.com)
+* [Arian van Putten](https://arianvp.me)
 
 
 
