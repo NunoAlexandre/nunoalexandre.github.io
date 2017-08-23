@@ -9,7 +9,7 @@ id: /about/
 
 ## Hi!
 
-<p><img width="100%" src="/images/meandaslan.jpeg"/></p>
+<p><img width="100%" title="Hüttschlag, Austria." src="/images/cover.jpg"/></p>
 My name is Nuno, I am Portuguese, married with a lovely Dutch woman and living in the Netherlands.
 I am a passionate and enthusiast software developer aspiring software craftsmanship.
 I thrive for beautiful code, good design and cool programming technology.
