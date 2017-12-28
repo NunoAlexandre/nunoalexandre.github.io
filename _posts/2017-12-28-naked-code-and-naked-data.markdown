@@ -19,18 +19,17 @@ This leads to three problems:
 
 Let's jump to an example. Suppose you are given the following function:
 
-``` haskell
-
+{% highlight haskell %}
 runJob :: Int -> Int -> String -> String -> IO ()
 runJob projectId companyId jobType priority = -- do something
-```
+{% endhighlight %}
 
 Unless if you check the implementation of this function, you don't know in which order to pass the arguments.
 Furthermore, `projectId` and `companyId` are actually just `Int`s, meaning they are seen as the same by readers and by the compiler.
 
 This program presents a very low vocabulary and opens up a whole world of errors such as:
 
-``` haskell
+{% highlight haskell %}
 let projectId = 1
 let companyId = 2
 let jobType = "download"
@@ -43,20 +42,20 @@ let otherCompanyId = 1
 
 -- compiles and evaluates to True
 companyId == projectId
-```
+{% endhighlight %}
 
 You might be thinking: "You can cover these cases through exhaustive testing". That might help a little, but it's way better to **make it right by design**.
 
 This example above could be made right by design by wrapping data in its own domain:
 
-``` haskell
+{% highlight haskell %}
 newtype ProjectId = ProjectId Int
 newtype CompanyId = CompanyId Int
 data JobType = Download | Upload | Save
 data Priority = Low | Normal | High
 
 runJob :: ProjectId -> CompanyId -> JobType -> Priority
-```
+{% endhighlight %}
 
 This way we have both a rich vocabulary and type safety, which avoids all the mistakes that were possible before.
 This sure adds a tiny overhead, but one thing I have been learning with my Team Lead [Robert life](https://nl.linkedin.com/in/robert-kreuzer-9a729027) is that life is made of tradeoffs. And here the _pros_ are much stronger than the _cons_.
@@ -76,19 +75,19 @@ I have mainly three problems with naked code:
 
 An example of naked code would be:
 
-``` haskell
+{% highlight haskell %}
 -- |  Active companies with failed jobs should be alerted.
 getCompaniesToAlert :: [CompanyId] -> [Job] -> [CompanyId]
 getCompaniesToAlert activeCompanies allJobs =
   intersect activeCompanies (nub . map jobCompanyId . filter ((== Failed) . jobStatus) $ allJobs)
-```
+{% endhighlight %}
 
 Good luck reading this, and, even worst, reading a system where code like this is the norm.
 For someone reading this, it's unclear what this function is really about. I think of this kind of code like that kind of people who keep making parenthesis while telling a story and neither them neither you can understand where it is going.
 
 Instead, give every piece of knowledge and behaviour its own place and let composition be declarative and objective:
 
-``` haskell
+{% highlight haskell %}
 getCompaniesToAlert :: [CompanyId] -> [Job] -> [CompanyId]
 getCompaniesToAlert subscribedCompanies allJobs =
   intersect subscribedCompanies getCompaniesWithFailingJobs
@@ -98,7 +97,7 @@ getFailedJobs = filter ((== Failed) . jobStatus)
 
 getCompaniesWithFailingJobs :: [Job] -> [CompanyId]
 getCompaniesWithFailingJobs = nub . map jobCompanyId . getFailedJobs
-```
+{% endhighlight %}
 
 Again, this adds a small overhead, but the _pros_ are more than the _cons_ since the code is now:
 
