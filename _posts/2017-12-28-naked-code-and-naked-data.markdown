@@ -58,7 +58,7 @@ runJob :: ProjectId -> CompanyId -> JobType -> Priority
 {% endhighlight %}
 
 This way we have both a rich vocabulary and type safety, which avoids all the mistakes that were possible before.
-This sure adds a tiny overhead, but one thing I have been learning with my Team Lead [Robert life](https://nl.linkedin.com/in/robert-kreuzer-9a729027) is that life is made of tradeoffs. And here the _pros_ are much stronger than the _cons_.
+This sure adds a tiny overhead, but one thing I have been learning with my Team Lead [Robert Kreuzer](https://nl.linkedin.com/in/robert-kreuzer-9a729027) is that life is made of tradeoffs. And here the _pros_ are much stronger than the _cons_.
 
 
 ### Naked code
