@@ -60,7 +60,6 @@ runJob :: ProjectId -> CompanyId -> JobType -> Priority
 This way we have both a rich vocabulary and type safety, which avoids all the mistakes that were possible before.
 This sure adds a tiny overhead, but one thing I have been learning with my Team Lead [Robert Kreuzer](https://nl.linkedin.com/in/robert-kreuzer-9a729027) is that life is made of tradeoffs. And here the _pros_ are much stronger than the _cons_.
 
-
 ### Naked code
 
 The concept of _naked code_ is similar to the concept of _naked data_, but I'd say it's slightly more subjective.
@@ -82,7 +81,7 @@ getCompaniesToAlert activeCompanies allJobs =
   intersect activeCompanies (nub . map jobCompanyId . filter ((== Failed) . jobStatus) $ allJobs)
 {% endhighlight %}
 
-Good luck reading this, and, even worst, reading a system where code like this is the norm.
+Good luck reading this, and, even worse, reading a system where code like this is the norm.
 For someone reading this, it's unclear what this function is really about. I think of this kind of code like that kind of people who keep making parenthesis while telling a story and neither them neither you can understand where it is going.
 
 Instead, give every piece of knowledge and behaviour its own place and let composition be declarative and objective:
