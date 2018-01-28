@@ -117,7 +117,7 @@ By using GADTs and DataKinds, each type of value can now stand for itself, inste
 That means that we can have functions that accept all types of `Value`s:
 
 {% highlight haskell%}
-resetWithDefault :: Value a -> b
+resetWithDefault :: Value a -> Value b
 resetWithDefault (StringValue _) = StringValue "Hello, world!"
 resetWithDefault (IntValue _) = IntValue 3
 {% endhighlight %}
@@ -160,3 +160,5 @@ bar (StringValue str) = IntValue 3
 ### Final notes
 
 I am not against the use of `data`. I love it, and I wish that such terse and powerful way of defining types existed in more mainstream languages. But as you see, there are cases where they are not ideal left alone and where a higher level of type-safety is both necessary and advisable.
+
+[Here you can find](https://gist.github.com/NunoAlexandre/223f3c2991810a347a2e9cd2bd1fdad9) the gist containing the Haskell code present in this page.
