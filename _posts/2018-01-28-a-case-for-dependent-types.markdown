@@ -103,11 +103,11 @@ Going step by step:
 2. Then, we define `Value`, whose type _depends on_ a concrete `ValueType` to be resolved.
 
 3. Now, we define the value wrappers we need and specialize their type accordingly:
-- `StringValue` is a `Value 'StringType'` which wraps a `String`.
-- `IntValue` is a `Value 'IntType'` which wraps an `Int`.
+- `StringValue` is a `Value StringType` which wraps a `String`.
+- `IntValue` is a `Value 'IntType` which wraps an `Int`.
 
 **Notes**:
-- If you are wondering about the `'` behind each `ValueType`, it is just a way of being explicit that we are promoting the `StringType` constructor, which is possible by using the `DataKinds` extension.
+- If you are wondering about the `'` before each `ValueType`, it is just a way of being explicit that we are promoting the `StringType` constructor, which is possible by using the `DataKinds` extension.
 - The `FlexibleInstances` extension is used so that we could define the type signature of `Value` by its _kind_.
 
 #### The whole and the self
@@ -117,7 +117,7 @@ By using GADTs and DataKinds, each type of value can now stand for itself, inste
 That means that we can have functions that accept all types of `Value`s:
 
 {% highlight haskell%}
-resetWithDefault :: Value a -> Value b
+resetWithDefault :: Value a -> Value a
 resetWithDefault (StringValue _) = StringValue "Hello, world!"
 resetWithDefault (IntValue _) = IntValue 3
 {% endhighlight %}
