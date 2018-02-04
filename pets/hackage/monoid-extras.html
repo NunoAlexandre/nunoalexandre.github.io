@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./static/hackage.css" type="text/css" />
+<link rel="search" type="application/opensearchdescription+xml" title="Hackage" href="/packages/opensearch.xml" />
+  <title>
+    monoid-extras: Various extra monoid-related definitions and utilities
+  </title>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://hackage.haskell.org/package/monoid-extras" />
+  <meta property="og:title" content="monoid-extras: Various extra monoid-related definitions and utilities" />
+  <meta property="og:description" content="Install via `cabal&nbsp;install&nbsp;monoid-extras`. " />
+  <meta property="og:site_name" content="Hackage" />
+  <link rel="canonical" href="https://hackage.haskell.org/package/monoid-extras" />
+  <script src="https://hackage.haskell.org/static/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <base href="https://hackage.haskell.org/package/monoid-extras-0.4.2/" />
+</head>
+
+<body>
+  <div id="page-header">
+<a class="caption" href="https://hackage.haskell.org/package/monoid-extras">
+monoid-extras: Various extra monoid-related definitions and utilities
+</a>
+<ul class="links" id="page-menu">
+
+    <li><a href="/">Home</a></li>
+
+    <li>
+      <form action="/packages/search" method="get" class="search">
+        <button type="submit">Search&nbsp;</button>
+        <input type="text" name="terms" />
+      </form>
+    </li>
+
+    <li><a href="/packages/browse">Browse</a></li>
+
+    <li><a href="/packages/recent">What's new</a></li>
+
+    <li><a href="/upload">Upload</a></li>
+
+    <li><a href="/accounts">User accounts</a></li>
+
+</ul>
+
+
+</div>
+
+  <div id="content">
+
+    <h1>The monoid-extras package</h1>
+    <div style="font-size: small">
+      [ <a href="/packages/tags">Tags: </a><a href="/packages/tag/benchmark">benchmark</a>, <a href="/packages/tag/bsd3">bsd3</a>, <a href="/packages/tag/data">data</a>, <a href="/packages/tag/library">library</a> ]
+      [ <a href="/package/monoid-extras/tags/edit">Propose Tags </a> ]
+    </div>
+
+
+
+    <div id="description">
+        <p>Various extra monoid-related definitions and utilities,
+such as monoid actions, monoid coproducts, semi-direct
+products, &quot;deletable&quot; monoids, &quot;split&quot; monoids,
+and &quot;cut&quot; monoids.</p>
+
+    </div>
+
+
+
+    <div id="properties">
+    <h2>Properties</h2>
+    <table class="properties">
+      <tbody>
+
+        <tr>
+          <th>Versions</th>
+          <td><a href="/package/monoid-extras-0.1.0.0">0.1.0.0</a>, <a href="/package/monoid-extras-0.1.1.0">0.1.1.0</a>, <a href="/package/monoid-extras-0.2.0.0">0.2.0.0</a>, <a href="/package/monoid-extras-0.2.1.0">0.2.1.0</a>, <a href="/package/monoid-extras-0.2.2.0">0.2.2.0</a>, <a href="/package/monoid-extras-0.2.2.1">0.2.2.1</a>, <a href="/package/monoid-extras-0.2.2.2">0.2.2.2</a>, <a href="/package/monoid-extras-0.2.2.3">0.2.2.3</a>, <a href="/package/monoid-extras-0.3.0.0">0.3.0.0</a>, <a href="/package/monoid-extras-0.3.1.0">0.3.1.0</a>, <a href="/package/monoid-extras-0.3.2.0">0.3.2.0</a>, <a href="/package/monoid-extras-0.3.2.1">0.3.2.1</a>, <a href="/package/monoid-extras-0.3.2.2">0.3.2.2</a>, <a href="/package/monoid-extras-0.3.2.3">0.3.2.3</a>, <a href="/package/monoid-extras-0.3.2.4">0.3.2.4</a>, <a href="/package/monoid-extras-0.3.3">0.3.3</a>, <a href="/package/monoid-extras-0.3.3.1">0.3.3.1</a>, <a href="/package/monoid-extras-0.3.3.2">0.3.3.2</a>, <a href="/package/monoid-extras-0.3.3.3">0.3.3.3</a>, <a href="/package/monoid-extras-0.3.3.4">0.3.3.4</a>, <a href="/package/monoid-extras-0.3.3.5">0.3.3.5</a>, <a href="/package/monoid-extras-0.4.0.0">0.4.0.0</a>, <a href="/package/monoid-extras-0.4.0.1">0.4.0.1</a>, <a href="/package/monoid-extras-0.4.0.2">0.4.0.2</a>, <a href="/package/monoid-extras-0.4.0.3">0.4.0.3</a>, <a href="/package/monoid-extras-0.4.0.4">0.4.0.4</a>, <a href="/package/monoid-extras-0.4.1">0.4.1</a>, <a href="/package/monoid-extras-0.4.1.1">0.4.1.1</a>, <a href="/package/monoid-extras-0.4.1.2">0.4.1.2</a>, <strong>0.4.2</strong></td>
+        </tr>
+
+                <tr>
+          <th>Change log</th>
+          <td><a href="/package/monoid-extras-0.4.2/changelog">CHANGES</a></td>
+        </tr>
+
+
+        <tr>
+          <th>Dependencies</th>
+          <td><a href="/package/base">base</a> (&gt;=4.3 &amp;&amp; &lt;4.11), <a href="/package/groups">groups</a> (&lt;0.5), <a href="/package/semigroupoids">semigroupoids</a> (&gt;=4.0 &amp;&amp; &lt;5.3), <a href="/package/semigroups">semigroups</a> (&gt;=0.8 &amp;&amp; &lt;0.19)<span style="font-size: small"> [<a href="/package/monoid-extras-0.4.2/dependencies">details</a>]</span></td>
+        </tr>
+
+        <tr>
+          <th>License</th>
+          <td><a href="/package/monoid-extras-0.4.2/src/LICENSE">BSD3</a></td>
+        </tr>
+
+
+
+        <tr>
+          <th>Author</th>
+          <td>Brent Yorgey</td>
+        </tr>
+        <tr>
+          <th>Maintainer</th>
+          <td>diagrams-discuss@googlegroups.com</td>
+        </tr>
+
+        <!-- Obsolete/deprecated 'Stability' field hidden
+             c.f. http://stackoverflow.com/questions/3841218/conventions-for-stability-field-of-cabal-packages
+        <tr>
+          <th>Stability</th>
+          <td>Unknown</td>
+        </tr>
+        -->
+
+                <tr>
+          <th>Category</th>
+          <td><a href="/packages/#cat:Data">Data</a></td>
+        </tr>
+
+
+
+
+                <tr>
+          <th>Bug tracker</th>
+          <td>
+            <a href="https://github.com/diagrams/monoid-extras/issues">
+              https://github.com/diagrams/monoid-extras/issues
+            </a>
+          </td>
+        </tr>
+
+
+                <tr>
+          <th>Source repository</th>
+          <td>head: git clone <a href="https://github.com/diagrams/monoid-extras.git">https://github.com/diagrams/monoid-extras.git</a></td>
+        </tr>
+
+
+        <tr>
+          <th>Uploaded</th>
+          <td>Sat Jul 16 11:51:58 UTC 2016 by <a href="/user/BrentYorgey">BrentYorgey</a></td>
+        </tr>
+
+                <tr>
+          <th>Updated</th>
+          <td>Wed Jun 21 22:41:00 UTC 2017 by <a href="/user/BrentYorgey">BrentYorgey</a> to <a href="/package/monoid-extras-0.4.2/revisions/">revision 2</a> &nbsp; <small>[<a href="https://github.com/haskell-infra/hackage-trustees/blob/master/revisions-information.md">What is this?</a>]</small></td>
+        </tr>
+
+
+                <tr>
+          <th>Distributions</th>
+          <td>Debian:<a href="http://packages.debian.org/source/sid/haskell-monoid-extras">0.4.0.3</a>, LTSHaskell:<a href="https://www.stackage.org/package/monoid-extras">0.4.2</a>, NixOS:<a href="http://hydra.nixos.org/job/nixpkgs/trunk/haskellPackages.monoid-extras.x86_64-linux">0.4.2</a>, Stackage:<a href="https://www.stackage.org/package/monoid-extras">0.4.2</a>, openSUSE:<a href="https://build.opensuse.org/package/show/devel:languages:haskell/ghc-monoid-extras">0.4.2</a></td>
+        </tr>
+
+
+
+
+        <tr>
+          <th>Downloads</th>
+          <td>33989 total (1335 in the last 30 days)</td>
+        </tr>
+
+        <tr>
+          <th> Rating</th>
+	  <td>(no votes yet)
+	  <span style="font-size: small">[estimated by <a href="https://en.wikipedia.org/wiki/Rule_of_succession">rule of succession</a>]</span></td>
+	</tr>
+
+	<tr>
+	  <th>Your Rating</th>
+	  <td>
+            <ul class="star-rating">
+              <li class="star uncool" id="1">&lambda;</li>
+              <li class="star uncool" id="2">&lambda;</li>
+              <li class="star uncool" id="3">&lambda;</li>
+	    </ul>
+
+          </td>
+        </tr>
+        <tr>
+          <th>Status</th>
+	  <td>Docs available <span style="font-size: small">[<a href="/package/monoid-extras-0.4.2/reports/1">build log</a>]</span><br />Last success reported on 2016-07-16 <span style="font-size: small">[<a href="/package/monoid-extras-0.4.2/reports/">all 1 reports</a>]</span><br/><a href="https://matrix.hackage.haskell.org/package/monoid-extras">Hackage Matrix CI</a></td>
+        </tr>
+      </tbody>
+    </table>
+    </div> <!-- /properties -->
+
+    <div id="modules">
+      <h2>Modules</h2><div id="module-list"><ul class="modules"><li><i>Data</i><ul class="modules"><li><i>Monoid</i><ul class="modules"><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Action.html">Data.Monoid.Action</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Coproduct.html">Data.Monoid.Coproduct</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Cut.html">Data.Monoid.Cut</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Deletable.html">Data.Monoid.Deletable</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Endomorphism.html">Data.Monoid.Endomorphism</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Inf.html">Data.Monoid.Inf</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-MList.html">Data.Monoid.MList</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Recommend.html">Data.Monoid.Recommend</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-SemiDirectProduct.html">Data.Monoid.SemiDirectProduct</a></span><ul class="modules"><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-SemiDirectProduct-Strict.html">Data.Monoid.SemiDirectProduct.Strict</a></span></li></ul></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-Split.html">Data.Monoid.Split</a></span></li><li><span class="module"><a href="/package/monoid-extras-0.4.2/docs/Data-Monoid-WithSemigroup.html">Data.Monoid.WithSemigroup</a></span></li></ul></li></ul></li></ul></div><p style="font-size: small">[<a href="/package/monoid-extras-0.4.2/docs/doc-index.html">Index</a>]</p>
+    </div>
+
+
+
+    <div id="downloads">
+      <h2>Downloads</h2><ul><li><a href="/package/monoid-extras-0.4.2/monoid-extras-0.4.2.tar.gz">monoid-extras-0.4.2.tar.gz</a> [<a href="/package/monoid-extras-0.4.2/src/">browse</a>] (Cabal source package)</li><li><a href="/package/monoid-extras-0.4.2/monoid-extras.cabal">Package description</a> (<a href="/package/monoid-extras-0.4.2/revisions/">revised</a> from the package)</li></ul><p>Note: This package has <a href="/package/monoid-extras-0.4.2/revisions/">metadata revisions</a> in the cabal description newer than included in the tarball. To unpack the package including the revisions, use 'cabal get'.</p>
+    </div>
+
+    <div id="maintainer-corner">
+      <h4>Maintainer's Corner</h4>
+      <p>For package maintainers and hackage trustees</p>
+      <ul>
+        <li>
+          <a href="https://hackage.haskell.org/package/monoid-extras/maintain">
+            edit package information
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+
+  </div> <!-- /content -->
+
+  <style>
+  div#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+
+  div#modal {
+    position: absolute;
+    width: 200px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 8px;
+  }
+
+  div#modal #content {
+    border-radius: 8px;
+    background: #fff;
+    padding: 20px;
+  }
+
+  div#modal #close {
+    position: absolute;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAbCAYAAABm409WAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABCdJREFUeNqcVl1IbFUUnjNzr47enLFkvKUoDNk1S0kxDPHBH4gCTfHJH4jgYgrpg1APmqjQS2gggiLViyBdkEAxjARFSPBBfPCv/LcRS5tSlLzXMcdxZvWt3d6HmTkzXW8LPs45a6/1rbX3XmvvYzL9hxBRC/AjRZcD4BGQE41Di0JciMfnQDF/n5+fm2ZmZkxnZ2e6TWFhoSknJ4T3a03TmkxPE5C/q9JbX1+nmpoaslgsxEPhSE9Pp6GhIbq5uVEuU8DztyLv7e2NShwOzIRcLpdy/S4auQNws0VHR8etiIORmppKh4eHKshXkQLwZtH4+Pgzkyvk5+cHL1dOMLmTNV6vV6xrsFNxcTHV1tZSSkpKiL6srIyam5spLS0tRM97IuWRHsDv97ezZmRkxJDV3t4enZ6e0sDAADkcDqGrqqqizc1NwdLe3m7YeFXCeoBAIPADa8rLyw0BZmdnhfX19TX19fVRY2OjTg4/amhoMPisra2J8YuLizeY3wzDfVY4nU6DcW5uLq2srAiHy8tLQi+I96urK1EM8fHxBp/h4WGV1EMOYOF3VsTExETdPO4JJZx5T08Pmc3miPZc4iwej+dTMweAwxOOZLfbja2uaSabzcaFoOtQKSYkY0pISIhY8jzGgqLx8zMO0xXp8XKEZ1NZWUk7Ozv6smxvb6vsaHBwkJKTkw0+XOossP2AAzx3dHQkeqClpcVgPDY2pm9yW1sblZSU0OLiotD5fD6qqKgIsefu56pj6ezsfJ0DJMzNzX3MCt798ADd3d20sbFBXV1dhOXSj4apqSmanp6mvLy8EPvq6mpBfnJysoLvFBEAyHK73aL26uvrQxx4CYqKigzVkp2dTRkZGSHnFb9vbW2JAPPz84MqwD3glYmJiS954Pj4WDj+n6Oiv7//3w47ONjhEx24zwGsQDrw9tLS0s/qmH7WINwTSpqamrqgywXE0X0XSAYKkpKSPgL572zEGxW+XNHuhNHRUZ28tbX1G+jLgQwuINHJgA14ALyXmJj4GY6H35TD8vKyqB5utri4OEHKs+Py5Y7l7mbBrefDMfI9xj8E3gJeBGLVtRkr1+tN4H3gC1TPT1gyD91CJicnT7Kysr6F3yfAOzJ7Lh6LupMt3HDAC3I/MoFXgZfr6upeKy0tvV9QUHAvMzPzjtVq1fb39/27u7vehYWFx2gq1+rq6hZseWP5+QvwB/AY8GlBl/8dIF4GSQWcEmmAg08SOVO2vQE8AP8FuAE+ml3Ar8CfktzLB7UW9odxV87ELjee1/ElGSBRjvGeXQMXwKkkdMusOeATOe6P9NuiZhIr+8MuiW2yImJkAJ7BpSQ7B/6S73/zsnDmssoi/hdpkkQFskrEyhlqMjvO8ioIPqkPPPXHK2hMkwWgYFbXuCRThIFwYiX/CDAA8quvgv5A6LkAAAAASUVORK5CYII=) 0 0 no-repeat;
+    width: 24px;
+    height: 27px;
+    display: block;
+    text-indent: -9999px;
+    top: -7px;
+    right: -7px;
+  }
+
+  .cool {
+    color: gold;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  }
+
+  .uncool {
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  }
+
+  .star-rating {
+    margin: 0;
+    list-style-type: none;
+    font-size: 150%;
+    color: black;
+  }
+
+  .star-rating li {
+    float: left;
+    margin: 0 1% 0 1%;
+    cursor: pointer;
+  }
+
+  .clear-rating {
+    font-size: small;
+  }
+
+</style>
+
+<script>
+  var modal = (function() {
+    var
+      method = {},
+      overlay,
+      modal,
+      content,
+      close;
+
+    // Center the modal in the viewport
+    method.center = function() {
+      var top, left;
+
+      top = Math.max($(window).height() - modal.outerHeight(), 0) / 2;
+      left = Math.max($(window).width() - modal.outerWidth(), 0) / 2;
+
+      modal.css({
+        top: top + $(window).scrollTop(),
+        left: left + $(window).scrollLeft()
+      });
+    };
+
+    // Open the modal
+    method.open = function(settings) {
+      content.empty().append(settings.content);
+
+      modal.css({
+        width: settings.width || 'auto',
+        height: settings.height || 'auto'
+      });
+
+      method.center();
+      $(window).bind('resize.modal', method.center);
+      modal.show();
+      overlay.show();
+    };
+
+    // Close the modal
+    method.close = function() {
+      modal.hide();
+      overlay.hide();
+      content.empty();
+      $(window).unbind('resize.modal');
+    };
+
+    // Generate the HTML and add it to the document
+    overlay = $('<div id="overlay"></div>');
+    modal = $('<div id="modal"></div>');
+    content = $('<div id="content"></div>');
+    close = $('<a id="close" href="#">close</a>');
+
+    modal.hide();
+    overlay.hide();
+    modal.append(content, close);
+
+    $(document).ready(function() {
+      $('body').append(overlay, modal);
+    });
+
+    close.click(function(e) {
+      e.preventDefault();
+      method.close();
+    });
+
+    return method;
+  }());
+</script>
+
+<script>
+  var votesUrl = '/package/monoid-extras/votes';
+  var star = {
+    "id"       : undefined,
+    "selected" : false
+  };
+  $('.star').mouseenter(function() {
+    if (star.selected === false) {
+      fill_stars(this.id, "in");
+    }
+  });
+  $('.star').mouseleave(function() {
+    if (star.selected === false) {
+      fill_stars(this.id, "out");
+    }
+  });
+  $('.star').click(function() {
+    fill_stars(3, "out");
+    fill_stars(this.id, "in");
+    star.selected = true;
+    star.id = this.id;
+    var formData = {
+      score: this.id
+    }
+    $.post(votesUrl, formData).done(function(data) {
+        if(data != "Package voted for successfully") {
+            modal.open({ content: data});
+	}
+    });
+  });
+  $('.clear-rating').click(function(e) {
+    e.preventDefault()
+    fill_stars(3, "out");
+    star.selected = false;
+    $.ajax({
+      url: votesUrl,
+      type: 'DELETE',
+      success: function(result) {
+        if(result != "Package vote removed successfully") {
+          modal.open({ content: result });
+	}
+      }
+    });
+  });
+  $(function() {
+       var userRating = parseInt($("#userRating").val(),10);
+       if(userRating > 0) {
+         fill_stars(userRating,"in")
+         star.selected = true;
+         star.id       = userRating;
+       }
+  });
+  var fill_stars = function(num, direction) {
+    if (direction === "in")
+      for (i = 0; i <= parseInt(num); i++)
+        $("#" + i).removeClass('uncool').addClass('cool');
+    else
+      for (i = 0; i <= parseInt(num); i++)
+        $("#" + i).removeClass('cool').addClass('uncool');
+  }
+
+</script>
+  <div id="footer">
+  <p>
+    Produced by <a href="/">hackage</a> and <a href="http://haskell.org/cabal/">Cabal</a> 2.0.1.1.
+  </p>
+</div>
+
+
+</body>
+</html>
