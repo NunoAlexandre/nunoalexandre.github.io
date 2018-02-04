@@ -171,21 +171,21 @@ ul.links li a, ul.links li form {
 .show { display: inherit; }
 .clear { clear: both; }
 
-.collapser {
-  background-image: url(minus.gif);
-  background-repeat: no-repeat;
+.collapser:before, .expander:before {
+  font-size: 0.9em;
+  color: #5E5184;
+  display: inline-block;
+  padding-right: 7px;
 }
-.expander {
-  background-image: url(plus.gif);
-  background-repeat: no-repeat;
+
+.collapser:before {
+  content: '-'
 }
-p.caption.collapser,
-p.caption.expander {
-  background-position: 0 0.4em;
+.expander:before {
+  content: "+";
 }
+
 .collapser, .expander {
-  padding-left: 14px;
-  margin-left: -14px;
   cursor: pointer;
 }
 
@@ -441,14 +441,6 @@ ul.links li form button {
   margin: 0;
   font-size: 1px;
   padding: 0;
-}
-
-#synopsis p.caption.collapser {
-  background: url(synopsis.png) no-repeat -64px -8px;
-}
-
-#synopsis p.caption.expander {
-  background: url(synopsis.png) no-repeat 0px -8px;
 }
 
 #synopsis ul {

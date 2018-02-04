@@ -237,27 +237,22 @@ ul.links li a {
 .show { display: inherit; }
 .clear { clear: both; }
 
-.collapser {
-  background-image: url(minus.gif);
-  background-repeat: no-repeat;
-}
-.expander:before {
-  /*background-image: url(https://hackage.haskell.org/package/lens-4.16/docs/plus.gif);*/
-  /*background-repeat: no-repeat;*/
-  content: "+";
-  font-size: 1.3em;
+.collapser:before, .expander:before {
+  font-size: 0.9em;
   color: #5E5184;
   display: inline-block;
   padding-right: 7px;
 }
-.collapser, .expander {
-  padding-left: 14px;
-  margin-left: -14px;
-  cursor: pointer;
+
+.collapser:before {
+  content: '-'
 }
-p.caption.collapser,
-p.caption.expander {
-  background-position: 0 0.4em;
+.expander:before {
+  content: "+";
+}
+
+.collapser, .expander {
+  cursor: pointer;
 }
 
 .instance.collapser, .instance.expander {
