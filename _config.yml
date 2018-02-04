@@ -10,7 +10,7 @@ title: Nuno Alexandre
 email: nunombalexandre at gmail
 description: An aspiring software craftsman's blog
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://nunoalexandre.com" # the base hostname & protocol for your site
+url: "https://nunoalexandre.com" # the base hostname & protocol for your site
 github_username: nunoalexandre
 disqus_shortname: "nunoalexandre"
 permalink: :year/:month/:day/:title
