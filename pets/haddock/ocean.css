@@ -270,17 +270,17 @@ ul.links li a {
 .clear { clear: both; }
 
 .collapser:before, .expander:before {
-  font-size: 0.9em;
+  font-size: 1.2em;
   color: #5E5184;
   display: inline-block;
   padding-right: 7px;
 }
 
 .collapser:before {
-  content: '-'
+  content: '⊗';
 }
 .expander:before {
-  content: "+";
+  content: "⊕";
 }
 
 .collapser, .expander {
