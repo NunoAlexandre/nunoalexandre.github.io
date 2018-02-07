@@ -276,7 +276,7 @@ details[open] > summary {
 pre {
   padding: 1rem;
   margin: 0px;
-  background-color: rgba(0, 0, 0, .033);
+  background-color: #f7f7f7;
   overflow: auto;
 }
 
@@ -402,8 +402,8 @@ div#style-menu-holder {
   float: right;
   clear: right;
   background: #faf9dc;
-  border: 1px solid #d8d7ad;
-  padding: 0.5em 1em;
+  background:  #f7f7f7;
+  padding: 1em;
   max-width: 20em;
   margin: 0.5em 0 1em 1em;
 }
@@ -470,7 +470,7 @@ div#style-menu-holder {
 
 #synopsis ul,
 #synopsis ul li.src {
-  background-color: #faf9dc;
+  background-color: #f7f7f7;
   white-space: nowrap;
   list-style: none;
   margin-left: 0;
@@ -598,11 +598,6 @@ div#style-menu-holder {
 
 .top p.src {
   border-top: 1px solid #ccc;
-}
-
-.subs, .doc {
-  /* use this selector for one level of indent */
-  padding-left: 2em;
 }
 
 .warning {
