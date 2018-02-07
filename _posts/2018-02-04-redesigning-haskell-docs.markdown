@@ -8,11 +8,11 @@ comments: true
 
 One of the first impressions most people mention having about Haskell is that it looks scary. Not just the concepts involved are overwhelming, but the documentation pages are not properly user-friendly and welcoming. Last December I decided to take action and propose a new design to the Hackage and the Haddock repositories.
 
+**Edit:** find the reddit thread about this blog post [here](https://www.reddit.com/r/haskell/comments/7vatew/redesigning_haddock_docs_and_hackage_pages/).
+
 More than a year ago I started playing with [`Elixir`](https://elixir-lang.org/) and I noticed quickly that all its official pages look consistent and welcoming. And after seven months working with Haskell daily at work, I realized that our community really misses something of that kind: a consistent, friendly and welcoming look.
 
 Very recently some big names in the Haskell words, namely Simon Peyton Jones, have come forward with [a proposal called `SLURP`](https://github.com/simonmar/ecosystem-proposals/blob/slurp/proposals/0000-slurp.rst): a _Single Liberal Unified Registry of Haskell Packages_. In that proposal they say:
-
-
 
 > Hackage has been extraordinarily successful as a single repository
 through which to share Haskell packages. (...) But in recent years there has
