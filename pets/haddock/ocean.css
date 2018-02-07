@@ -79,6 +79,15 @@ body.js-enabled .hide-when-js-enabled {
   #content {
     width: 93vw;
   }
+
+  #synopsis {
+    display: block;
+    padding: 0;
+    position: relative;
+    margin: 4em 0;
+    border-bottom: 1px dashed #5E5184;
+    width: 100%;
+  }
 }
 
 
@@ -97,6 +106,23 @@ body.js-enabled .hide-when-js-enabled {
   #package-header ul.links {
     float: right;
     margin: 3px 2em 2px 1em;
+  }
+
+  #synopsis {
+    display: block;
+    position: fixed;
+    height: 70vh;
+    top: 10vh;
+    left: 10px;
+    padding: 0.25em;
+    max-width: 65vw;
+    /* Ensure that synopsis covers everything (including MathJAX markup) */
+    z-index: 1;
+  }
+
+  #synopsis .show {
+    border: 1px solid #5E5184;
+    padding: 0.7em;
   }
 }
 
@@ -426,19 +452,6 @@ div#style-menu-holder {
 
 #description .caption {
   display: none;
-}
-
-#synopsis {
-  display: block;
-  position: fixed;
-  height: 80%;
-  top: 9vh;
-  right: 10px;
-  padding: 0;
-  max-width: 75%;
-  z-index: 1;
-  /* Ensure that synopsis covers everything (including MathJAX markup) */
-  z-index: 1;
 }
 
 #synopsis summary {
