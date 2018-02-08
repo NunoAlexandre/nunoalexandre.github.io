@@ -11,7 +11,7 @@ html {
 
 body {
   background: #fefefe;
-  color: rgba(69, 59, 97, 0.95);
+  color: #221D30;
   text-align: left;
   min-height: 100%;
   position: relative;
@@ -21,6 +21,10 @@ body {
   -o-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
+}
+
+#content a {
+  overflow-wrap: break-word;
 }
 
 p {
@@ -87,7 +91,7 @@ body.js-enabled .hide-when-js-enabled {
   }
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1000px) {
   #content {
     width: 93vw;
   }
@@ -123,7 +127,6 @@ body.js-enabled .hide-when-js-enabled {
   #synopsis {
     display: block;
     position: fixed;
-    height: 70vh;
     top: 5em;
     left: 10px;
     padding: 0.25em;
@@ -187,10 +190,6 @@ h2 { font-size: 131%;   /* 17pt */ }
 h3 { font-size: 116%;   /* 15pt */ }
 h4 { font-size: 100%;   /* 13pt */ }
 h5 { font-size: 100%;   /* 13pt */ }
-
-select, input, button, textarea {
-	font:99% sans-serif;
-}
 
 table {
 	font-size:inherit;
@@ -380,7 +379,8 @@ table.info {
 }
 
 .info th {
-	padding: 0 1em 0 0;
+  padding: 0 1em 0 0;
+  text-align: right;
 }
 
 div#style-menu-holder {
@@ -436,6 +436,11 @@ div#style-menu-holder {
 
 /* @group Front Matter */
 
+#synopsis .caption,
+#table-of-contents .caption {
+  font-size: 1rem;
+}
+
 #table-of-contents {
   background:  #f7f7f7;
   padding: 1em;
@@ -445,7 +450,6 @@ div#style-menu-holder {
 #table-of-contents .caption {
   text-align: left;
   margin: 0;
-  font-size: 1.08rem;
 }
 
 #table-of-contents ul {
@@ -502,7 +506,9 @@ div#style-menu-holder {
 
 /* @group Main Content */
 
-#interface div.top { margin: 2em 0; }
+#interface div.top + div.top { margin-top: 0.6em; }
+
+#interface p + div.top,
 #interface h1 + div.top,
 #interface h2 + div.top,
 #interface h3 + div.top,
