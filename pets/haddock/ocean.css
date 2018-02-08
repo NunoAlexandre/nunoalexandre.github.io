@@ -71,7 +71,13 @@ body.js-enabled .hide-when-js-enabled {
   #content {
     width: 65vw;
     max-width: 1450px;
-    min-width: 830px;
+  }
+
+  #table-of-contents {
+    position: fixed;
+    left: 10px;
+    max-width: 10vw;
+    top: 10.2em;
   }
 }
 
@@ -118,7 +124,7 @@ body.js-enabled .hide-when-js-enabled {
     display: block;
     position: fixed;
     height: 70vh;
-    top: 10vh;
+    top: 5em;
     left: 10px;
     padding: 0.25em;
     max-width: 65vw;
@@ -431,18 +437,15 @@ div#style-menu-holder {
 /* @group Front Matter */
 
 #table-of-contents {
-  float: right;
-  clear: right;
-  background: #faf9dc;
   background:  #f7f7f7;
   padding: 1em;
-  max-width: 20em;
-  margin: 0.5em 0 1em 1em;
+  margin: 1em 0 2em 0;
 }
 
 #table-of-contents .caption {
   text-align: left;
   margin: 0;
+  font-size: 1.08rem;
 }
 
 #table-of-contents ul {

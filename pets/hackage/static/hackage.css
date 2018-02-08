@@ -126,10 +126,6 @@ pre, code, kbd, samp, .src {
     margin-bottom: 8px;
 }
 
-#table-of-contents, #synopsis  {
-  /* font-size: 85%; /* 11pt */
-}
-
 
 /* @end */
 
@@ -235,6 +231,13 @@ pre + pre {
     float: right;
     display: inline-table;
     margin: 0.35em 2em 0 2em;
+  }
+
+  #table-of-contents {
+    position: fixed;
+    left: 10px;
+    max-width: 10vw;
+    top: 10.2em;
   }
 
   #content {
@@ -401,18 +404,15 @@ ul.links li form button {
 /* @group Front Matter */
 
 #table-of-contents {
-  float: right;
-  clear: right;
-  background: #faf9dc;
-  border: 1px solid #d8d7ad;
-  padding: 0.5em 1em;
-  max-width: 20em;
-  margin: 0.5em 0 1em 1em;
+  background:  #f7f7f7;
+  padding: 1em;
+  margin: 1em 0 2em 0;
 }
 
 #table-of-contents .caption {
   text-align: left;
   margin: 0;
+  font-size: 1.08rem;
 }
 
 #table-of-contents ul {
