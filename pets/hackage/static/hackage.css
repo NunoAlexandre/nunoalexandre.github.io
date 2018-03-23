@@ -51,8 +51,8 @@ dd {
 }
 
 a { text-decoration: none; }
-a[href]:link {color: #9C5791;}
-a[href]:visited {color: #5E3558;}
+a[href]:link {color: #9E358F;}
+a[href]:visited {color: #805A75;}
 a[href]:hover { text-decoration:underline; }
 
 /* @end */
@@ -215,21 +215,50 @@ pre + pre {
 
 /* @end */
 
+/* @group properties */
+
+div #properties {
+    float:right;
+    min-width:350px;
+    background: #fefefe;
+    width:25vw;
+    margin-left:15px;
+    margin-bottom:15px;
+}
+
+div #description img {
+    max-width:55%;
+}
+
+table.properties td:first-child, table.properties th:first-child {
+  padding-left: 0;
+}
+
+table.properties td:last-child, table.properties th:last-child {
+  padding-right: 0;
+}
+
+table.properties td, table.properties th {
+  vertical-align: top;
+  text-align: left;
+}
+
+.word-wrap {
+     /* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
+    -ms-word-break: break-all;
+    word-break: break-all;
+    /* Non standard for webkit */
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+/* @end */
 
 /* @group responsive */
 
 @media only screen and (min-width: 1280px) {
-  #page-header {
-    text-align: left;
-  }
-
-  #page-header ul.links {
-    list-style: none;
-    text-align: left;
-    float: right;
-    display: inline-table;
-    margin: 2px 2em 0 2em;
-  }
 
   #table-of-contents {
     position: fixed;
@@ -239,12 +268,45 @@ pre + pre {
   }
 
   #content {
-    width: 60vw;
+    width: 70vw;
     max-width: 1450px;
   }
 }
 
 @media only screen and (max-width: 1280px) {
+
+  div #description img {
+    max-width:45%;
+  }
+
+  #content {
+    width: 75vw;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  #page-header {
+      text-align: left;
+      overflow: visible;
+      white-space: nowrap;
+      display: inline-table;
+      width: 100%;
+  }
+
+  #page-header ul.links {
+    list-style: none;
+    text-align: left;
+    float: right;
+    display: inline-table;
+    margin: 2px 1em 0 2em;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  #content {
+    width: 88vw;
+  }
+
   #page-header {
     text-align: center;
   }
@@ -256,15 +318,17 @@ pre + pre {
     margin: 14px 0 0px 0;
   }
 
-  #content {
-    width: 75vw;
-  }
-}
 
-@media only screen and (max-width: 950px) {
-  #content {
-    width: 88vw;
+  div #properties {
+      float:none;
+      width:75vw;
+      margin-left:0;
   }
+
+  div #description img {
+    max-width:100%;
+  }
+
 }
 
 
@@ -292,7 +356,7 @@ pre + pre {
 #page-header .caption {
   background: url(https://hackage.haskell.org/static/icons/ic_haskell_grayscale_32.svg) no-repeat 0em;
   color: white;
-  margin: 0 2em;
+  margin: 0 1em 0 2em;
   font-weight: bold;
   font-style: normal;
   padding-left: 2.2em;
@@ -659,6 +723,17 @@ ul.links li form button {
 #module-list ul {
   list-style: none;
   margin: 0 0 0 2em;
+
+     /* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
+    -ms-word-break: break-all;
+    word-break: break-all;
+    /* Non standard for webkit */
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+
 }
 
 #detailed-dependencies ul {
@@ -667,7 +742,7 @@ ul.links li form button {
 }
 
 #module-list li {
-  clear: right;
+/*  clear: right; */
 }
 
 #module-list span.collapser,
@@ -745,18 +820,6 @@ table.simpletable th, table.simpletable td {
   padding: 0.2em 1em;
 }
 
-table.properties td:first-child, table.properties th:first-child {
-  padding-left: 0;
-}
-
-table.properties td:last-child, table.properties th:last-child {
-  padding-right: 0;
-}
-
-table.properties td, table.properties th {
-  vertical-align: top;
-  text-align: left;
-}
 
 table.fancy {
   border: 1px solid #ddd;
@@ -784,7 +847,8 @@ table.properties tr th:first-child {
 
 table.dataTable.compact.fancy tbody th,
 table.dataTable.compact.fancy tbody td {
-  padding: 6px 10px;
+    padding: 6px 10px;
+    line-height: normal;
 }
 
 ul.searchresults li {
@@ -810,14 +874,19 @@ ul.directory-list {
 
 /* Package versions */
 
+a.unpreferred[href]:link {
+    color: #ECBA13;
+}
+
+a.deprecated[href]:link {
+    color: #D00B3C;
+}
+
 .versions a.normal[href]:link {
     color: #61B01E;
 }
 
-.versions a.unpreferred[href]:link {
-    color: #FACC1F;
-}
-
-.versions a.deprecated[href]:link {
-    color: #E80C43;
+p.registration-email {
+    border: 1px solid rgb(196,69,29);
+    padding: 0 1em;
 }
