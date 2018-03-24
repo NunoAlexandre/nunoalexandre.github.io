@@ -468,6 +468,9 @@ ul.links li form input {
   padding:1px;
   margin: 0px;
 	width: 8em;
+  border-radius: 3px;
+  background-color: rgba(255,255,255, 0.2);
+  color: #fff;
 }
 
 ul.links li form button {
