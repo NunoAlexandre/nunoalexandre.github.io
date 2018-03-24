@@ -337,6 +337,7 @@ table.properties td, table.properties th {
     margin-bottom: -17px;
     height: 50px;
   }
+
   #page-header ul.links::-webkit-scrollbar {display:none;}
 
   #page-header ul.links li:last-of-type {
@@ -462,15 +463,16 @@ div#style-menu-holder {
 }
 
 #footer {
-  background: #ddd;
+  background: #ededed;
   border-top: 1px solid #aaa;
   padding: 0.5em 0;
-  color: #666;
+  color: #222;
   text-align: center;
-  position: absolute;
   width: 100%;
   height: 3em;
-  margin-top: 1em;
+  margin-top: 3em;
+  position: relative;
+  clear: both;
 }
 
 /* @end */
