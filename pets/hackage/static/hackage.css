@@ -65,7 +65,7 @@ a[href]:hover { text-decoration:underline; }
  */
 
 body, button {
-  font: 400 17px/1.37 'PT Sans', 'Open Sans', 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, sans-serif;
+  font: 400 17px/1.37 'PT Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
   *font-size:small; /* for IE */
   *font:x-small; /* for IE in quirks mode */
 }
@@ -146,7 +146,7 @@ p + ul {
 }
 
 ul + p {
-  margin-top: 2em;
+  margin-top: 1.5em;
 }
 
 ul.links li {
@@ -453,7 +453,7 @@ div#style-menu-holder {
   position: absolute;
   width: 100%;
   height: 3em;
-  margin-top: 6em;
+  margin-top: 1em;
 }
 
 /* @end */
@@ -899,16 +899,20 @@ ul.directory-list {
 a.unpreferred[href]:link {
     color: #ECBA13;
 }
+a.unpreferred[href]:visited {
+    color: #ECBA13;
+}
 
 a.deprecated[href]:link {
+    color: #D00B3C;
+}
+a.deprecated[href]:visited {
     color: #D00B3C;
 }
 
 .versions a.normal[href]:link {
     color: #61B01E;
 }
-
-p.registration-email {
-    border: 1px solid rgb(196,69,29);
-    padding: 0 1em;
+.versions a.normal[href]:visited {
+    color: #61B01E;
 }
