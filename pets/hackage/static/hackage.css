@@ -375,11 +375,11 @@ table.properties td, table.properties th {
   font-weight: bold;
   font-style: normal;
   padding-left: 2.2em;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 #page-header ul.links, #page-header ul.links button {
-  font-size: 15px;
+  font-size: 1rem;
 }
 
 #page-header a:link, #page-header a:visited { color: white; }
