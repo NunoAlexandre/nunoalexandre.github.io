@@ -11,7 +11,7 @@ html {
 
 body {
   background: #fefefe;
-  color: #221D30;
+  color: #333;
   text-align: left;
   min-height: 100vh;
   position: relative;
@@ -65,7 +65,7 @@ a[href]:hover { text-decoration:underline; }
  */
 
 body, button {
-  font: 400 17px/1.5 'Open Sans', 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, sans-serif;
+  font: 400 17px/1.37 'PT Sans', 'Open Sans', 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, sans-serif;
   *font-size:small; /* for IE */
   *font:x-small; /* for IE in quirks mode */
 }
@@ -254,8 +254,19 @@ table.properties td, table.properties th {
 
 /* @group responsive */
 
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1920px) {
+  #content {
+    width: 50vw;
+  }
+}
 
+@media only screen and (min-width: 1280px) and (max-width: 1919px) {
+  #content {
+    width: 60vw;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
   #table-of-contents {
     position: fixed;
     left: 10px;
@@ -264,7 +275,6 @@ table.properties td, table.properties th {
   }
 
   #content {
-    width: 60vw;
     max-width: 1450px;
   }
 }
