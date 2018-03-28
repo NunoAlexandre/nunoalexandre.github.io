@@ -51,8 +51,8 @@ dd {
 }
 
 a { text-decoration: none; }
-a[href]:link {color: #9E358F;}
-a[href]:visited {color: #805A75;}
+a[href]:link { color: #9E358F; }
+a[href]:visited {color: #7231AB; }
 a[href]:hover { text-decoration:underline; }
 
 /* @end */
@@ -65,8 +65,17 @@ a[href]:hover { text-decoration:underline; }
  */
 
 body, button {
-  font: 400 17px/1.37 'PT Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
-  *font-size:small; /* for IE */
+  font: 400 17px/1.37 'PT Sans',
+    /* Fallback Font Stack */
+    -apple-system,
+	  BlinkMacSystemFont,
+    'Segoe UI',
+	  Roboto,
+	  Oxygen-Sans,
+	  Cantarell,
+	  'Helvetica Neue',
+    sans-serif;
+  *font-size: medium; /* for IE */
   *font:x-small; /* for IE in quirks mode */
 }
 
@@ -281,13 +290,13 @@ table.properties td, table.properties th {
 
 @media only screen and (min-width: 1920px) {
   #content {
-    width: 50vw;
+    width: 55vw;
   }
 }
 
 @media only screen and (min-width: 1280px) and (max-width: 1919px) {
   #content {
-    width: 60vw;
+    width: 65vw;
   }
 }
 
