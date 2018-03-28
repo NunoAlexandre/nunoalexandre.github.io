@@ -236,11 +236,6 @@ div#properties table.properties th {
   display: block;
 }
 
-div#properties table.properties tr + tr {
-  padding-top: 0.33rem;
-  clear: both;
-}
-
 div#properties table.properties tr {
   padding-bottom: 3px;
 }
