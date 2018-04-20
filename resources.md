@@ -7,6 +7,8 @@ permalink: /resources/
 
 ### Books
 
+* [Pragamatic Thinking & Learning](https://www.amazon.com/Pragmatic-Thinking-Learning-Refactor-Programmers/dp/1934356050)
+* [Shut your monkey](https://www.amazon.com/Shut-Your-Monkey-Control-Critic/dp/1440341133/ref=sr_1_1?ie=UTF8&qid=1524240206&sr=8-1&keywords=Shut+your+monkey)
 * [Deep Work](https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692)
 * [The Art of Creative Thinking](https://www.amazon.co.uk/Art-Creative-Thinking-Rod-Judkins/dp/1444794485)
 * [Change Your Mind](https://www.amazon.com/Change-Your-Mind-Unlock-Creative/dp/174270557X)
@@ -27,6 +29,8 @@ permalink: /resources/
 
 ### Blogs
 
+* [Channable's Tech Blog](https://tech.channable.com)
+* [Stephen Diehl](http://www.stephendiehl.com/)
 * [Martin Fowler](http://www.martinfowler.com)
 * [Chad Fowler](http://chadfowler.com)
 * [Sandi Metz](http://www.sandimetz.com/blog/)
@@ -36,6 +40,7 @@ permalink: /resources/
 * [Yegor 256](http://www.yegor256.com)
 * [Ruud van Asseldonk](https://ruudvanasseldonk.com)
 * [Arian van Putten](https://arianvp.me)
+* [Laurens Duijvesteijn](http://www.duijf.io/)
 
 
 
