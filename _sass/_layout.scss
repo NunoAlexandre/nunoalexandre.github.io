@@ -269,12 +269,21 @@ background: transparent;
   background-position: left;
   background-size: 3px 20px;
   background-repeat: repeat-y;
+
+  @include media-query($on-palm) {
+     background: none;
+  }
 }
 
 .timeline .item {
   margin: 3em 0 4em 3em;
   border-radius: 3px;
   padding: 2em;
+
+  @include media-query($on-palm) {
+     margin-left: 0;
+     padding: 1.5em 0;
+  }
 }
 
 .timeline .item a {
