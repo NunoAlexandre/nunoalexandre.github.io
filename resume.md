@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Resume
-comments: true
+comments: false
 permalink: /resume/
 ---
 
