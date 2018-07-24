@@ -2,7 +2,7 @@
  * Site header
  */
 .site-header {
-padding-top: 5px;
+    padding-top: 5px;
     border-bottom: 1px solid $grey-color-light;
     min-height: 56px;
     // Positioning context for the mobile navigation icon
@@ -24,10 +24,15 @@ padding-top: 5px;
 
 .site-nav {
     text-align: center;
-    line-height: 56px;
+    line-height: normal;
+    padding: 1.4em 0 1em 0;
 
     .menu-icon {
         display: none;
+    }
+
+    @include media-query($on-palm) {
+      text-align: left;
     }
 
     .page-link {
@@ -41,7 +46,7 @@ padding-top: 5px;
         }
 
         @include media-query($on-palm) {
-           font-size: $base-font-size - 3;
+           font-size: $base-font-size - 4;
 
            &:not(:last-child) {
                margin-right: $spacing-unit/2;
