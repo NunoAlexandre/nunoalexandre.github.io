@@ -21,11 +21,18 @@ I am an enthusiast software developer aspiring software craftsmanship. I’m a p
     <span class="title">Lead Developer</span>
     <div class="period">Since July 2018</div>
     <div class="description">
-      Kidiyo aims to develop fun and thoughtful games to children from 0 to 6 years old,
-      providing them with a healthy and safe environment to play, explore and learn.
-      I am responsible for building and managing an in-house team of developers, as well as
-      contributing to the path that Kidiyo should take both at the development level as
-      level as conceptually.
+      Kidiyo aims to develop fun and thoughtful games from children from 0 to 6 years old,
+      providing them with a healthy and safe environment to play, explore and learn, both
+      online and offline. <br><br>
+
+      I am responsible for:
+      <ul>
+        <li>building and managing an in-house team of developers</li>
+        <li>contributing to the roadmap</li>
+        <li>designing and developing the whole technical infrastructure and apps</li>
+        <li>linking psychologists, child experts, designers and developers</li>
+        <li>professionalizing the overall workflow and standards</li>
+      </ul>
     </div>
     <div class="tags">
       <code class="highlighter-rouge">Swift</code>
