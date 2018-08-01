@@ -15,7 +15,7 @@ The talk was hosted by [worth.systems](https://worth.systems).
 <div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/pjIw0-xPoZ0?ecver=2" width="640" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>
 
 #### Slides
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/4cbq8fI4DzH9tt" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"></div>
+<div><div style="left: 0px; width: 100%; height: 0px; position: relative; padding-bottom: 80%;"><iframe src="//speakerdeck.com/player/8d096986f62848a0868ebb4e3eb73316" frameborder="0" allowfullscreen="" allow="autoplay; encrypted-media" scrolling="no" style="top: 0px; left: 0px; width: 100%; height: 97%; position: absolute;"></iframe></div></div>
 
 ### Motives
 
