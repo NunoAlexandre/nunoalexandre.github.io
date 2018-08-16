@@ -174,7 +174,7 @@ I am an enthusiast software developer aspiring software craftsmanship. I’m a p
 
   <li class="item">
     <span class="logo">
-      <a href="https://kidiyo.com">
+      <a href="https://fenix.ciencias.ulisboa.pt/degrees/engenharia-informatica-564500436615278/curriculo">
         <img src="/images/fcul.png"/>
       </a>
     </span>
