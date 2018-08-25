@@ -14,9 +14,9 @@ least) from iOS 9.0 onward.
 _TL;DR_: Get [my Orientation extension](https://gist.github.com/NunoAlexandre/a0cd5af9a5c1ea1933baf8a3c6b426f0)
 and check [how to use it](#bringing-it-all-together).
 
-Most SO answers suggest to `override` the `preferredInterfaceOrientationForPresentation`,
-`supportedInterfaceOrientations` and `shouldAutorotate` variables. These can be
-defined on `UIViewController`s and on `UINavigationController`s.
+Most SO answers suggest to override `preferredInterfaceOrientationForPresentation`,
+`supportedInterfaceOrientations`, and `shouldAutorotate`. These can be defined
+on `UIViewController`s and on `UINavigationController`s.
 
 I'd expect to be able to get it working out of the box by simply overriding
 `preferredInterfaceOrientationForPresentation` and `supportedInterfaceOrientations`
