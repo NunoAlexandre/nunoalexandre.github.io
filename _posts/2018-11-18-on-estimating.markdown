@@ -20,7 +20,7 @@ Our natural need to be important triggers in us the will to defy the impossible.
 **Intimidation** <br>
 Having a high figure demanding a feature in half of the reasonable time it would take to get it (well) done, never made room for better estimations. Despite it being your responsibility to negotiate that deadline at the light of your perspective and experience, it still affects you.
 
-**The (bad) habit of working extra time**
+**The (bad) habit of working extra time**<br>
 Getting things done after hours is, unfortunately, a common practice. Not only does it exhaust you and makes you less productive when you are most expected to, working extra time taints how you see the actual difference between your original estimation and the true effort and time spent.
 
 ## Why it matters
