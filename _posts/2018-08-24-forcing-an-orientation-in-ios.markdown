@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Forcing an orientation in iOS"
-date:   2018-07-14 21:36:39 +0100
+date:   2018-08-24 18:36:39 +0100
 categories: ios orientation ux swift
 comments: true
 ---
