@@ -7,6 +7,8 @@ permalink: /resources/
 
 ### Books
 
+* [Type-Driven Development with Idris](https://www.manning.com/books/type-driven-development-with-idris)
+* [Peak Performance](https://www.amazon.com/Peak-Performance-Elevate-Burnout-Science-ebook/dp/B01N1RNP9N)
 * [Pragamatic Thinking & Learning](https://www.amazon.com/Pragmatic-Thinking-Learning-Refactor-Programmers/dp/1934356050)
 * [Shut your monkey](https://www.amazon.com/Shut-Your-Monkey-Control-Critic/dp/1440341133/ref=sr_1_1?ie=UTF8&qid=1524240206&sr=8-1&keywords=Shut+your+monkey)
 * [Deep Work](https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692)
