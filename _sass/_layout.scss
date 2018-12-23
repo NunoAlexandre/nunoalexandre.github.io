@@ -530,11 +530,15 @@ iframe {
 }
 
 a.page-link:hover {
-    color: $brand-color;
+  color: $brand-color;
+}
+
+.gist + p {
+  margin-top: $spacing-unit;
 }
 
 p + p {
-        margin-top: 26px;
+  margin-top: 26px;
 }
 
 .post-list p + p {
