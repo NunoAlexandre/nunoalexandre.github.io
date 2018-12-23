@@ -31,15 +31,15 @@ permalink: /resources/
 
 ### Blogs
 
-* [Channable's Tech Blog](https://tech.channable.com)
 * [Stephen Diehl](http://www.stephendiehl.com/)
+* [Channable's Tech Blog](https://tech.channable.com)
+* [Ruud van Asseldonk](https://ruudvanasseldonk.com)
+* [Coding Horror](http://blog.codinghorror.com)
 * [Martin Fowler](http://www.martinfowler.com)
 * [Chad Fowler](http://chadfowler.com)
 * [Sandi Metz](http://www.sandimetz.com/blog/)
 * [Code Miller](http://www.codemiller.com)
-* [Coding Horror](http://blog.codinghorror.com)
 * [Clean Coder](http://blog.cleancoder.com)
-* [Yegor 256](http://www.yegor256.com)
 * [Ruud van Asseldonk](https://ruudvanasseldonk.com)
 * [Arian van Putten](https://arianvp.me)
 * [Laurens Duijvesteijn](http://www.duijf.io/)
