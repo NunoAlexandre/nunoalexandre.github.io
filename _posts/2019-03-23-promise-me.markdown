@@ -19,7 +19,7 @@ The project in question here is the Kidiyo iOS app. Kidiyo believes in introduci
 digital media to young children through constructive, funny, and healthy content.
 Therefore, we stand to be the one-in-all platform with all sorts of different items, such as games, videos, ebooks, and offscreen connections.
 
-Being a platform means that the items we provide must be made available and improved dynamically, without the need for new app releases. Currently, those items are downloaded to be played, expect for streamable videos and music.
+Being a platform means that the items we provide must be made available and improved dynamically, without the need for new app releases. Currently, those items are downloaded to be played, except for streamable videos and music.
 
 In the new version of Kidiyo, soon to be released, I had three requirements for
 the downloads:
