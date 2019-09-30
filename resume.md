@@ -25,11 +25,11 @@ I am an enthusiast software developer aspiring software craftsmanship. I’m a p
       providing them with a healthy and safe environment to play, explore and learn, both
       online and offline. <br><br>
 
-      I am responsible for:
+      I was responsible for:
       <ul>
         <li>building and managing an in-house team of developers</li>
-        <li>contributing to the roadmap</li>
         <li>designing and developing the whole technical infrastructure and apps</li>
+        <li>contributing to the roadmap and business case</li>
         <li>linking psychologists, child experts, designers and developers</li>
         <li>professionalizing the overall workflow and standards</li>
       </ul>
