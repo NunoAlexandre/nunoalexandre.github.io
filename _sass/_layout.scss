@@ -7,6 +7,8 @@
     min-height: 56px;
     // Positioning context for the mobile navigation icon
     position: relative;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .site-description {
@@ -464,6 +466,15 @@ h1.post-title {
 
 .face img {
     border-radius: 50%;
+}
+
+.site-header .banner {
+  text-align: center;
+  border-left: 6px solid $brand-color;
+  padding-left: 10px;
+  a {
+    color: $brand-color;
+  }
 }
 
 .post-list, .post {
