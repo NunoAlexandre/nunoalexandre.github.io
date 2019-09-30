@@ -19,7 +19,7 @@ I am an enthusiast software developer aspiring software craftsmanship. I’m a p
       </a>
     </span>
     <span class="title">Lead Developer</span>
-    <div class="period">Since July 2018</div>
+    <div class="period">From July 2018 to October 2019</div>
     <div class="description">
       Kidiyo aims to develop fun and thoughtful games from children from 0 to 6 years old,
       providing them with a healthy and safe environment to play, explore and learn, both
