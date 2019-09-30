@@ -51,7 +51,7 @@ I am an enthusiast software developer aspiring software craftsmanship. I’m a p
     <span class="title">Software Engineer</span>
     <div class="period">From June 2017 to July 2018</div>
     <div class="description">
-      I found the rare and priceless chance to use Haskell at work and being part of a Product-based company at Channable. There I was part of an outstanding team of Engineers who shared the same high standards and eagerness to learn, providing an environment for thick and fast learning.
+      I found the rare and priceless chance to use Haskell at work and being part of a Product-based company at Channable. There I was part of an outstanding team of Engineers who shared the same high standards and eagerness to learn, providing an environment for thick and fast learning. There I developed an API Gateway in Haskell that processed every single request involved in the tool, allowing Channable to open parts of its <a href="https://docs.channable.com/api/v1/#getting-started" target="_blank">API to the public</a>, and worked on a new, highly scalable and optimized Haskell component to replace Apache Spark, responsible to process millions of rules and products every day, where milliseconds make a significant difference.
     </div>
     <div class="tags">
       <code class="highlighter-rouge">Haskell</code>
