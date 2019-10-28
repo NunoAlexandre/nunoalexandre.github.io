@@ -32,3 +32,7 @@ For that, we need to separate calls from arguments by placing the arguments in a
 Where now the form of this code says it all, whatever the actual code is:
 
 <img src="/images/small-step-after.png"/>
+
+### Concrete advantages
+
+The advantages are not just structural, visual, or subjective . Note that now the addition, removal, or modification of a function argument will be shown in a separate git diff line, instead of ending up with a single git diff line that mixes up all of the different changes made to your project.
