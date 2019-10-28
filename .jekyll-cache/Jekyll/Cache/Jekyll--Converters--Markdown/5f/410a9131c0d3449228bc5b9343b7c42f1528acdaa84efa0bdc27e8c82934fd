@@ -1,0 +1,180 @@
+I"�A<p>I wanted to write a little grep program that prints the lines of a given file that contain a given term.<br />
+I choose to write it in <code class="highlighter-rouge">Haskell</code>, <code class="highlighter-rouge">Ruby</code>, <code class="highlighter-rouge">Java</code>, <code class="highlighter-rouge">Scala</code> and <code class="highlighter-rouge">Python</code> and see how different the thinking process and the result would be.</p>
+
+<p>The aim was to get an idea of these points:</p>
+
+<ul>
+  <li>how different these languages deal with IO</li>
+  <li>how conditional flows could be managed</li>
+  <li>how clean the code would be</li>
+  <li>LOC</li>
+  <li>Performance</li>
+</ul>
+
+<p>And as baseline I defined the following requirements:</p>
+
+<ul>
+  <li>usage is grep term file (the term and the file to grep would be taken as program arguments)</li>
+  <li>in case of incorrect usage (not enough arguments), prints the usage.</li>
+  <li>these program arguments should be named and not used directly</li>
+  <li>the actual grep work should be defined in a specific function</li>
+  <li>ignored cases such as incorrect filepaths</li>
+</ul>
+
+<p><br />
+So I started with Haskell. <br />
+Haskell has a very interesting way of dealing with IO. IO is part of the “dirty” world, not of the pure one. <br />
+So computation that happens to do IO work is bound and “isolated” from the pure code and this separation is explicit, through the IO Monad.<br />
+To give a quick simple example of what this implies, a String value obtained from a IO operation has type of IO String and not just String.</p>
+
+<h2 id="haskell-version">Haskell version:</h2>
+
+<p><strong>LOC:</strong> 9<br />
+<strong>Average Time:</strong> real 0m0.047s | user 0m0.042s | sys 0m0.004s</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.List</span>
+<span class="kr">import</span> <span class="nn">System.Environment</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="n">getArgs</span> <span class="o">&gt;&gt;=</span> <span class="n">dispatch</span>
+
+<span class="n">dispatch</span> <span class="o">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">dispatch</span> <span class="p">(</span><span class="n">term</span><span class="o">:</span><span class="n">file</span><span class="o">:</span><span class="kr">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">grep</span> <span class="n">term</span> <span class="n">file</span>
+<span class="n">dispatch</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">putStrLn</span> <span class="s">"usage: grep term file"</span>
+
+<span class="n">grep</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">FilePath</span> <span class="o">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">grep</span> <span class="n">term</span> <span class="n">file</span> <span class="o">=</span> <span class="n">readFile</span> <span class="n">file</span> <span class="o">&gt;&gt;=</span> <span class="n">mapM_</span> <span class="n">putStrLn</span> <span class="o">.</span> <span class="n">filter</span> <span class="p">(</span><span class="n">isInfixOf</span> <span class="n">term</span><span class="p">)</span> <span class="o">.</span> <span class="n">lines</span></code></pre></figure>
+
+<p>Why <code class="highlighter-rouge">mapM_ putStrLn . filter (isInfixOf term) . lines</code> ? <br />
+Another way of writing this would be: <code class="highlighter-rouge">putStrLn . unlines . filter (isInfixOf term) . lines</code>.
+<code class="highlighter-rouge">mapM_</code> is a function that takes a Monad (putStrLn) and a foldable element (the filtered lines) to which the function gets mapped upon.<br />
+Both seem to me like fine solutions so I just decided to leave it like this.</p>
+
+<h2 id="java-version">Java version:</h2>
+
+<p><strong>LOC:</strong> ±24<br />
+<strong>Average Time:</strong> real 0m0.239s | user 0m0.354s | sys 0m0.050s</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.file.Files</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.file.Path</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.file.Paths</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"usage: grep term file"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">term</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="nc">String</span> <span class="n">file</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+            <span class="k">try</span> <span class="o">{</span> 
+                <span class="n">grep</span><span class="o">(</span><span class="n">term</span><span class="o">,</span> <span class="n">file</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Got an IOException"</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">grep</span><span class="o">(</span><span class="nc">String</span> <span class="n">term</span><span class="o">,</span> <span class="nc">String</span> <span class="n">filepath</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span><span class="nc">Paths</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">filepath</span><span class="o">)).</span><span class="na">filter</span><span class="o">(</span><span class="n">line</span> <span class="o">-&gt;</span> <span class="n">line</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">term</span><span class="o">))</span>
+                        <span class="o">.</span><span class="na">forEachOrdered</span><span class="o">(</span><span class="n">line</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">line</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Java 8 introduced Files which makes this work nicer than the traditional while getLine().
+Apart from that, not much.</p>
+
+<h2 id="ruby-version">Ruby version:</h2>
+
+<p><strong>LOC:</strong> 10<br />
+<strong>Average Time:</strong> real 0m0.060s | user 0m0.040s | sys 0m0.016s</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">grep</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="no">File</span><span class="p">.</span><span class="nf">foreach</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">line</span> <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">include?</span> <span class="n">term</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="no">ARGV</span><span class="p">.</span><span class="nf">length</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"usage: grep term file"</span>
+<span class="k">else</span>
+    <span class="n">term</span> <span class="o">=</span> <span class="no">ARGV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="no">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">grep</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Ok, maybe the foreach could be line-breaked but this looks pretty clean and readable.</p>
+
+<h2 id="scala-version">Scala version:</h2>
+
+<p><strong>LOC:</strong> 18<br />
+<strong>Average Time:</strong> real 0m0.421s | user 0m0.551s | sys 0m0.092s</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">import</span> <span class="nn">scala.io.Source</span>
+
+<span class="k">object</span> <span class="nc">Grep</span> <span class="o">{</span>
+   <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="nv">args</span><span class="o">.</span><span class="py">size</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">)</span>
+         <span class="nf">println</span><span class="o">(</span><span class="s">"usage: grep term file"</span><span class="o">)</span>
+      <span class="k">else</span> <span class="o">{</span>
+         <span class="k">val</span> <span class="nv">term</span> <span class="k">=</span> <span class="nf">args</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+         <span class="k">val</span> <span class="nv">file</span> <span class="k">=</span> <span class="nf">args</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+         <span class="nf">grep</span><span class="o">(</span><span class="n">term</span><span class="o">,</span><span class="n">file</span><span class="o">)</span> 
+      <span class="o">}</span>
+   <span class="o">}</span>
+   
+   <span class="k">def</span> <span class="nf">grep</span><span class="o">(</span><span class="n">term</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">filepath</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="nv">Source</span><span class="o">.</span><span class="py">fromFile</span><span class="o">(</span><span class="n">filepath</span><span class="o">).</span><span class="py">getLines</span><span class="o">().</span><span class="py">foreach</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
+         <span class="nf">if</span> <span class="o">(</span><span class="nv">line</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="n">term</span><span class="o">))</span>
+            <span class="nf">println</span><span class="o">(</span><span class="n">line</span><span class="o">)</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="python-version">Python version:</h2>
+
+<p><strong>LOC:</strong> 12<br />
+<strong>Average Time:</strong> real 0m0.038s | user 0m0.018s | sys 0m0.015s</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">grep</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="nb">file</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span> 
+                <span class="k">print</span> <span class="n">line</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="p">:</span>
+    <span class="k">print</span> <span class="s">"usage: grep term file"</span>
+<span class="k">else</span><span class="p">:</span> 
+    <span class="n">term</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">grep</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span></code></pre></figure>
+
+<h2 id="general-conclusions">General conclusions</h2>
+
+<p>I think the Ruby version ends up with a very readable core and looks quite clean, but that’s all.<br />
+The Python version doesn’t look very interesting apart from the simplified syntax (like Ruby) without all the curly brackets that Java and Scala take but that is a  superficial difference.</p>
+
+<p>The Haskell version ends up being, in my view, the cleanest solution. If I would not specify the function types, I would end up with only 6 lines to satisfy the requirements.<br />
+The fact that I don’t need to define flows in an if-else way but, instead, with functions and pattern matching, the way it reads so nicely and the way the language deals with IO as something apart (which I find more interesting and challenging)… It’s just something else!</p>
+
+<h2 id="performance">Performance</h2>
+<p>I used a 4.2MB plain text file for as target file. 
+Here I got a bit surprised with Scala, not just because it took longer than the other languages but also because of its time variation. Sometimes it took almost up to 1.165s, while the other languages always kept a very small and constant time range.</p>
+
+<p><strong>Rating</strong></p>
+
+<ol>
+  <li>Python     ± 0m0.038s</li>
+  <li>Haskell    ± 0m0.047s</li>
+  <li>Ruby       ± 0m0.060s</li>
+  <li>Java       ± 0m0.239s</li>
+  <li>Scala      ± 0m0.421s</li>
+</ol>
+
+<p>Find the <a href="https://github.com/NunoAlexandre/grep">source repository here</a></p>
+
+:ET

@@ -1,0 +1,2 @@
+I"g<p>Let’s abstract this class, let’s play with generics, inherithance, abstract classes and interfaces and make this code reusable in some other context or problem. Oh but wait… this is not quite well placed. Ok, let’s make an exception here or instead add an attribute to configure the behaviour of this particular case. <em>Tadam</em>, it works!</p>
+:ET

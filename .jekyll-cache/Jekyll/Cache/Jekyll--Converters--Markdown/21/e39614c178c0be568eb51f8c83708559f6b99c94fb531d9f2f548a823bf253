@@ -1,0 +1,142 @@
+I"�6<p>I used to think of Haskell ADTs (Algebraic Data Types) as a sort of a final, flat type inheritance definition. Sometimes they are more like a base-class design in OO without the good bits. Here I show how we can overcome that by using <em>dependent types</em>.</p>
+
+<h3 id="a-wrong-analogy">A wrong analogy</h3>
+
+<p>Consider the following ADT:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Value</span>
+  <span class="o">=</span> <span class="kt">StringValue</span> <span class="kt">String</span>
+  <span class="o">|</span> <span class="kt">IntValue</span> <span class="kt">Int</span></code></pre></figure>
+
+<p>I used to think there were - <em>sort of</em> - three types here.
+Or, maybe better put, I used to think that this was a kind of a Haskell equivalent of this approach in Java:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Value</span> <span class="o">{}</span>
+
+<span class="kd">final</span> <span class="kd">class</span> <span class="nc">StringValue</span> <span class="kd">extends</span> <span class="nc">Value</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="nc">String</span> <span class="n">value</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">StringValue</span><span class="o">(</span><span class="nc">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">final</span> <span class="kd">class</span> <span class="nc">IntValue</span> <span class="kd">extends</span> <span class="nc">IntValue</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="nc">Int</span> <span class="n">value</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">IntValue</span><span class="o">(</span><span class="nc">Int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>In the Java example, we have three types we can play around with.
+<strong>But</strong> on the Haskell ADT above, there is only one type: <code class="highlighter-rouge">Value</code>. <code class="highlighter-rouge">StringValue</code> and <code class="highlighter-rouge">IntValue</code> are just different constructors of that type.</p>
+
+<h4 id="implications">Implications</h4>
+
+<p>In terms of code, this means we can have:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">f</span> <span class="o">::</span> <span class="kt">Value</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre></figure>
+
+<p>But we can’t have a specialized <code class="highlighter-rouge">g</code> that only accepts, say, <code class="highlighter-rouge">StringValue</code>s:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">g</span> <span class="o">::</span> <span class="kt">StringValue</span> <span class="o">-&gt;</span> <span class="kt">StringValue</span></code></pre></figure>
+
+<p>This is fairly annoying, as now the only way of applying specialized functions to a specific <code class="highlighter-rouge">Value</code> <del>type</del> constructor is by unwrapping it beforehand, which still requires the parent operation to accept any <code class="highlighter-rouge">Value</code> if we want to be <em>total</em>. This is ugly and repetitive:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">g</span> <span class="o">::</span> <span class="kt">Value</span> <span class="o">-&gt;</span> <span class="kt">Value</span>
+<span class="c1">-- the real reason for this function</span>
+<span class="n">g</span> <span class="p">(</span><span class="kt">StringValue</span> <span class="n">str</span><span class="p">)</span> <span class="o">=</span> <span class="kt">StringValue</span> <span class="o">$</span> <span class="n">str</span> <span class="o">++</span> <span class="s">"?"</span>
+<span class="c1">-- A kind of python `pass`</span>
+<span class="n">g</span> <span class="p">(</span><span class="kt">IntValue</span> <span class="n">int</span><span class="p">)</span> <span class="o">=</span> <span class="kt">IntValue</span> <span class="n">int</span></code></pre></figure>
+
+<p>This implies that once you define your ADT, you have to stick with it everywhere, even when parts of it are not applicable or sensible to an operation.</p>
+
+<p>In the example above, the return type is also <code class="highlighter-rouge">Value</code>, so we can sort of <code class="highlighter-rouge">pass</code> it for the cases that we are not interested in. But what if we want to have a function <code class="highlighter-rouge">k :: Value -&gt; String</code>, that is meant to only accept <code class="highlighter-rouge">StringValue</code>s?</p>
+
+<p>A workaround would be to set such case as <code class="highlighter-rouge">undefined</code> or to throw <code class="highlighter-rouge">error</code> for the <code class="highlighter-rouge">IntValue</code> case, as dynamically typed languages do. Another option would be to return a <code class="highlighter-rouge">Maybe String</code>, where <code class="highlighter-rouge">Nothing</code> represents the non-applicable-case.</p>
+
+<p>None of these options are clean or even acceptable solutions, in my opinion. They are neither type-safe neither made right by design.</p>
+
+<h3 id="a-better-way">A better way</h3>
+
+<p>This problem can be very neatly addressed by bringing <em>dependent types</em> onto the table, by using <code class="highlighter-rouge">GADTs</code> (Generalized algebraic datatypes) and <code class="highlighter-rouge">DataKinds</code>:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="cp">{-# LANGUAGE GADTs             #-}</span>
+<span class="cp">{-# LANGUAGE DataKinds         #-}</span>
+<span class="cp">{-# LANGUAGE FlexibleInstances #-}</span>
+<span class="cp">{-# LANGUAGE KindSignatures    #-}</span>
+
+<span class="kr">data</span> <span class="kt">ValueType</span> <span class="o">=</span> <span class="kt">StringType</span> <span class="o">|</span> <span class="kt">IntType</span>
+
+<span class="kr">data</span> <span class="kt">Value</span> <span class="o">::</span> <span class="kt">ValueType</span> <span class="o">-&gt;</span> <span class="o">*</span> <span class="kr">where</span>
+  <span class="kt">StringValue</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="kt">'StringType</span>
+  <span class="kt">IntValue</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="kt">'IntType</span></code></pre></figure>
+
+<p>Going step by step:</p>
+
+<ol>
+  <li>
+    <p>First, we define the type of values (<code class="highlighter-rouge">ValueType</code>) we support: <code class="highlighter-rouge">StringType</code> and <code class="highlighter-rouge">IntType</code>.</p>
+  </li>
+  <li>
+    <p>Then, we define <code class="highlighter-rouge">Value</code>, whose type <em>depends on</em> a concrete <code class="highlighter-rouge">ValueType</code> to be resolved.</p>
+  </li>
+  <li>
+    <p>Now, we define the value wrappers we need and specialize their type accordingly:</p>
+    <ul>
+      <li><code class="highlighter-rouge">StringValue</code> is a <code class="highlighter-rouge">Value StringType</code> which wraps a <code class="highlighter-rouge">String</code>.</li>
+      <li><code class="highlighter-rouge">IntValue</code> is a <code class="highlighter-rouge">Value 'IntType</code> which wraps an <code class="highlighter-rouge">Int</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Notes</strong>:</p>
+<ul>
+  <li>If you are wondering about the <code class="highlighter-rouge">'</code> before each <code class="highlighter-rouge">ValueType</code>, it is just a way of being explicit that we are promoting the <code class="highlighter-rouge">StringType</code> constructor, which is possible by using the <code class="highlighter-rouge">DataKinds</code> extension.</li>
+  <li>The <code class="highlighter-rouge">FlexibleInstances</code> extension is used so that we could define the type signature of <code class="highlighter-rouge">Value</code> by its <em>kind</em>.</li>
+</ul>
+
+<h4 id="the-whole-and-the-self">The whole and the self</h4>
+
+<p>By using GADTs and DataKinds, each type of value can now stand for itself, instead of just existing in the context of the whole.</p>
+
+<p>That means that we can have functions that accept all types of <code class="highlighter-rouge">Value</code>s:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">resetWithDefault</span> <span class="o">::</span> <span class="kt">Value</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="n">a</span>
+<span class="n">resetWithDefault</span> <span class="p">(</span><span class="kt">StringValue</span> <span class="kr">_</span><span class="p">)</span> <span class="o">=</span> <span class="kt">StringValue</span> <span class="s">"Hello, world!"</span>
+<span class="n">resetWithDefault</span> <span class="p">(</span><span class="kt">IntValue</span> <span class="kr">_</span><span class="p">)</span> <span class="o">=</span> <span class="kt">IntValue</span> <span class="mi">3</span></code></pre></figure>
+
+<p>As well as ones that only accept specific types of values:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">serious</span> <span class="o">::</span> <span class="kt">Value</span> <span class="kt">'StringType</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="kt">'StringType</span>
+<span class="n">serious</span> <span class="p">(</span><span class="kt">StringValue</span> <span class="n">str</span><span class="p">)</span> <span class="o">=</span> <span class="kt">SStringValue</span> <span class="o">$</span> <span class="n">str</span> <span class="o">++</span> <span class="s">"!"</span>
+
+<span class="n">plusX</span> <span class="o">::</span> <span class="kt">Value</span> <span class="kt">'IntType</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="kt">'IntType</span>
+<span class="n">plusX</span> <span class="p">(</span><span class="kt">IntValue</span> <span class="n">x</span><span class="p">)</span> <span class="n">y</span> <span class="o">=</span> <span class="kt">IntValue</span> <span class="o">$</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span></code></pre></figure>
+
+<h4 id="batteries-included">Batteries included</h4>
+
+<p>Note that this approach brings further type-safety to our system.
+While before one could have the following and get away with it silently:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">foo</span> <span class="o">::</span> <span class="kt">Value</span> <span class="o">-&gt;</span> <span class="kt">Value</span>
+<span class="n">foo</span> <span class="p">(</span><span class="kt">StringValue</span> <span class="kr">_</span><span class="p">)</span> <span class="o">=</span> <span class="kt">IntValue</span> <span class="mi">0</span></code></pre></figure>
+
+<p>Now, to achieve the same result, one has to be strict and explicit:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">foo</span> <span class="o">::</span> <span class="kt">Value</span> <span class="kt">'StringType</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="kt">'IntType</span>
+<span class="n">foo</span> <span class="p">(</span><span class="kt">StringValue</span> <span class="kr">_</span><span class="p">)</span> <span class="o">=</span> <span class="kt">IntValue</span> <span class="mi">3</span></code></pre></figure>
+
+<p>We can also guarantee that, for functions that accept all kinds of <code class="highlighter-rouge">Value</code>s, one can’t change the type of the input value when calculating the result value:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">bar</span> <span class="o">::</span> <span class="kt">Value</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Value</span> <span class="n">a</span>
+<span class="c1">-- Compiler error, as `IntValue` does not match `StringValue`</span>
+<span class="n">bar</span> <span class="p">(</span><span class="kt">StringValue</span> <span class="n">str</span><span class="p">)</span> <span class="o">=</span> <span class="kt">IntValue</span> <span class="mi">3</span></code></pre></figure>
+
+<h3 id="final-notes">Final notes</h3>
+
+<p>I am not against the use of <code class="highlighter-rouge">data</code>. I love it, and I wish that such terse and powerful way of defining types existed in more mainstream languages. But as you see, there are cases where they are not ideal left alone and where a higher level of type-safety is both necessary and advisable.</p>
+
+<p><a href="https://gist.github.com/NunoAlexandre/223f3c2991810a347a2e9cd2bd1fdad9">Here you can find</a> the gist containing the Haskell code present in this page.</p>
+:ET

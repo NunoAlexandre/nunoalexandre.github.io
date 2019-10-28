@@ -1,0 +1,96 @@
+I"�"<p>What if your functions would only, actually, take a single argument? 
+Currying is a very nice feature that Haskell offers that allows cleaner code to be written and leverages composition.</p>
+
+<blockquote>
+Currying is the process of transforming a function that takes multiple arguments into a function that takes just a single argument and returns another function if any arguments are still needed.</blockquote>
+
+<p>Alright, so I have read this exceprt on an answer to the question on Quora: <a href="https://www.quora.com/What-programming-language-do-people-hate-the-most-and-why/answer/Arunav-Sanyal-1">What programming language do people hate the most, and why?</a></p>
+
+<blockquote>
+    Haskell is too goddamn opinionated on FP. FP is a wonderful paradigm for programming, but most FP enthusiasts champion it as a be all and end all for every task on the planet. And that simply is not true. This is most obvious in the Haskell community. I hate the community more than the language. <strong>That being said, any language that hogties me to prevent me from using basic constructs like loops and multi argument functions <u>is not worth spending even a microsecond on</u>.</strong>
+<br />(...)<br />
+<u>I dont believe currying is a better way to do things. Currying is like building stuff with lego blocks. But its asymptotically more unreadable as a result of increasing complexity. f(g(x)) = y is what currying solves, but I expressely want f(x, y) = z as it reads better, makes more sense and does not hogtie me to define two separate methods when I just wanted one piece of functionality that does exactly one thing. Think about a how a curryied impl would look like if you have 50 different things that is happening to the inputs?</u>
+<br />
+I use scala so i know how to curry stuff, but its way more elegant to use multi var functions when code bases implode in size. Its a restriction that is no palatable to me.
+<br />
+Same goes for loops. Loops map cognitively to certain tasks that recursion does not (vice versa is also true,but I find loops way more elegant for a vast majority of problems).
+</blockquote>
+
+<h2 id="what-i-have-to-say">What I have to say</h2>
+
+<p>First, if a language makes you think differently about programming it already is worth spending a microsecond on it.</p>
+
+<blockquote><i>I dont believe currying is a better way to do things. Currying is like building stuff with lego blocks.</i></blockquote>
+
+<p>I disagree because I believe that complexity is better built by composing simple parts together.</p>
+
+<p>Your example about “what curry solves” it’s not even a currying example but a function composition example.
+Consider for example the sum function:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Num</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span></code></pre></figure>
+
+<p>So by currying:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>  <span class="o">==</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="mi">2</span></code></pre></figure>
+
+<p>And this is useful because you can compose partial applications in a very clean and readable way.</p>
+
+<p>About your “<code class="highlighter-rouge">f(x, y) = z</code> as it reads better”. Does it really? I don’t really see your problem here. Is it about the brackets? you can have exactly the same style in Haskell, you just don’t have the brackets.</p>
+
+<p>For instance:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">elem</span> <span class="o">::</span> <span class="kt">Eq</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre></figure>
+
+<p>you can use it like:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">elem</span> <span class="n">x</span> <span class="n">list</span></code></pre></figure>
+
+<p>If you mean that <code class="highlighter-rouge">elem(x, list)</code> reads better, that’s a just an opinion without much more to add, and with arguments against (more characters involved, more messy to look at)</p>
+
+<p>So the conclusion is that currying doesn’t stop you from invoking functions like you do in Scala. It just provides something extra.</p>
+
+<p>An alternative to curry (in such cases) is using anonymous lambdas. 
+For the two functions above you can either do:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">map</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">list</span>
+<span class="c1">--or</span>
+<span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">list</span></code></pre></figure>
+
+<p>and</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">filter</span> <span class="p">(</span><span class="n">elem</span> <span class="mi">3</span><span class="p">)</span> <span class="n">listOfLists</span>
+<span class="c1">--or</span>
+<span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">list</span> <span class="o">-&gt;</span> <span class="n">elem</span> <span class="mi">3</span> <span class="n">list</span><span class="p">)</span> <span class="n">listOfLists</span></code></pre></figure>
+
+<p>I guess you are not really arguing that the second versions are more readable?</p>
+
+<p>And comparing such thing to Java for example:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span><span class="mi">1</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span></code></pre></figure>
+
+<p>and</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">listOfLists</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">list</span> <span class="o">-&gt;</span> <span class="n">list</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="mi">3</span><span class="o">))</span>
+   <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span></code></pre></figure>
+
+<p>Is it even necessary to discuss which style is cleaner, more concise and readable?</p>
+
+<blockquote>
+<i>“Think about a how a curryied impl would look like if you have 50 different things that is happening to the inputs?”</i>
+</blockquote>
+
+<p>Ok, again, I’m not sure if you confused currying with function composition.</p>
+
+<p>I hope we both agree that functions should not have more than few arguments, so a case of 50 arguments might not be what you meant but maybe composing 50 functions instead?</p>
+
+<p>Even in such hypothetical case, that would straight away be a case to better breakdown the computation into better smaller blocks, first of all. And, sorry, I just don’t see any strength in your arguments even for such case. Would it be better in an imperative style?</p>
+
+<p>“but I find loops way more elegant for a vast majority of problems”. It happens that I don’t like for or while loops. Now what? Where’s your argument? Loops in general are far from being elegant. In Haskell you have map, filter, fold, etc etc that are way more elegant ways of doing these reductions applications.
+Still, I agree that a loop might be a good fit for some problems but why would you be so against other ways of thinking about programming?</p>
+
+<blockquote><i>"A language that doesn’t affect the way
+you think about programming, is not 
+worth knowing."</i> – Alan Perlis
+</blockquote>
+
+:ET

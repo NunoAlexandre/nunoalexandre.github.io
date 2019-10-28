@@ -1,0 +1,142 @@
+I"�3<p><code class="highlighter-rouge">null</code> returning and checking is everywhere and it developed deep roots in the imperative programming world.
+It’s more than time to stop using it and to look into better ways to deal with fallible computation.</p>
+
+<p>Some attempts were made to work around this such as the <code class="highlighter-rouge">Null Object Pattern</code> which I don’t really like because it’s a solution to be applied to every class that might be used as return type where null might be returned instead.</p>
+
+<h2 id="whats-the-problem-with-using-null">What’s the problem with using Null?</h2>
+
+<p>I see a few to start with:</p>
+
+<ul>
+  <li>Null is not an object</li>
+  <li>It makes code implicit and therefore not trustable</li>
+  <li>It requires defensive programming (null checking), making it dirty</li>
+</ul>
+
+<p>Let’s consider the following method declaration:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="nc">Category</span> <span class="nf">findCategoryById</span><span class="o">(</span><span class="kt">long</span> <span class="n">categoryId</span><span class="o">);</span></code></pre></figure>
+
+<p>This method declares that it returns a <code class="highlighter-rouge">Category</code> object, having its category id.<br />
+But, is it really? I mean, can I trust this code and relax?</p>
+
+<p>What if I implement that method like this?</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="nc">Category</span> <span class="nf">findCategoryById</span><span class="o">(</span><span class="kt">long</span> <span class="n">categoryId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>In such case I’m not - at all - returning a <code class="highlighter-rouge">Category</code>, so the code is not saying the truth. <br />And that is bad.</p>
+
+<p>We need to consider that it might happen that no such category exists with the given id.</p>
+
+<p>One way to solve this would be to have, instead:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="nc">Category</span> <span class="nf">findCategoryById</span><span class="o">(</span><span class="kt">long</span> <span class="n">categoryId</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">NoSuchElementException</span><span class="o">;</span> </code></pre></figure>
+
+<p>This would make it more explicit but brings a few drawbacks:</p>
+
+<ul>
+  <li>Exceptions are known to be expensive</li>
+  <li>Either requires try-catch blocks (big and ugly) OR</li>
+  <li>You (can) keep postponing the exception handling (by adding throws NoSuchElementException to the call chain)</li>
+</ul>
+
+<h2 id="optional-to-the-rescue">Optional to the rescue</h2>
+
+<p>Optional is here to help us and we shouldn’t just keep it aside.
+Optional<T> is a wrapper around a value of type T that might actually be nothing. This not only encapsulates the null checking in a single place but also makes us design and reason rigorously about our code.</T></p>
+
+<p>For example, in Haskell there is no such thing as a <code class="highlighter-rouge">null</code> but the <code class="highlighter-rouge">Maybe a</code> type:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Just</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Nothing</span></code></pre></figure>
+
+<p>I don’t think of Optional as any modern solution to replace the usage of null verifications but as a design solution that should have been there from the beginning.</p>
+
+<h3 id="before-and-after-optional">Before and After Optional</h3>
+
+<p>Our method declaration should now become:<br /></p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">public</span> <span class="n">final</span> <span class="kt">Optional</span><span class="o">&lt;</span><span class="kt">Category</span><span class="o">&gt;</span> <span class="n">findCategoryById</span><span class="p">(</span><span class="n">long</span> <span class="n">categoryId</span><span class="p">);</span></code></pre></figure>
+
+<p>So that, instead of doing the usual:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Category</span><span class="o">&gt;</span> <span class="n">category</span> <span class="o">=</span> <span class="n">findCategoryById</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+<span class="k">if</span> <span class="o">(</span> <span class="n">category</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">(&lt;&lt;</span> <span class="nc">Wrong</span> <span class="n">category</span> <span class="n">id</span> <span class="o">&gt;&gt;);</span>
+<span class="o">}</span>
+<span class="k">else</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">(</span><span class="n">category</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Or</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
+    <span class="nc">Category</span><span class="o">&gt;</span> <span class="n">category</span> <span class="o">=</span> <span class="n">findCategoryById</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+    <span class="n">log</span><span class="o">(</span><span class="n">category</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+<span class="o">}</span>
+<span class="k">catch</span> <span class="o">(</span> <span class="nc">Exception</span> <span class="n">_</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">(</span><span class="s">"&lt;&lt; Wrong category id &gt;&gt;"</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>We can better have:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Category</span><span class="o">&gt;</span> <span class="n">category</span> <span class="o">=</span> <span class="n">findCategoryById</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+<span class="n">log</span><span class="o">(</span><span class="n">category</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Category:</span><span class="o">:</span><span class="n">name</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"&lt;&lt; Wrong category id &gt;&gt;"</span><span class="o">));</span></code></pre></figure>
+
+<p>Now imagine the impact that such different design and approach will have in your system as a whole…</p>
+
+<h2 id="what-if-we-cant-change-the-method-declaration">What if we can’t change the method declaration?</h2>
+
+<p>Let’s suppose you are using some web service or some database API that doesn’t yet use Optional and / or throws exceptions and you don’t want either to check nulls all around the code either deal with the exceptions.</p>
+
+<p>The solution is to wrap it up! 
+Create <code class="highlighter-rouge">wrapper</code> classes that will bridge the outside data source nulls or exceptions into your internal convention ( [null|Exception] -&gt; Optional).</p>
+
+<p>Suppose that the method above is such case. <br />
+I could wrap that (service) method like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">MyService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">OutsideService</span> <span class="n">service</span><span class="o">;</span>
+    <span class="o">(...)</span>
+
+    <span class="c1">//Example #0 - if it returns null</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Category</span><span class="o">&gt;</span> <span class="nf">findCategoryById</span><span class="o">(</span><span class="kt">long</span> <span class="n">categoryId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">service</span><span class="o">.</span><span class="na">findCategoryById</span><span class="o">(</span><span class="n">categoryId</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="c1">//Example #1 - if it throws an exception</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Category</span><span class="o">&gt;</span> <span class="nf">findCategoryById</span><span class="o">(</span><span class="kt">long</span> <span class="n">categoryId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">service</span><span class="o">.</span><span class="na">findCategoryById</span><span class="o">(</span><span class="n">categoryId</span><span class="o">));</span>
+        <span class="o">}</span> 
+        <span class="k">catch</span> <span class="o">(</span> <span class="nc">Exception</span> <span class="n">_</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span> 
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="some-final-considerations">Some final considerations</h2>
+
+<p>If you find it too much effort to opt for this wrapping logic either because the wrapped services have too many methods or you just find it too much to code, I understand your point. 
+I can’t choose for you but we may agree that it looks better to ensure code correctness than to resign to the way it’s done elsewhere and do the same internally.</p>
+
+<p>If you just don’t like the idea of repeating all those <code class="highlighter-rouge">try-catch</code> blocks, I get you there, but it’s something easy to abstract (and I will soon post something about it).</p>
+
+<h2 id="is-optional-enough-for-every-situation">Is Optional enough for every situation?</h2>
+
+<p>No. Optional represents results of computation that might or not have failed but when you are left alone with an Optional.empty() you don’t really have much information about the context of the failure. 
+In some cases, it is not even necessary to have such context but in other cases it is and there are ways to approach that.</p>
+
+<p>In Haskell, for such cases there is the <code class="highlighter-rouge">Either</code> type, defined as follows:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Either</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="kt">Left</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Right</span> <span class="n">b</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Ord</span><span class="p">,</span> <span class="kt">Read</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span></code></pre></figure>
+
+<p>Although Java officially doesn’t have yet such type, <a href="https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/base/Either.java">some have been written already</a>, declared like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Either</span><span class="o">&lt;</span><span class="no">L</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="o">{...}</span></code></pre></figure>
+
+<p>The idea is that your method returns an Either&lt;L,R&gt; object where L represents the successful computation result value and R the failing one (ordered by convention).</p>
+
+<p>Thanks for reading and keep code beautiful.</p>
+:ET

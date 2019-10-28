@@ -1,0 +1,33 @@
+I"�<p>Breaking those long lines of code into smaller, grouped ones, with a clear consistency on where different types of elements are placed, is a small and efficient step towards improved readability.</p>
+
+<h3 id="before">Before</h3>
+
+<p>Consider the code example below. There are <strong>two calls</strong>, <strong>five arguments</strong>, and <strong>three levels</strong> of nesting. However, that’s not what we get from the looks of it. We need to spend time visually parsing it and group the parts in different categories, not to mention that scrolling is required to even read the whole thing.</p>
+
+<script src="https://gist.github.com/NunoAlexandre/70e73375596decf14e3934c9c373ebe6.js"></script>
+
+<p>Note the form of this code, leaving the actual code aside. No clue, whatsoever.
+<img src="/images/small-step-before.png" /></p>
+
+<h3 id="from-now-on">From now on</h3>
+
+<p>We want to clearly see, without knowing the code, what is:</p>
+
+<ul>
+  <li>A function call</li>
+  <li>A function’s arguments</li>
+  <li>Part of what</li>
+</ul>
+
+<p>For that, we need to separate calls from arguments by placing the arguments in a new, indented line:</p>
+
+<script src="https://gist.github.com/NunoAlexandre/8fda4bf645434b81fa09f9fc24448f95.js"></script>
+
+<p>Where now the form of this code says it all, whatever the actual code is:</p>
+
+<p><img src="/images/small-step-after.png" /></p>
+
+<h3 id="concrete-advantages">Concrete advantages</h3>
+
+<p>The advantages are not just structural, visual, or subjective . Note that now the addition, removal, or modification of a function argument will be shown in a separate git diff line, instead of ending up with a single git diff line that mixes up all of the different changes made to your project.</p>
+:ET

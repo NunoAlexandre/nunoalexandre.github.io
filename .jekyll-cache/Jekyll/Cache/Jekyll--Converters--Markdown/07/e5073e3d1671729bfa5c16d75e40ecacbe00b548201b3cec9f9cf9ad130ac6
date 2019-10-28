@@ -1,0 +1,5 @@
+I"%<p>Now back to mobile development (next to a million other things) at <a href="kidiyo.com">Kidiyo</a>,
+I was underwhelmed with the lack of support from the iOS SDK to force different
+landscapes across an app. In this blog I share a neat solution that works (at
+least) from iOS 9.0 onward.</p>
+:ET

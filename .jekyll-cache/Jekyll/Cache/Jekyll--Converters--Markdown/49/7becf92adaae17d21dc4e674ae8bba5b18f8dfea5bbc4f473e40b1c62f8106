@@ -1,0 +1,74 @@
+I"�<p><em>Function composition is the pointwise application of one function to the result of another to produce a third function.</em>, <a href="https://en.wikipedia.org/wiki/Function_composition">says Wikipedia</a>. Here I show what I was getting wrong about it.</p>
+
+<p>Having the two functions:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">f</span> <span class="o">::</span> <span class="kt">B</span> <span class="o">-&gt;</span> <span class="kt">C</span>
+<span class="n">g</span> <span class="o">::</span> <span class="kt">A</span> <span class="o">-&gt;</span> <span class="kt">B</span></code></pre></figure>
+
+<p>We can compose them as <code class="highlighter-rouge">(f . g)</code>, since <code class="highlighter-rouge">f</code>’s input type is <code class="highlighter-rouge">g</code>’s output type.</p>
+
+<h3 id="example">Example</h3>
+
+<p>Say we have:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">f</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">g</span> <span class="o">::</span> <span class="kt">Char</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">g</span> <span class="sc">'y'</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g</span> <span class="kr">_</span>   <span class="o">=</span> <span class="mi">0</span></code></pre></figure>
+
+<p>Then we can compose them as:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="o">&gt;</span> <span class="p">(</span><span class="n">f</span> <span class="o">.</span> <span class="n">g</span><span class="p">)</span> <span class="sc">'y'</span>
+<span class="kt">True</span>
+<span class="o">&gt;</span> <span class="p">(</span><span class="n">f</span> <span class="o">.</span> <span class="n">g</span><span class="p">)</span> <span class="sc">'n'</span>
+<span class="o">&gt;</span> <span class="kt">False</span></code></pre></figure>
+
+<h3 id="my-mistake">My mistake</h3>
+
+<p>I knew that composition was lazy:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="o">&gt;</span> <span class="p">(</span><span class="n">filter</span> <span class="n">even</span><span class="p">)</span> <span class="o">.</span> <span class="p">(</span><span class="n">filter</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">))</span> <span class="o">$</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">20</span><span class="p">]</span></code></pre></figure>
+
+<p>But I missed how composition really works.</p>
+
+<p>See, I always thought that the right side of the composition (in the example above, the function <code class="highlighter-rouge">g</code>) was the first to be computed, but that is wrong.</p>
+
+<p>It turns out, as it makes sense to be, that <code class="highlighter-rouge">f</code> is the first function to be computed. This may sound odd to you as if <code class="highlighter-rouge">f</code> expects <code class="highlighter-rouge">Char</code>. But that’s obviously not the case.</p>
+
+<p>Remember that Haskell is lazy. In a strict language, the composition would most likely happen as I was expecting it to happen but not in a lazy language.</p>
+
+<p>Note that <code class="highlighter-rouge">g(x)</code> is the value that <code class="highlighter-rouge">f</code> receives, thus <code class="highlighter-rouge">g</code> cannot be evaluated before (entering) <code class="highlighter-rouge">f</code> as that would mean strict evaluation of arguments.</p>
+
+<h3 id="proof">Proof</h3>
+
+<p>Let’s show that the left most function is the first to be computed.</p>
+
+<p>Having these definitions for <code class="highlighter-rouge">f</code> and <code class="highlighter-rouge">g</code>:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">f</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"failed in f"</span>
+
+<span class="n">g</span> <span class="o">::</span> <span class="kt">Char</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"failed in g"</span></code></pre></figure>
+
+<p>An application based on their composition results in <code class="highlighter-rouge">*** Exception: failed in f</code>:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="o">&gt;</span> <span class="p">(</span><span class="n">f</span> <span class="o">.</span> <span class="n">g</span><span class="p">)</span> <span class="o">$</span> <span class="sc">'y'</span>
+<span class="o">***</span> <span class="kt">Exception</span><span class="o">:</span> <span class="n">failed</span> <span class="kr">in</span> <span class="n">f</span></code></pre></figure>
+
+<h3 id="usefulness">Usefulness</h3>
+
+<p>One quick example, out of infinite possible ones:</p>
+
+<p>When building <a href="https://hackage.haskell.org/package/wai"><code class="highlighter-rouge">Wai.Application</code></a> middlewares, the order in which you process a request does matter.</p>
+
+<p>For instance, you want to first ensure the request is not targeting some protected endpoint before authenticating it, so to save unnecessary computation in a positive case.</p>
+
+<p>In a strict language, handling such dependency while being able to compose wouldn’t be easy and clean.
+In Haskell, however, you simply need to set the order of the composition so that it matches your business logic, without having each middleware knowing about each other and falling into a dependency hell.</p>
+
+<p>Simple but fundamental and useful piece of knowledge to keep in mind.</p>
+:ET

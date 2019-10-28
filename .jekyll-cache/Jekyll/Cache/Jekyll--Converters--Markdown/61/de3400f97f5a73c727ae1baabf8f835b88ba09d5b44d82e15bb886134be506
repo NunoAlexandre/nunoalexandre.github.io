@@ -1,0 +1,58 @@
+I"+<p>When programming we are using some programming language to describe a solution for a problem, to define behaviour or the flow of a computation. And we do it using a language that is not human, and it’s not our mother language, therefore we inevitably feel the need to leave comments and make it as readable as possible. By other words, most of the times we comment to balance the unreadability of our code.</p>
+
+<p>So the challenge is to comment only if really necessary and inevitable and not as <strong>the</strong> solution. Only comment when it really needs to be, when you need to explain why a certain unexpected expression or value is there and you can not let it express with clear code.</p>
+
+<p>The software we develop should read as much as possible as a narrative. The ultimate source of truth is the code itself while the comments easily become obsolent or even a lie upon the code.</p>
+
+<p>Comments are a discret way of making us worse developers and a great convinence to our lazyness.</p>
+
+<p>Also, to comment usually comes together with breaking the <code class="highlighter-rouge">Tell, Don't Ask</code> principle.</p>
+
+<p>Let’s jump to an example:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">numberOfItemsEligibleForDiscount</span><span class="o">(</span><span class="nc">Sale</span> <span class="n">sale</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">eligibleItems</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span> <span class="nc">Item</span> <span class="n">item</span> <span class="o">:</span> <span class="n">sale</span><span class="o">.</span><span class="na">items</span><span class="o">()</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// if this item cost more than 50 euros and it's from the music category...</span>
+    <span class="k">if</span> <span class="o">(</span> <span class="n">item</span><span class="o">.</span><span class="na">cost</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mf">50.0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">.</span><span class="na">category</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"music"</span><span class="o">)</span> <span class="o">)</span>
+      <span class="n">eligibleItems</span><span class="o">++;</span> <span class="c1">//then we increment the eligibleItems</span>
+  <span class="o">}</span> 
+  <span class="k">return</span> <span class="n">eligibleItems</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Alright. What does exactly mean to an item to cost more than 50 euros and being from the music category? 
+It means it’s eligible for discount!
+So why having this knowledhe within a function whose porpuse it to tells us how many items from a sale are eligile to have discount? 
+Next to this, how can we reduce the ammount of code written here?</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">numberOfItemsEligibleForDiscount</span><span class="o">(</span><span class="nc">Sale</span> <span class="n">sale</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">sale</span><span class="o">.</span><span class="na">items</span><span class="o">().</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span><span class="o">.</span><span class="na">cost</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">.</span><span class="na">category</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"music"</span><span class="o">)).</span><span class="na">count</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><em>“Oh cool, we can use java 8 streams!”</em>
+So we go and we refactor this code. We reduce it by 5 lines and we make it somewhat more declarative.
+Still confusing. And, more than that, we keep having, within this function, business logic knowledge that should have a meaning and existence on its own, by itself.</p>
+
+<p>So this code would be better written like:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">numberOfItemsEligibleForDiscount</span><span class="o">(</span><span class="nc">Sale</span> <span class="n">sale</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">sale</span><span class="o">.</span><span class="na">items</span><span class="o">().</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">eligibleForDiscount</span><span class="o">(</span><span class="n">item</span><span class="o">)).</span><span class="na">count</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Somewhat better. But we are still asking for things, breaking encapsulation and make it happen on our own.</p>
+
+<p>One way we could improve this would be to have this method whithin the Sale class, that would take a <code class="highlighter-rouge">Discount</code> as parameter, being <code class="highlighter-rouge">Discount</code> an super type and therefore this would be polimorphic.</p>
+
+<p>And then we would end up having:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">itemsEligibleForDiscount</span><span class="o">(</span><span class="nc">Discount</span> <span class="n">discount</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">discount</span><span class="o">.</span><span class="na">appliesTo</span><span class="o">(</span><span class="n">item</span><span class="o">)).</span><span class="na">count</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>So we end up with no need to have comments, we have a clean way of applying knlowdge upon a context and we endup with a much flexible design.</p>
+
+<p><code class="highlighter-rouge">The Clean Code</code> has a great chapter on this that will affect your way of programming and keeping your code clean at all times, as it affected mine.</p>
+
+<p>And what about class documentation? <a href="http://programmers.stackexchange.com/questions/285787/clean-code-comments-vs-class-documentation">Check this.</a></p>
+
+:ET

@@ -1,0 +1,4 @@
+I"<blockquote>
+  <p>Can we make the code that simple? It turns out that we can. We can change the ExpenseReportDAO so that it always returns a MealExpense object. If there are no meal expenses, it returns a MealExpense object that returns the per diem as its total:</p>
+</blockquote>
+:ET

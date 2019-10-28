@@ -1,0 +1,191 @@
+I"�B<p>The discussion around using Null is a long one. 
+I wrote before about <a href="http://0.0.0.0:4000/2016/08/31/why-optional-is-better-than-null">“Why Optional is better than Null”</a>, but there is more to discuss regarding using Null as a way of expressing meaning.</p>
+
+<p>If you are doing OO programming, you should not be using Null as you drink coffee in the morning.</p>
+
+<p>In that other post on this subject, I focussed more on the common case where Null is used to express failing computation.
+Another way of using Null is by making it a way of expressing meaning.
+If you are doing that, stop it. There are proper, better ways of doing it.</p>
+
+<h3 id="request-example">Request Example</h3>
+
+<p>Let’s take a look at this example: You want your users to send a request to another user, who either approves or rejects it.
+I have seen such cases being coded like this:  </p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Request</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Boolean</span> <span class="n">hasBeenApproved</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">Request</span><span class="o">(</span><span class="nc">String</span> <span class="n">content</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">;</span>
+        <span class="n">hasBeenApproved</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>     
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">content</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">content</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDecision</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">decision</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">hasBeenApproved</span> <span class="o">=</span> <span class="n">decision</span><span class="o">;</span> 
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">hasBeenApproved</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hasBeenApproved</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">alreadyAddressed</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hasBeenApproved</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>What is wrong here? The problem really is that the Boolean attribute hasBeenApproved, by being null, holds meaning and business logic.</p>
+
+<p>Furthermore, note that the setDecision method gets a primitive boolean since the responder can either approve or decline, not ignore it. Again, such logic is mapped in a hidden, implicit and weak manner.</p>
+
+<p>Now, imagine that the request could be ignored… It would require a new boolean attribute (wasIgnored) to be added, which would only check that specific case… ugly!</p>
+
+<p>By last but not least, <a href="https://media.pragprog.com/articles/may_04_oo1.pdf">this object is not shy</a>. Even as an outsider you easily guess how it works inside, which is not good as that causes unwanted coupling, not only around types but also around an implementation.</p>
+
+<p>This code would be used as follows:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Request</span> <span class="n">aRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">(</span><span class="s">"Offer me the SICP book"</span><span class="o">);</span>
+<span class="n">aRequest</span><span class="o">.</span><span class="na">setDecision</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span></code></pre></figure>
+
+<p>It doesn’t read nicely. It sounds very procedural and it’s not straightforward what <code class="highlighter-rouge">true</code> means there.
+By checking the method definition, you know straight away how it is implemented inside the class.</p>
+
+<p>Lets continue…</p>
+
+<h3 id="handling-new-requirements">Handling new requirements</h3>
+<p>Now your client has new requirements: The Request responder must now be able to not only decline or approve it, but also mark it as <em>Need of Work</em>.</p>
+
+<p>I guess this would change the code by creating first a RequestResponseType:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">RequestResponseType</span> <span class="o">{</span>
+    <span class="no">APPROVED</span><span class="o">,</span> <span class="no">DECLINED</span><span class="o">,</span> <span class="no">NEEDS_WORK</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>And then adjusting the Request to:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Request</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">RequestResponseType</span> <span class="n">response</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">Request</span><span class="o">(</span><span class="nc">String</span> <span class="n">content</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">;</span>
+        <span class="n">hasBeenApproved</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>     
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">content</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">content</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setResponse</span><span class="o">(</span><span class="nc">RequestResponseType</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">;</span> 
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">hasBeenApproved</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hasBeenApproved</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">RequestResponseType</span> <span class="nf">getResponse</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasBeenAddressed</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hasBeenApproved</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>This is getting dirty. Every change will cause the Request object to expose more of its internals, making the logic around it become spread instead of contained.</p>
+
+<p>It could be used like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Request</span> <span class="n">aRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">(</span><span class="s">"Offer me the SICP book"</span><span class="o">);</span>
+<span class="n">aRequest</span><span class="o">.</span><span class="na">setResponse</span><span class="o">(</span><span class="nc">RequestResponseType</span><span class="o">.</span><span class="na">APPROVED</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Was my request approved? "</span> <span class="o">+</span> <span class="o">(</span><span class="n">aRequest</span><span class="o">.</span><span class="na">getResponse</span><span class="o">()</span> <span class="o">==</span> <span class="nc">RequestResponseType</span><span class="o">.</span><span class="na">APPROVED</span><span class="o">));</span></code></pre></figure>
+
+<p>Ugly…! Note how this approach breaks a few principles:</p>
+<ul>
+  <li>encapsulation: <em>Request</em> exposes its internals</li>
+  <li>coupling: An outsider knows about RequestResponseType</li>
+  <li><em>Tell, Don’t Ask: rather than asking an object for data and acting on that data, we should instead tell an object what to do</em> (<a href="https://martinfowler.com/bliki/TellDontAsk.html">Martin Fowler</a>)</li>
+</ul>
+
+<h3 id="doing-it-better">Doing it better</h3>
+
+<p>It is true that following the way that is shown above does work. <a href="http://0.0.0.0:4000/2016/06/06/but-it-works">“But it works”</a> is not good enough. And I wouldn’t be happy to maintain such code after three or four new requirements have arrived and turned it into cooked spaghetti.</p>
+
+<p>In order to avoid breaking those principles listed above, I would refactor the previous approach into something like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Request</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">RequestStatus</span> <span class="n">status</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Request</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">content</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">AWAITING_RESPONSE</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">String</span> <span class="nf">content</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">content</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">approve</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">APPROVED</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">decline</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">DECLINED</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">needsWork</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">NEEDS_WORK</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">hasBeenApproved</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">status</span> <span class="o">==</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">APPROVED</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">hasBeenDeclined</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">status</span> <span class="o">==</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">DECLINED</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">doesNeedWork</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">status</span> <span class="o">==</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">NEEDS_WORK</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Boolean</span> <span class="nf">hasBeenAddressed</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">status</span> <span class="o">!=</span> <span class="nc">RequestStatus</span><span class="o">.</span><span class="na">AWAITING_RESPONSE</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">enum</span> <span class="nc">RequestStatus</span> <span class="o">{</span>
+        <span class="no">AWAITING_RESPONSE</span><span class="o">,</span> <span class="no">APPROVED</span><span class="o">,</span> <span class="no">DECLINED</span><span class="o">,</span> <span class="no">NEEDS_WORK</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>How does this help?</p>
+
+<ul>
+  <li>The logic around “Awaiting Response” and around setting the response is no longer ugly and implicit.</li>
+  <li>With this approach, Request no longer exposes its internals. One doesn’t know how the different response/statuses are mapped and implemented internally.</li>
+  <li>Decreased coupling as there is no external knowledge of ResponseRequestType.</li>
+  <li>Now one Tells <em>Request</em>, instead of asking for data.</li>
+</ul>
+
+<p>Note how different the code is used, now that the knowledge and decision logic lays where it belongs.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Request</span> <span class="n">aRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">(</span><span class="s">"Offer me the SICP book"</span><span class="o">);</span>
+<span class="n">aRequest</span><span class="o">.</span><span class="na">approve</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Was my request approved? "</span> <span class="o">+</span> <span class="o">(</span><span class="n">aRequest</span><span class="o">.</span><span class="na">hasBeenAccepted</span><span class="o">());</span></code></pre></figure>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>This improved version is not great yet. 
+The more statuses are introduced, the bigger <em>Request</em> will become. And if <em>Request</em> needs to include more data such as date, author, etc, this class no longer will respect the Single-Responsibility Principle. 
+Furthermore, one can change the status of the Request, which may not be desired.</p>
+
+<p>I might write a post later on how to improve it, so keep posted.</p>
+
+:ET

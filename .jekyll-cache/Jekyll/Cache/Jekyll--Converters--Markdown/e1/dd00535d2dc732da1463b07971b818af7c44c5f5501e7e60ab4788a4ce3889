@@ -1,0 +1,168 @@
+I"�2<p>Look deeply into the principles of Object-Oriented programming. Then look into the code we are developing tagged as being Object-Oriented. Is it <em>really</em> Object-Oriented?</p>
+
+<p>I dare to say no.</p>
+
+<p>The three pillars of OOP are known as being:</p>
+
+<ol>
+  <li>Encapsulation</li>
+  <li>Inheritance</li>
+  <li>Polymorphism</li>
+</ol>
+
+<p>Next to this, we have a vast set of principles such as SOLID, DRY, KISS, etc.</p>
+
+<p>Do these matter at all? They do. Do we act as if they matter? I don’t think so.</p>
+
+<p>I have mixed feeling about this discussion. In one hand, I think we don’t realise that those 3 pillars of OO are not really exclusive to OO or that OOP made them possible. And inheritance is no good, it’s like advertising your product saying it is plugged into a rock.</p>
+
+<p>However, we all keep using OO languages for everything and we defend it on the basis of these key principles while breaking them every single day while calling it “being pragmatic” or just by being forced by “great” frameworks like Spring.</p>
+
+<p>And that pisses me off a little. It’s like using a hammer for every home task but then ending up using the hammer the way around.</p>
+
+<p>Allow me to show you how we do this with OO and how it is not OO.</p>
+
+<h3 id="encapsulation">Encapsulation</h3>
+
+<p>We had encapsulation in C, in a much more well-defined way than we do in Java for example, where we have to define a header file (*.h) declaring the methods you make available.</p>
+
+<p>The idea with encapsulation is to hide from the outside world the data and implementation details of your object.</p>
+
+<p>We all know this, but still, this is what we do all the time:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">password</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">isActive</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isActive</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="n">password</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isActive</span> <span class="o">=</span> <span class="n">isActive</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">getName</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPassword</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">password</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPassword</span><span class="o">(</span><span class="nc">String</span> <span class="n">password</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="n">password</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">getActive</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">isActive</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">setActive</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">isActive</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isActive</span> <span class="o">=</span> <span class="n">isActive</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Bye, bye Encapsulation. This is not an object, it’s just a data structure. I, as an outsider, know everything about the internals of this <em>object</em>.</p>
+
+<p>How is this different from using a C struct?</p>
+
+<p>Plus, important to mention this <code class="highlighter-rouge">get</code> and <code class="highlighter-rouge">set</code> disease. 
+Seriously, this is such a procedural and dusty naming.</p>
+
+<p>Search for the definition of <code class="highlighter-rouge">Get</code> and <code class="highlighter-rouge">Set</code> in your dictionary and be amazed about how many different meanings it can hold. And don’t we see that it doesn’t read as one would expect in a world of objects?</p>
+
+<p>I hope one to ask me “how old are you?”, not “get age”. Or that someone tells me a joke to make me laugh, not <em>set</em> my lips into a smile shape.</p>
+
+<h3 id="inheritance">Inheritance</h3>
+
+<p>Although it’s factual that Composition is to be preferred over Inheritance (that is even a principle of OO), we still prefer or are forced to choose Inheritance.</p>
+
+<p>We say OO is great because it’s natural. Well…! 
+Let’s map inheritance into the real world:
+You think of birds as flying animals, so you map that into a super class Bird that implements a <code class="highlighter-rouge">fly()</code> method. It happens that not all birds actually fly. Now what?</p>
+
+<p>And, in technical terms, Inheriting is to define a hard coded compile-time dependency. With composition, you can make use of run-time Polymorphism instead, which is much more flexible and powerful.</p>
+
+<p>Sandi Metz brilliantly showed in this talk not only how composition is better but also how Inheritance is not the way to abstract and reuse behaviour.</p>
+<div><iframe src="https://www.youtube.com/embed/OMPfEXIlTVE?ecver=2" width="640" height="360" frameborder="0" allowfullscreen=""></iframe></div>
+
+<p>Still, Inheritance keeps being a cornerstone of several and important frameworks such as Spring, Android, etc.</p>
+
+<h3 id="polymorphism">Polymorphism</h3>
+
+<p>Polymorphism is perhaps <em>the</em> nicest principle of OO when compared to procedural languages like C.
+We could archive polymorphism in C. The initial C++ compiler would actually translate the C++ code into C, which just shows that it is possible. But in OO it is more elegant and straightforward.</p>
+
+<p>Polymorphism allows us to focus on what needs to be done, instead of in who is going to do it.
+We can make use of polymorphism by different ways: Ad-hoc (aka function level), through sub-typing or through parametric types (generics).</p>
+
+<p>So how are we misusing it?</p>
+
+<p>Well, I don’t see the Ad-hoc approach being used. Instead, we prefer to have one big method that checks the <em>instanceof</em> the object.</p>
+
+<p>Sub-typing, in the mainstream frameworks, is done through Inheritance.</p>
+
+<p>The parametric way is - I think - the one less commonly misused but maybe not used enough.</p>
+
+<p>I (dis)like particularly to see this sort of thing bellow masked as polymorphism, in Java Spring:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleController</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"aSpecificExampleService"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">ExampleService</span> <span class="n">service</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Being <code class="highlighter-rouge">ExampleService</code> an interface.</p>
+
+<p>This creates the illusion of flexibility but it is not different from doing:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleController</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">ExampleService</span> <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpecificExampleService</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>It is actually different. You can change which service is identified as <em>aSpecificExampleService</em> without having to change the classes which use it.</p>
+
+<p>However, when following the second example we have compile-time checking while that with the first approach only at loading time or run-time you will get to know if the targeted implementation is not present or if something is wrong.</p>
+
+<p>We still benefit from having service as ExampleService, but to sell this @Autowired and @Qualifier strategy as something great is just misguiding and I think it’s important that we as developers understand why.</p>
+
+<h3 id="and-more">And More</h3>
+
+<p>These examples were just focused in the cornerstones of OO, but there is much more.</p>
+
+<p>One common example is to use Util classes. It doesn’t matter that <em>great</em> libraries or frameworks are using it all the time! That doesn’t make it correct.</p>
+
+<p>Util classes are a collection of static methods that act upon the arguments they receive.
+Since their arguments in OO are objects, it means that they have to know about the Object’s data in order to know what to do.</p>
+
+<p>This means to break a few of principles at once such as <em>Encapsulation</em> and <em>Tell, Don’t Ask</em>. You spread the knowledge about your objects across classes and since static methods are fixed to a class, you also lose flexibility and subtyping polymorphism.</p>
+
+<p>No less important, static methods are procedures. Just like C methods are. 
+To be clear: <strong>This is not Object-Oriented.</strong></p>
+
+<p>It is, instead, some sort of ugly mix between Procedural and OO programming.<br />
+OO is not about exposing the objects’ internals, neither util classes, neither methods ten lines long.</p>
+
+<p>Object-Oriented is mostly about message passing. It’s about getting objects encapsulation data and/or behaviour and getting them interacting with each other, building complexity along the way.</p>
+
+<p>Although I think that us, as developers, have the biggest slice of blame for turning OO into this ugly thing, I also think that OO itself takes some of the blame.</p>
+
+<p>Object-Oriented is not very well defined and not very practical. There are many different definitions of what OOP is, and each one adds a new view and often contradictory to each other.</p>
+
+<p>And it’s not super practical because inevitably we tend to seek shortcuts through it, like static methods.
+To go purely OO, we have to look into languages like Smalltalk.</p>
+
+<p>In opposite, have a look at Functional Programming and notice how well defined it is when compared to OO.</p>
+
+<p>In conclusion, I think it’s not practical to be purely OO, but that doesn’t mean it’s fine to be only 10%.</p>
+
+<p>We have to do better, we have to read <a href="http://www.goodreads.com/book/show/43940.Object_Thinking">David West’s Object Thinking</a>, to read <a href="https://www.sandimetz.com">Sandi Metz</a> and even to get slightly infected by the extremism of <a href="http://www.yegor256.com">Yegor</a>.</p>
+
+<p>We have to feel itchy the next time we are going to create a Util class or to generate getters and setters, and we have to stop to realise that this is that we are doing is not object-oriented.</p>
+:ET

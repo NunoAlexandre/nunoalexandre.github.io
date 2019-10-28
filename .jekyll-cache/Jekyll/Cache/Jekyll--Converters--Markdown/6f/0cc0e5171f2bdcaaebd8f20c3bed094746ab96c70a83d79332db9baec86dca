@@ -1,0 +1,72 @@
+I"�<p>At University, a professor enthusiastically told us that translating problems into programming models would be one of the coolest tasks we would have as developers. Unfortunately, modelling is most often done poorly. Types to the rescue!</p>
+
+<h3 id="modeling">Modeling</h3>
+
+<p><img src="/images/treeToHaskell.svg" /></p>
+
+<p>Modelling is building the backbone of a world using a programming language. We give a body to a problem. We define a vocabulary and a shape to reason about that problem.
+Modelling is, therefore, halfway into solving a problem. After all, we need a ball to score a goal.</p>
+
+<blockquote>
+  <p>In a sense, programming (pure functional programming, in particular) is about transforming data from one form to another. Types allow us to describe the form of that data, and the more precise we make these descriptions, the more guidance the language can give in implementing transformations on that data.
+<br /><br /><small><strong>Type-driven Development with Idris by Edwin Brady</strong></small></p>
+</blockquote>
+
+<p>What ways do we have to define those <em>descriptions</em>?</p>
+
+<h3 id="using-procedures">Using Procedures</h3>
+
+<p>Modelling a problem using procedures really means not modelling at all.
+However, this approach appears to be a practice amongst mobile developers.</p>
+
+<p>A model helps to reason about the problem and to build the path to solve it.
+Doing that procedurally means the goal is achieved solely via procedures. In such an approach, there is not a concrete nor explicit definition of the problem. The result is sufficient.</p>
+
+<h4 id="modeling-a-slideshow">Modeling a slideshow</h4>
+
+<p>Say we want to build a slideshow. A <code class="highlighter-rouge">Slideshow</code> is a list of <code class="highlighter-rouge">Slide</code>’s, and each
+slide contains a <code class="highlighter-rouge">title</code>, a <code class="highlighter-rouge">description</code>, and an <code class="highlighter-rouge">image</code>.</p>
+
+<p>Because we want to display the slideshow in a GUI, each slide should have a UI representation, where the layout and the visual properties of its fields are defined.</p>
+
+<p>The following is a procedural way to “model” this problem.</p>
+
+<script src="https://gist.github.com/NunoAlexandre/c36d7241e3b45d65d36a966aaa7ab893.js"></script>
+
+<p>To build a Slideshow, we’d then do:</p>
+
+<script src="https://gist.github.com/NunoAlexandre/b9d2213a3e177e5dcba44e01a6eae1fd.js"></script>
+
+<h5 id="problems">Problems</h5>
+
+<p>There a couple of problems with this approach:</p>
+
+<ul>
+  <li>there is no overview on what a <code class="highlighter-rouge">Slide</code> is</li>
+  <li>we are mixing shape and content</li>
+  <li>it’s tedious and error-prone to add, edit or reorder a slide, as each of its parts are spread</li>
+  <li>it’s impossible to create a slideshow dynamically</li>
+  <li>no flexibility due to missing dependency-injection</li>
+  <li>easy to have <strong>x</strong> titles, <strong>y</strong> descriptions, and <strong>z</strong> images and get away with it</li>
+</ul>
+
+<h3 id="using-types">Using Types</h3>
+
+<p>By using types, we solve all the problems we have in the procedural approach without trading off any advantage:</p>
+
+<script src="https://gist.github.com/NunoAlexandre/a1fe8e3bb291cec028de81e4bd21c025.js"></script>
+
+<p>To create this <code class="highlighter-rouge">Slideshow</code>, we do:</p>
+
+<script src="https://gist.github.com/NunoAlexandre/482adc37420b713b32bb665f3565dffc.js"></script>
+
+<h5 id="advantages">Advantages</h5>
+
+<ul>
+  <li>precise definition and overview of what a <code class="highlighter-rouge">Slide</code> <em>is</em> and what each one <em>contains</em></li>
+  <li>easy to add, edit, and reorder</li>
+  <li>a slideshow can now be built with data from any source, at compile or runtime</li>
+  <li>clear separation between shape and content, and between the concept and its UI representation</li>
+  <li>the compiler ensures each slide is correctly defined</li>
+</ul>
+:ET

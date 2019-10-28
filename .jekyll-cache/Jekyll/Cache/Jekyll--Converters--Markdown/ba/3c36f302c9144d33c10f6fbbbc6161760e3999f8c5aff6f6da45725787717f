@@ -1,0 +1,6 @@
+I"<p>I’ve used this pattern in a iOS project where a web page was to be loaded and the native app should handle javascript events. I encapsulated the “web page” into an EmbeddedWebApp object where the javascript&lt;&gt;native bridge was set. I had a factory class (client) where were defined the handled events/commands and their action upon the native side of the app. One of the events (command) was to request a camera capture, that needed to delegate the request to another object (receiver). Note the <em>Single Responsibility</em> principle and how important it is.</p>
+
+<p><img src="/images/command-pattern.png" /></p>
+
+<h6 id="image-credits-belong--to-heads-first-design-patterns-authors-rights">Image credits belong  to Heads First Design Patterns author’s rights.</h6>
+:ET

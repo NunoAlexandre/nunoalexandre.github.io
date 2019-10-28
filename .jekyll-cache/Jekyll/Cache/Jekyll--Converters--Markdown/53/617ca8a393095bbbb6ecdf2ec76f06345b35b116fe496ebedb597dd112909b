@@ -1,0 +1,4 @@
+I"ˆ<p>Refactoring is perhaps the most underappreciated task in software development. For me,
+it can be great fun and joyful to transform inedible code into an elegant &amp; maintainable code.
+In this blog post, I quickly share a small part of a significant refactoring I just completed, and how moving from callbacks to promises helped design a declarative and composable download pipeline.</p>
+:ET

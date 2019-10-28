@@ -1,0 +1,38 @@
+I"�<p>When I think of referential transparency, I think that one reference to something is transparent, this is, there are no hidden parts involved.</p>
+
+<p>In Haskell, a function only acts upon the arguments that were passed. It’s not possible that within a function you refer to something outside the function scope.</p>
+
+<h2 id="a-referential-transparency-example">A referential transparency example</h2>
+
+<p>In linguistic terms, you can think of referential transparency like this:</p>
+
+<p>“I am in the capital of Portugal” being the same than “I am in Lisbon”.</p>
+
+<p>This means that you can simply replace a function reference by its value while keeping the behaviour the same. For example, if you have a function such as:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">plusThree</span> <span class="o">::</span> <span class="kt">Num</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">plusThree</span> <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span></code></pre></figure>
+
+<p>Just liked I could replace ‘capital of Portugal’ with’ Lisbon’, I can either apply ‘plusThree’ (reference, maps to ‘capital of Portugal’ ) or the ‘value’ of that function, i.e, ‘(+3)’ (maps to ‘Lisbon’):</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="o">&gt;</span> <span class="n">plusThree</span> <span class="mi">4</span> <span class="o">==</span> <span class="p">(</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="mi">4</span>
+<span class="kt">True</span></code></pre></figure>
+
+<h2 id="example-without-referential-transparency">Example without referential transparency</h2>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//global variable whose value might change during execution </span>
+<span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+<span class="o">(</span><span class="err">…</span><span class="o">)</span>
+
+<span class="kt">int</span> <span class="nf">plusX</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+ <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>In such case you can not, theoretically, replace the method reference by its value, not only by syntactic issues but because plusX holds external references (that might change, who knows?), breaking referential transparency.</p>
+
+<p>If you, by chance, are not understanding the different between referential transparency and purity in Haskell context:</p>
+
+<p>For a function to be pure, it needs to be referentially transparent and have no side effects.</p>
+
+<p>(This is an adapted version of my answer on <a href="https://www.quora.com/What-is-the-significance-of-referential-transparency-in-Haskell/answer/Nuno-Alexandre-4">this question in Quora</a>)</p>
+:ET

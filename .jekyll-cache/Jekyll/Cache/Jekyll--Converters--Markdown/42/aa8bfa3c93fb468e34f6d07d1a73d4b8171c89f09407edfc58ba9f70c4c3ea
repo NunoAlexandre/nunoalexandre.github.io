@@ -1,0 +1,86 @@
+I"["<p><em>Delivering types from JSON like a Stork</em> is the tagline of my most recent pet project, <a href="https://github.com/NunoAlexandre/stork">Stork</a>.
+Stork is a lightweight library written in Swift 4.2 focused on making the flight from JSON to Types as smooth as possible. 
+Stork believes in simplicity, explicitness, and control.</p>
+
+<p>Based on functional programming principles and mildly inspired in Aeson, Stork is the middle sweet between JSON parsers such as Argo - full-fledged but requiring extra dependencies, learning too many operators, and too functional for some - and other parsers that require your types to be mutable, to throw on init, or that take the control away from you by making too many assumptions.</p>
+
+<h4 id="links">Links</h4>
+
+<ul>
+  <li><a href="https://github.com/NunoAlexandre/Stork" target="_blank">Stork on Github</a></li>
+  <li><a href="#how-it-works">How it works</a></li>
+  <li><a href="#considerations">Considerations</a></li>
+  <li><a href="#why">Why</a></li>
+</ul>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>To go from JSON to types, all you need to do is to state what fields you want to parse. Stork infers their type and parses them for you. To make that possible, your types must follow the <code class="highlighter-rouge">FromJson</code> protocol.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">protocol</span> <span class="kt">FromJson</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="kd">func</span> <span class="nf">from</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">JsonValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span><span class="p">?</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>In practice, this means that for a type to be parseable from JSON, it needs to provide a way of being constructed from a <a href="https://github.com/NunoAlexandre/stork/blob/master/Stork/Stork/Source/JsonValue.swift">JsonValue</a>: <code class="highlighter-rouge">string</code>, <code class="highlighter-rouge">number</code>, <code class="highlighter-rouge">bool</code>, <code class="highlighter-rouge">JSON</code>/<code class="highlighter-rouge">[String: Any]</code>, or <code class="highlighter-rouge">[JsonValue]</code>.</p>
+
+<h3 id="api">API</h3>
+
+<p>Suppose you have a type <code class="highlighter-rouge">User</code> already complying to <code class="highlighter-rouge">FromJson</code>.</p>
+
+<p>You can get Stork to parse you a <code class="highlighter-rouge">User</code> or an array of <code class="highlighter-rouge">User</code>s as follows:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// Single User</span>
+<span class="k">let</span> <span class="nv">maybeUser</span><span class="p">:</span> <span class="kt">User</span><span class="p">?</span> <span class="o">=</span> <span class="kt">User</span><span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="n">userJSON</span><span class="p">)</span>
+
+<span class="c1">// Array of User's</span>
+<span class="k">let</span> <span class="nv">users</span><span class="p">:</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="nv">jsonArray</span><span class="p">:</span> <span class="n">usersJSON</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="operators">Operators</h3>
+
+<p>Stork provides only 4 infix operators to extract and parse a value from a JSON object:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">infix</span> <span class="k">operator</span> <span class="o">.</span><span class="p">?</span>   <span class="c1">// Maybe get a scalar or custom type</span>
+<span class="k">infix</span> <span class="k">operator</span> <span class="o">.!</span>   <span class="c1">// Same as .? but expects the value to be present</span>
+<span class="k">infix</span> <span class="k">operator</span> <span class="o">..</span><span class="p">?</span>  <span class="c1">// Maybe get an array of scalar or custom types</span>
+<span class="k">infix</span> <span class="k">operator</span> <span class="o">..!</span>  <span class="c1">// Same as ..? but expects the array to be present</span></code></pre></figure>
+
+<p>All of these operators share the same arguments: <code class="highlighter-rouge">(json: JSON, key: String)</code>.</p>
+
+<h3 id="in-action">In Action</h3>
+
+<p>Say that we want to parse <code class="highlighter-rouge">User</code>s from some JSON input, where <code class="highlighter-rouge">User</code> and its nested types are defined as follows:</p>
+
+<script src="https://gist.github.com/NunoAlexandre/43644efec05ddf2061299eeac55ca9e1.js"></script>
+
+<p>With Stork, to go from JSON to this model all we need to do is to have these types complying to the <code class="highlighter-rouge">FromJson</code> protocol.</p>
+
+<script src="https://gist.github.com/NunoAlexandre/05515eff0524a7ec98669df118880dbb.js"></script>
+
+<h2 id="considerations">Considerations</h2>
+
+<p>Note that failing to extract a required field or failing to parse it to the desired, inferred type, causes Stork to internally fail with an exception, which gets translated into an <em>Optional</em> for you. That might be inconvenient as it gives you no clue as to what field caused Stork to fail to parse.</p>
+
+<p>As I started using <code class="highlighter-rouge">Stork</code> in my own production projects at <a href="https://itunes.apple.com/us/app/kidiyo-spelen-leren/id1296241552?mt=8" target="_blank">Kidiyo</a>, my workaround this current behaviour is to write unit/integration tests that verify all the requirements and specifications for all edge cases. As long as the schema - and its variants - of the JSON at hand is well-defined, this should not set you back.</p>
+
+<h2 id="why">Why</h2>
+
+<p>First and foremost, I needed to be able to parse nested types and having worked with proper and well-designed JSON parsers such as <a href="http://hackage.haskell.org/package/aeson">Aeson</a>, this sad approach was a no-go to me:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">guard</span> <span class="k">let</span> <span class="nv">title</span> <span class="o">=</span> <span class="n">jsonArray</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">"title"</span><span class="p">]</span> <span class="k">as?</span> <span class="kt">String</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span> </code></pre></figure>
+
+<p>Therefore, I looked into Swift JSON parsers that seemed to get some attention from the iOS community, such as Argo, Gloss, Unbox, and a few others.
+Argo was clearly - and admittedly - inspired in Aeson (a good thing), but required extra dependencies (a bad thing), so I left it for later as I wanted to see what the other two had to offer. So I tried to make my types parseable using Gloss and Unbox, and I wasn’t happy with the experience. Far from me to be cynical about those projects, but the reality is that I felt impotent using those two libraries. More specifically, the issues I found were:</p>
+
+<ul>
+  <li>a transversal assumption that you always only want to build a type from a JSON object and not from a string, number, boolean or array of values;</li>
+  <li>a transversal assumption that RawRepresentable Enum’s must be a direct map from my their JSON counterpart;</li>
+  <li>no compile-time guarantees that a (nested) type is parseable, i.e., that it complies to the required protocol to make it so.</li>
+</ul>
+
+<p>At this point, I thought it was fun to write my own parser and see what kind of problems I would face myself. Although Stork is somewhat similar to Argo in design, I intentionally decided not to check how Argo worked, neither externally nor internally, until I had reached <a href="https://github.com/NunoAlexandre/stork/commit/d58f9bc980ad7905fd5ecbd63748835a7823a9c5">Stork’s first working version</a>.</p>
+
+<p>Inspired in Aeson, my idea with Stork was to speak to the community that it targets, where currying and a bazillion of functional operators is <em>not</em> common language.</p>
+
+<p>Finally, I named it <code class="highlighter-rouge">Stork</code> as that was my daughter’s first toy and because I liked the metaphor of having a stork delivering types to those expecting it.</p>
+
+:ET

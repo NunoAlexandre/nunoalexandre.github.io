@@ -1,0 +1,88 @@
+I"�<p>Despite modern opinions, thinking that having no plan and merely living by the day is equivalent to freedom is a dangerous fallacy to hold on to. Freer is the man who chooses to walk from east to west than the man who happens to. Freer is the developer who takes the lead on their own journey than the one who is carried around like a bottle in the ocean.</p>
+
+<p>I am a big fan of the philosophical topic “Positive vs Negative Freedom”. The Stanford Encyclopedia of Philosophy describes it as:</p>
+
+<blockquote>
+  <p>Negative liberty is the absence of obstacles, barriers or constraints. One has the negative freedom to the extent that actions are available to one in this negative sense. Positive liberty is the possibility of acting — or the fact of acting — in such a way as to take control of one’s life and realise one’s fundamental purposes.</p>
+</blockquote>
+
+<p>Put in other words, being a free developer is not about finding the <em>perfect</em> job and have no difficulties to face whatsoever. It is, instead, about developing such a character that allows one to set and pursue a path while dealing with and getting enriched by external obstacles.</p>
+
+<h3 id="why">Why</h3>
+
+<p>The question is fair: why should I set and pursue such a path? Why not just follow whatever pops as interesting?</p>
+
+<p>In case you don’t care much about your career, you probably think it’s pointless to keep reading. I’d say this is especially important for you.</p>
+
+<h3 id="1-track-progress">1. Track progress</h3>
+
+<p>Imagine a sprint without a goal, or even without any overall set of essential tasks to be done in the next two or three weeks. How can one judge the progress and success of such sprint? One can’t.</p>
+
+<p>By having a set of concrete milestones you want to pass through, you will be able to look back at your year and judge how far you got.</p>
+
+<p>You can also see it from another angle. Having such a plan will allow you to identify periods of regression or of flat failure.</p>
+
+<p>Being able to track your failures or regressions is not a minor thing. You will start to see which roads are dead-ends or bottlenecks for you and you will learn incredible amounts about yourself and your limitations. It opens the door for improvement, for polishing yourself or maybe even your plan, something that would hardly happen if you have no set path at all.</p>
+
+<h3 id="2-focus">2. Focus</h3>
+
+<p>When you define your path, a set of values and interests will emerge, either implicitly or explicitly. These are the backbone of how you see and want to look at yourself progressing through the years as a professional.</p>
+
+<p>By committing to them, you will be equipped with a sort of moral compass that will guide you through times of distraction and temptation. For instance, once you define the goal of becoming a Haskell developer, then <em>those</em> Linkedin messages offering you a job using the latest new shiny JS flavour or working with the same old Java for more money are nothing more than distractions of a superfluous nature.</p>
+
+<p>You will be able to say <strong>no</strong> because you now know what it is that you want and value and what is not. Moreover, when you find yourself in a dead end, you will have the capacity to judge alternative paths that you have predicated without losing it all and sell your soul.</p>
+
+<h3 id="3-self-control">3. Self-control</h3>
+
+<p>Something I never understood was seeing developers willing being assets of recruiting companies. Literally, you are a like a rentable hammer used where, when and by whom it happens to be. You go where they tell you to go. You sell your soul and make yourself deprived of control over the journey you take.</p>
+
+<p>Lack of control is agreed to be one of the most significant causes of stress in one life and career. Being complacent about it is giving away not just your job but potentially your health as well.</p>
+
+<p>I don’t mean to sound judgy, and I definitely don’t think that’s my position. In many other industries, complying with such a structure of recruitment companies is almost necessary if you want to at least have a job that provides with enough money to pay for your rent. That is not the case in our industry, though.</p>
+
+<p>Having a plan will grant you a purposeful attitude and view about yourself and your journey ahead, which will make you respect and value yourself and the decisions you have to make. Having someone else (or the mere chance) doing it for you becomes naturally unacceptable.</p>
+
+<h2 id="setting-a-path">Setting a path</h2>
+
+<p>When I was at university, I knew there were a couple of things I absolutely wanted to work on. It was something like the following list:</p>
+
+<ul>
+  <li>Develop a mobile app</li>
+  <li>Develop a web app</li>
+  <li>Work on distributed systems</li>
+  <li>Have an active role in the design of the software I’d be building</li>
+  <li>Find a meaningful job</li>
+  <li>Seek a healthy work-life balance</li>
+</ul>
+
+<p>You see that this simple plan was somewhat broad, but it set boundaries and implied some principles and values:</p>
+
+<ul>
+  <li>I wanted to try different sectors of software development</li>
+  <li>I didn’t want to be stuck in one place and within one technology</li>
+  <li>Find a good environment and meaningful projects was more important than finding the most ~boring~ well paying job</li>
+  <li>I would not work for companies with a vision and mission I didn’t identify myself with</li>
+  <li>I wanted to learn more about the high-level side of software developing and have space to have influence</li>
+  <li>Meaningful work was vital to me. Just sit in front of a screen from 9 to 5 wouldn’t do it.</li>
+</ul>
+
+<p>By the time I set this path, I had been doing web design for a while as a side job. I knew I wanted and needed more.</p>
+
+<p>When I became an actual professional software developer, I quickly started ticking my list.</p>
+
+<p>My very first professional project in The Netherlands was the <a href="https://itunes.apple.com/nl/app/nieuwspoort/id498033973?mt=8">Nieuwspoort app</a>, followed by several web applications. After a few years of working on web development - using several technologies but mostly Java - I had to revise my path. I would either dive in to either React/Angular/you name it or follow what seemed to be a much better long-term investment. Learn functional programming in Haskell. Also, I knew that soon enough I wanted to stop doing Java cold-turkey for at least a year.</p>
+
+<p>When I committed to start learning Haskell, I remember explaining to my wife that it was not about finding a job using it but about pushing me out of a comfortable zone and expand my brain.</p>
+
+<p>During that period I received several job offers that promised a much shorter term and big reward. Having set a path was fundamental to not let myself fall into that trap.</p>
+
+<p>One year and a half later I was becoming a <a href="/2017/07/13/happy-Haskell-developer">happy Haskell developer</a>.</p>
+
+<p>I define and tune the path I set for myself based on what I find to be fundamentally interesting, challenging and aligned with my values. Sometimes I learn that I was wrong about some of those conclusions, but that as well is an advantage of this approach.</p>
+
+<p>A final tip I leave is to not share your path with many people. Doing so will give you the wrong feeling that you had taken concrete steps to achieve it when you actually didn’t. Watch <a href="https://www.youtube.com/watch?v=mKdm5xSZiOA">Why You Shouldn’t Tell People About Your Goals</a> for more on this topic.</p>
+
+<p>Take control, endure through tricky times, don’t be afraid of asking, and enjoy your journey!</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Dap3GM6-luU?start=10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+:ET

@@ -1,0 +1,157 @@
+I"�1<p>Monads were not the easiest concept for me to fully understand. 
+There are endless QAs and tutorials about Monads and each one adds something more. 
+And then I released that Monad is actually a design pattern and it all made sense.</p>
+
+<h2 id="to-learn-about-monads">To Learn About Monads</h2>
+
+<p>These two videos below are great resources to understand what Monads are and why they are useful.
+Although I’m going to add my breadcrumb on this more below, I might not be of a better help than to listen to these talks.</p>
+
+<h3 id="monads-to-the-rescue">Monads To The Rescue</h3>
+
+<p>While following the online course <a href="https://www.futurelearn.com/courses/functional-programming-haskell/">Functional Programming in Haskell @ FutureLearn</a>, I’ve got to know about <a href="http://www.codemiller.com">Katie Miller</a> and her great talk about Monads.</p>
+
+<p>So far, this has been the best talk about Monads I listen to, so it’s my first suggestion if you want to get into it. Katie also explains it brilliantly with Java code and way of thinking.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MlZCiiKGbb0" frameborder="0" allowfullscreen=""></iframe>
+
+<h3 id="dont-fear-the-monad">Don’t Fear the Monad</h3>
+
+<p>I also enjoyed a great deal to watch this explanation from <a href="https://www.linkedin.com/in/brianbeckman">Brian Beckman</a>. Brian kept my attention by his efforts in making the object of his explanation look simple and to avoid the overwhelming feeling win.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZhuHCtR3xq8" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="me-and-the-monad">Me and the Monad</h2>
+
+<p>I was firstly introduced to Monads during a University course on Haskell, where they are vastly used.</p>
+
+<p>I was enjoying the language a great deal… and then Monads showed up. <br />
+<em>Every good thing comes to an end</em>, I thought.</p>
+
+<p>I was wrong.</p>
+
+<p>When I went back to learn Haskell more seriously, I was curious to face Monads again.
+I was very eager to understand them as I thought that would mean I had some special skill and I started creating a really messy image of it in my mind. 
+I had a lot of unrelated ways to explain it but slowly it started getting clearer and less scary.</p>
+
+<h3 id="getting-an-idea">Getting an idea</h3>
+
+<p>Wikipedia says:</p>
+
+<blockquote>In functional programming, monads are a way to build computer programs by joining simple components in predictable and robust ways.</blockquote>
+
+<p>So, this is interesting as it brings some key points. 
+A Monad is a design pattern that consists of allowing complex computation to be built by composing very simple components in an explicit and controlled manner. Some say that Monads are <strong><em>the</em></strong> way of achieving it.</p>
+
+<p>I like to think of Monad as a container:</p>
+
+<ol>
+  <li>Each Monad type is a special type of container</li>
+  <li>that defines a specific rule for interaction,</li>
+  <li>And each type of container holds values of any type.</li>
+</ol>
+
+<p>The <em>rule</em> defines that every interaction with the container is passed to and is handled by and within the container and its output never come out of the container.</p>
+
+<p><small>
+[ If you know about <a href="http://docker.com">Docker</a> containers this behaviour might sound familiar ]
+</small></p>
+
+<p>If we were to stop here, we would actually be talking about <a href="https://www.quora.com/What-is-the-difference-between-monoid-and-monad">Monoids</a>.</p>
+
+<h4 id="a-simple-example">A simple example</h4>
+
+<p>From what has been said above, a simple example to visualize these concepts is to think of a clock.</p>
+
+<p>A clock has hours, which are a collection of numbers from 0 to 12.
+If we think a clock as such a container, the interaction rule to interact with the hours of a clock is that at the end of the interaction, the hours of the clock remain within the 0..12 range. (mod 12)</p>
+
+<h3 id="so-what-is-actually-a-monad">So what is actually a Monad</h3>
+
+<p>The Monad Class declaration, in Haskell, gives us a pretty neat high-level view of what’s involved:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">class</span>  <span class="kt">Monad</span> <span class="n">m</span>  <span class="kr">where</span>
+   <span class="n">return</span>           <span class="o">::</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">m</span> <span class="n">a</span>
+   <span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span>            <span class="o">::</span> <span class="n">m</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">m</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">m</span> <span class="n">b</span></code></pre></figure>
+
+<p>Think of the lower <code class="highlighter-rouge">m</code> has a specific type of container, and of <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> has data types.</p>
+
+<p>Having that in mind, what we have is that for something to be a Monad, <code class="highlighter-rouge">m</code>, it must define the following <strong>two operations</strong> as they are intended:</p>
+
+<p><strong>First - <code class="highlighter-rouge">return</code></strong> (nothing to do with the <em>return</em> keyword you are used to)</p>
+
+<p><code class="highlighter-rouge">return</code>, also called <code class="highlighter-rouge">unit</code>, states that given a value of type <code class="highlighter-rouge">a</code>, that value is placed within the specific container <code class="highlighter-rouge">m</code>.</p>
+
+<p>Imagine the Monad being a plate. The <code class="highlighter-rouge">return</code> function-to-be defines that given any kind of food, it will return a plate with that piece of food in it (called the <em>minimal context</em>).</p>
+
+<p><strong>Second - <code class="highlighter-rouge">(&gt;&gt;=)</code></strong> (similar to a shell pipe)</p>
+
+<ul>
+  <li><code class="highlighter-rouge">(&gt;&gt;=)</code>, also called <code class="highlighter-rouge">bind</code>, as the role of binding computation. This is where the idea of building complexity using simple blocks takes place.</li>
+</ul>
+
+<p>This function-to-be defines that given gives two arguments, outputs a container of the same type holding a value of any type (maybe the same, <code class="highlighter-rouge">a</code>, or not).</p>
+
+<p>Now, those two arguments are:</p>
+
+<ol>
+  <li>A Monad <code class="highlighter-rouge">m a</code>, this is, a specific type of container holding a value of type <code class="highlighter-rouge">a</code>.</li>
+  <li>A function that receives a value of that same type <code class="highlighter-rouge">a</code> and returns a container of the same type received in the first argument, holding a value of any type (maybe the same, <code class="highlighter-rouge">a</code>, or not).</li>
+</ol>
+
+<p>But it’s not over yet. <br />
+This two rules must be enough to fullfill the following <strong>three (monadic) laws</strong>:</p>
+
+<ul>
+  <li><strong>Left identity</strong>:   <code class="highlighter-rouge">return a &gt;&gt;= f</code>  <strong>≡</strong>  <code class="highlighter-rouge">f a</code><br /></li>
+  <li><strong>Right identity</strong>:  <code class="highlighter-rouge">m &gt;&gt;= return</code>  <strong>≡</strong>  <code class="highlighter-rouge">m</code><br /></li>
+  <li><strong>Associativity</strong>: <code class="highlighter-rouge">(m &gt;&gt;= f) &gt;&gt;= g</code>  <strong>≡</strong>  <code class="highlighter-rouge">m &gt;&gt;= (\x -&gt; f x &gt;&gt;= g)</code><br /></li>
+</ul>
+
+<p>And that’s it. It might be scary at first, but it’s actually simple and it’s great to be able to think of code in terms of mathematics.</p>
+
+<h2 id="maybe-monad">Maybe Monad</h2>
+
+<p>A very known Monad is the <code class="highlighter-rouge">Maybe</code> Monad. (Optional in Java, Option in Scala, etc)</p>
+
+<p>It is defined as follows in Haskell:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Maybe</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Just</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">Nothing</span></code></pre></figure>
+
+<p>And the Monadic rules for the <code class="highlighter-rouge">Maybe</code> Monad are implemented as follows:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">return</span> <span class="o">::</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="n">a</span>
+<span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">Just</span> <span class="n">x</span>
+
+<span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="n">b</span>
+<span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="kt">Nothing</span>  <span class="n">g</span> <span class="o">=</span> <span class="kt">Nothing</span>
+<span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="p">(</span><span class="kt">Just</span> <span class="n">x</span><span class="p">)</span> <span class="n">g</span> <span class="o">=</span> <span class="n">g</span> <span class="n">x</span></code></pre></figure>
+
+<h3 id="building-a-family-tree-with-the-maybe-monad">Building a Family Tree with the Maybe Monad</h3>
+
+<p>This next example is presented in the <a href="https://en.wikibooks.org/wiki/Haskell/Understanding_monads">Understanding Monads</a> guide.</p>
+
+<p>To build a family tree - from the 20th century - we need to find the mother or/and the father of a concrete Person.
+But it’s not certain that the mother or the father of a person X will be found, so it’s a Maybe.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">father</span> <span class="o">::</span> <span class="kt">Person</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="kt">Person</span>
+<span class="n">mother</span> <span class="o">::</span> <span class="kt">Person</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="kt">Person</span></code></pre></figure>
+
+<p>With the Maybe Monad we can find the maternal grandfather like this:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">maternalGrandfather</span> <span class="o">::</span> <span class="kt">Person</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="kt">Person</span>
+<span class="n">maternalGrandfather</span> <span class="n">p</span> <span class="o">=</span> <span class="kr">do</span>
+   <span class="kr">case</span> <span class="n">mother</span> <span class="n">p</span> <span class="kr">of</span>
+      <span class="kt">Nothing</span> <span class="o">-&gt;</span> <span class="kt">Nothing</span>
+      <span class="kt">Just</span> <span class="n">psMother</span> <span class="o">-&gt;</span> <span class="n">father</span> <span class="n">psMother</span></code></pre></figure>
+
+<p>Fair enough.<br /> 
+But using the monadic pure syntax this can be written as:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">maternalGrandfather</span> <span class="o">::</span> <span class="kt">Person</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="kt">Person</span>
+<span class="n">maternalGrandfather</span> <span class="o">=</span> <span class="p">(</span><span class="n">mother</span> <span class="o">&gt;&gt;=</span> <span class="n">father</span><span class="p">)</span></code></pre></figure>
+
+<p>Very clean, super expressive and no need for dirty step by step process with assignments and if-else’s or switch cases.</p>
+
+<p>This gives a tiny clue of how powerful Monads are for building complex computation with very simple parts in a controlled manner, which is precisely how complexity is better built and maintainable.</p>
+:ET

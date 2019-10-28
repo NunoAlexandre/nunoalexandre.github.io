@@ -1,0 +1,493 @@
+I"��<p>Does size matter? It does and the conclusion is pretty clear: smaller is better. Small is beautiful.</p>
+
+<div>
+<iframe src="https://www.youtube.com/embed/B3b4tremI5o?ecver=2" width="500" height="275" allowfullscreen=""></iframe>
+</div>
+
+<p>Uncle Bob says that the only way to keep a continuous, long-term good pace is by keeping the code clean.
+And I believe the best way to keep the code clean and maintainable is by keeping it small.</p>
+
+<p>What do I mean my small? Well, by smaller I don’t necessarily mean fewer lines.
+I rather have 3 understandable lines of code to deal with than a long and squeezed one.</p>
+
+<p>Having that said, what I am really for is to keep <em>whatever it is</em> (classes, modules, functions, interfaces, etc) with a single, well-defined domain of concern.</p>
+
+<p>Classes with more than 100 lines and methods with more than 4 are, most likely, doing more than they should.
+They are concerned with more than one domain and that makes them difficult to maintain.
+They are shallow, difficult to test and don’t fit in our heads.</p>
+
+<p>On the contrary, small parts with a single responsibility are far more easy to maintain, to compose and to test.</p>
+
+<p>We want our code to require as low cognitive weight as possible, to fit in a small screen and to have people feeling comfortable to change.</p>
+
+<h3 id="getting-small">Getting Small</h3>
+
+<p>A while ago I was helping this friend improving his code.
+He needed to write this piece of code that would fetch certain types of content from a remote server.</p>
+
+<p>When I first looked at it, it looked something as you see below.
+Things got a bit too big, making it difficult to do <em>anything</em> with it.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImporterBasicUtils</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Log</span> <span class="no">LOGGER</span> <span class="o">=</span> <span class="nc">LogFactoryUtil</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="nc">ImporterBasicUtils</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">checkServerIsOnline</span><span class="o">(</span><span class="nc">ServiceContext</span> <span class="n">serviceContext</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">online</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">connectionTimeout</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">connectionTimeout</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"connectTimeout"</span><span class="o">));</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NumberFormatException</span> <span class="n">nfe</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Connection timeout setting not a number? "</span> <span class="o">+</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"connectTimeout"</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Checking source availability"</span><span class="o">);</span>
+            <span class="no">URL</span> <span class="n">sourceSystem</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"sourceSystem"</span><span class="o">));</span>
+
+            <span class="nc">HttpURLConnection</span> <span class="n">huc</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">sourceSystem</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+            <span class="n">huc</span><span class="o">.</span><span class="na">setConnectTimeout</span><span class="o">(</span><span class="n">connectionTimeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
+            <span class="n">huc</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+            <span class="n">huc</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">huc</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">200</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">online</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"No 200 response from source system."</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Successfully found source, response code 200"</span><span class="o">);</span>
+                <span class="n">online</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">MalformedURLException</span> <span class="n">murle</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"MalformedURLException with: "</span> <span class="o">+</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"sourceSystem"</span><span class="o">),</span> <span class="n">murle</span><span class="o">);</span>
+            <span class="n">online</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ProtocolException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Something's wrong with the protocol for the sourceSystem connection"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="n">online</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"IOException from the sourceSystem: "</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="n">online</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">online</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">UserSoap</span> <span class="nf">getUserFromSource</span><span class="o">(</span><span class="nc">String</span> <span class="n">userCode</span><span class="o">,</span> <span class="nc">ServiceContext</span> <span class="n">serviceContext</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">userServiceURLString</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">sourceSystemUrlStart</span> <span class="o">=</span> <span class="n">getSourceSystemUrlStartClean</span><span class="o">(</span><span class="n">serviceContext</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">sourceSystemUsername</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"sourceSystemUsername"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">sourceSystemEncryptedPassword</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"sourceSystemEncryptedPassword"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">decryptKey</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">serviceContext</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"decryptKey"</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">retryCounter</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">retryTimeout</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="nc">UserSoap</span> <span class="n">user</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">retryCounter</span> <span class="o">=</span> <span class="n">getAttributeInt</span><span class="o">(</span><span class="n">serviceContext</span><span class="o">,</span> <span class="s">"retries"</span><span class="o">);</span>
+        <span class="n">retryTimeout</span> <span class="o">=</span> <span class="n">getAttributeLong</span><span class="o">(</span><span class="n">serviceContext</span><span class="o">,</span> <span class="s">"retryTimeout"</span><span class="o">);</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">userServiceURLString</span> <span class="o">=</span> <span class="n">sourceSystemUrlStart</span> <span class="o">+</span> <span class="s">"/user-portlet/api/user-service"</span><span class="o">;</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Contacting URL: "</span> <span class="o">+</span> <span class="n">userServiceURLString</span><span class="o">);</span>
+            <span class="no">URL</span> <span class="n">userServiceURL</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="n">userServiceURLString</span><span class="o">);</span>
+
+            <span class="nc">UserServiceSoapServiceLocator</span> <span class="n">locatorUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserServiceSoapServiceLocator</span><span class="o">();</span>
+            <span class="nc">UserServiceSoap</span> <span class="n">userServiceSoap</span> <span class="o">=</span> <span class="n">locatorUser</span><span class="o">.</span><span class="na">getUserService</span><span class="o">(</span><span class="n">userServiceURL</span><span class="o">);</span>
+            <span class="o">((</span><span class="nc">UserServiceSoapBindingStub</span><span class="o">)</span> <span class="n">userServiceSoap</span><span class="o">).</span><span class="na">setUsername</span><span class="o">(</span><span class="n">sourceSystemUsername</span><span class="o">);</span>
+            <span class="o">((</span><span class="nc">UserServiceSoapBindingStub</span><span class="o">)</span> <span class="n">userServiceSoap</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="nc">CryptoUtils</span><span class="o">.</span><span class="na">cryptoString</span><span class="o">(</span><span class="n">sourceSystemEncryptedPassword</span><span class="o">,</span> <span class="n">decryptKey</span><span class="o">,</span> <span class="s">"decrypt"</span><span class="o">));</span>
+
+            <span class="nc">UserSoap</span><span class="o">[]</span> <span class="n">users</span> <span class="o">=</span> <span class="n">userServiceSoap</span><span class="o">.</span><span class="na">getUsersByCode</span><span class="o">(</span><span class="n">userCode</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">users</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"No users returned, ignoring "</span> <span class="o">+</span> <span class="n">userCode</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">users</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">MalformedURLException</span> <span class="n">mue</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"MalformedURLException with: "</span> <span class="o">+</span> <span class="n">userServiceURLString</span><span class="o">);</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="n">mue</span><span class="o">.</span><span class="na">getStackTrace</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ServiceException</span> <span class="n">se</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Failed getting a service"</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">retryCounter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Re-attempting this operation, remaining re-tries are: "</span> <span class="o">+</span> <span class="n">retryCounter</span><span class="o">);</span>
+                <span class="n">pauseTimer</span><span class="o">(</span><span class="n">retryTimeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
+                <span class="n">serviceContext</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"retries"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">retryCounter</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">getUserFromSource</span><span class="o">(</span><span class="n">userCode</span><span class="o">,</span> <span class="n">serviceContext</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Retried enough times, halting."</span><span class="o">,</span> <span class="n">se</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">RemoteException</span> <span class="n">re</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Something failed remotely"</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">retryCounter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Re-attempting this operation, remaining re-tries are: "</span> <span class="o">+</span> <span class="n">retryCounter</span><span class="o">);</span>
+                <span class="n">pauseTimer</span><span class="o">(</span><span class="n">retryTimeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
+                <span class="n">serviceContext</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"retries"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">retryCounter</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">getUserFromSource</span><span class="o">(</span><span class="n">userCode</span><span class="o">,</span> <span class="n">serviceContext</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Exhausted number of re-tries, giving up"</span><span class="o">,</span> <span class="n">re</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">user</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>There were a couple of things that had their own domain here:</p>
+
+<ol>
+  <li>Checking if a server is reachable</li>
+  <li>Make requests to the source server</li>
+  <li>Fault-tolerance - retry request n times before giving up</li>
+</ol>
+
+<p><small><em>There were a few more, which I worked on, but I am focusing on this ones for the sake of simplicity.
+</em></small></p>
+
+<h3 id="1-checking-if-a-server-is-reachable">1. Checking if a server is reachable</h3>
+
+<p>I wrapped this logic as being a <code class="highlighter-rouge">Ping</code>:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Ping</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="no">URL</span> <span class="n">url</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">timeoutInMilliseconds</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Ping</span><span class="o">(</span><span class="kd">final</span> <span class="no">URL</span> <span class="n">url</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">timeoutInSeconds</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">timeoutInMilliseconds</span> <span class="o">=</span> <span class="n">timeoutInSeconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">didSucceed</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">successful</span><span class="o">(</span><span class="n">ping</span><span class="o">())).</span><span class="na">map</span><span class="o">(</span><span class="nl">Boolean:</span><span class="o">:</span><span class="n">booleanValue</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Boolean</span> <span class="nf">successful</span><span class="o">(</span><span class="nc">HttpURLConnection</span> <span class="n">connection</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">()</span> <span class="o">==</span> <span class="mi">200</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">HttpURLConnection</span> <span class="nf">ping</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+      <span class="nc">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+      <span class="n">connection</span><span class="o">.</span><span class="na">setConnectTimeout</span><span class="o">(</span><span class="n">timeoutInMilliseconds</span><span class="o">);</span>
+      <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+      <span class="n">connection</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+      <span class="k">return</span> <span class="n">connection</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="2-make-requests-to-the-source-server">2. Make requests to the source server</h3>
+
+<p>Here I am only including the method that was fetching users, but there were other methods to fetch other entities. These other fetching methods were pretty much a copy of each other, changing only in what was really necessary.
+This is not surprising as big code becomes scary to analyze and to improve.</p>
+
+<p>Furthermore, the soap services returned either null, an exception or, by last, the expected value - which I didn’t want to work with directly.</p>
+
+<p>In the end, there were two cases that matter: the happy path - where the value was fetched successfully - or the failure (no value) one, which was fine enough to happen as long as it as logged.</p>
+
+<p>My approach was, therefore, to create a <code class="highlighter-rouge">Service</code> for each of these entities and then wrap them using the <code class="highlighter-rouge">Facade</code> pattern.</p>
+
+<p>Like this, I could wrap the bad bits of these soap services and make it bearable within the project I had to manage.</p>
+
+<p>The <code class="highlighter-rouge">Service</code> to fetch Users looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="kd">final</span> <span class="kd">class</span> <span class="nc">SourceUserService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserServiceSoap</span> <span class="n">service</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">serviceURI</span> <span class="o">=</span> <span class="s">"/user-portlet/api/user-service"</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SourceUserService</span><span class="o">(</span><span class="kd">final</span> <span class="nc">SourceSettings</span> <span class="n">settings</span><span class="o">)</span>
+                                <span class="kd">throws</span> <span class="nc">MalformedURLException</span><span class="o">,</span> <span class="nc">ServiceException</span> <span class="o">{</span>
+        <span class="no">URL</span> <span class="n">serviceURL</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="n">settings</span><span class="o">.</span><span class="na">hostname</span><span class="o">()</span> <span class="o">+</span> <span class="n">serviceURI</span><span class="o">);</span>
+        <span class="nc">UserServiceSoapServiceLocator</span> <span class="n">locatorUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserServiceSoapServiceLocator</span><span class="o">();</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">locatorUser</span><span class="o">.</span><span class="na">getUserService</span><span class="o">(</span><span class="n">serviceURL</span><span class="o">);</span>
+        <span class="o">((</span><span class="nc">UserServiceSoapBindingStub</span><span class="o">)</span> <span class="n">service</span><span class="o">).</span><span class="na">setUsername</span><span class="o">(</span><span class="n">settings</span><span class="o">.</span><span class="na">username</span><span class="o">());</span>
+        <span class="o">((</span><span class="nc">UserServiceSoapBindingStub</span><span class="o">)</span> <span class="n">service</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="nc">CryptoUtils</span><span class="o">.</span><span class="na">cryptoString</span><span class="o">(</span><span class="n">settings</span><span class="o">.</span><span class="na">encryptedPassword</span><span class="o">(),</span>
+                    <span class="n">settings</span><span class="o">.</span><span class="na">decryptKey</span><span class="o">(),</span> <span class="s">"decrypt"</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">UserSoap</span> <span class="nf">getUserByCode</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">code</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">RemoteException</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">UserSoap</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">service</span><span class="o">.</span><span class="na">getUsersByCode</span><span class="o">(</span><span class="n">code</span><span class="o">));</span>
+        <span class="k">return</span> <span class="n">users</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">users</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>   
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>And the Facade looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">SimpleSourceAssetsFacade</span> <span class="kd">implements</span> <span class="nc">SourceAssetsFacade</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">SourceUserService</span> <span class="n">userService</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">SourceSettings</span> <span class="n">settings</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">FaultTolerantAttempt</span> <span class="n">attempt</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Log</span> <span class="no">LOG</span> <span class="o">=</span> <span class="nc">LogFactoryUtil</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="nc">SimpleSourceAssetsFacade</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+  <span class="kd">public</span> <span class="nf">SimpleSourceAssetsFacade</span><span class="o">(</span><span class="kd">final</span> <span class="nc">SourceSettings</span> <span class="n">settings</span><span class="o">)</span>
+                                <span class="kd">throws</span> <span class="nc">MalformedURLException</span><span class="o">,</span> <span class="nc">ServiceException</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">settings</span> <span class="o">=</span> <span class="n">settings</span><span class="o">;</span>
+      <span class="n">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SourceUserService</span><span class="o">(</span><span class="n">settings</span><span class="o">);</span>
+      <span class="n">attempt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FaultTolerantAttempt</span><span class="o">(</span><span class="n">settings</span><span class="o">.</span><span class="na">retryTimeout</span><span class="o">(),</span> <span class="n">settings</span><span class="o">.</span><span class="na">retries</span><span class="o">());</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">isAvailable</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">Ping</span><span class="o">(</span><span class="n">settings</span><span class="o">.</span><span class="na">hostURL</span><span class="o">(),</span> <span class="n">settings</span><span class="o">.</span><span class="na">connectionTimeout</span><span class="o">()).</span><span class="na">didSucceed</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">UserSoap</span><span class="o">&gt;</span> <span class="nf">userByCode</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">code</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">attempt</span><span class="o">.</span><span class="na">to</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">userService</span><span class="o">.</span><span class="na">getUserByCode</span><span class="o">(</span><span class="n">code</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="3-fault-tolerance">3. Fault-tolerance</h3>
+
+<p>To add the capacity of being fault-tolerant, I first found some libraries doing it but only through annotations.
+These annotations required a parameter, which had to be defined at compile time.
+That wouldn’t work, as I needed to keep the capacity of changing the number of retries in the settings of this portlet.</p>
+
+<p>I went, therefore, ahead with creating my own way of tolerating faults.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FaultTolerantAttempt</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">retryIntervalInSeconds</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">timesToRetry</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Log</span> <span class="no">LOG</span> <span class="o">=</span> <span class="nc">LogFactoryUtil</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="nc">DirectSourceAssetsFacade</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="nf">FaultTolerantAttempt</span><span class="o">(</span><span class="kt">int</span> <span class="n">retryTimeInMiliSeconds</span><span class="o">,</span> <span class="kt">int</span> <span class="n">timesToRetry</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">retryIntervalInSeconds</span> <span class="o">=</span> <span class="n">retryTimeInMiliSeconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">timesToRetry</span> <span class="o">=</span> <span class="n">timesToRetry</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">to</span><span class="o">(</span><span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">timesToRetry</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">action</span><span class="o">.</span><span class="na">result</span><span class="o">());</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span> <span class="nc">Exception</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="no">LOG</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Exception on FaultTolerantAttempt :: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">timesToRetry</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+                <span class="n">pauseThread</span><span class="o">(</span><span class="n">retryIntervalInSeconds</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">pauseThread</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeout</span><span class="o">)</span> <span class="o">{</span>
+        <span class="no">LOG</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Pausing Thread for "</span><span class="o">+(</span><span class="n">timeout</span><span class="o">/</span><span class="mi">1000</span><span class="o">)+</span><span class="s">" seconds..."</span><span class="o">);</span>
+        <span class="nc">Try</span><span class="o">.</span><span class="na">to</span><span class="o">(</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">timeout</span><span class="o">),</span>
+                <span class="o">()</span> <span class="o">-&gt;</span> <span class="no">LOG</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Resuming the Thread..."</span><span class="o">),</span>
+                <span class="o">()</span> <span class="o">-&gt;</span> <span class="no">LOG</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Failed to pause the Thread!"</span><span class="o">)</span>
+        <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Being <code class="highlighter-rouge">FallibleAction</code> a simple functional interface:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="no">T</span> <span class="nf">result</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Note what we had before and what we have in the end.
+We started with a single know-it-all, 99 lines long class. It had two <em>static</em> methods, one 37, the other 55 lines long. It was procedural and difficult to read.</p>
+
+<p>Through refactoring, we end up having a few well-defined classes, being the biggest class only 30 lines long.
+Not only that, but we also end up with a much richer vocabulary to describe our system.</p>
+
+<p>There were a couple of things I couldn’t change.
+For instance, UserServiceSoap (an external service) had no other way to be initialized but to have a locator and those setters in place after the casts. The best I could find was to wrap it as I showed above.</p>
+
+<p>It gave me a great joy to take some of my free time do this refactoring and to increase considerably - I believe - the quality of the code, making it both object-oriented and functional, reusable, readable and maintainable.</p>
+
+<p>Equally joyful was to get my friend who was working on this enthusiast about clean code and about functional programming. Win-win!</p>
+
+<p>Ironically, this was my longest post so far.</p>
+:ET

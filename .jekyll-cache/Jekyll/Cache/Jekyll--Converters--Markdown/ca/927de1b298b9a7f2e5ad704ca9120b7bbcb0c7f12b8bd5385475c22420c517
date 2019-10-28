@@ -1,0 +1,56 @@
+I"&<p>To some people programming languages are no more than mere tools. 
+We can say the same about Mathematics but we would be missing a lot.</p>
+
+<p>The design involved in a programming language marks a tremendous difference on how it makes you think and what code you write.</p>
+
+<p><img src="/images/languages-perspective.jpg" /></p>
+
+<blockquote>
+  <p>A language that doesn’t affect the way you think about programming, is not worth knowing. – <strong>Alan Perlis</strong></p>
+</blockquote>
+
+<p>Usually juniors <em>love</em> <code class="highlighter-rouge">PHP</code> because <em>“you don’t have to set types and it just works!”</em>. Doesn’t it sound like when we wished our parents were as cool as our friend’s that gave him all he wanted when he wanted? Well, I hate <code class="highlighter-rouge">PHP</code>. It’s just a piece of bad design and if you are going to do <code class="highlighter-rouge">PHP</code> please consider some framework like <a href="http://laravel.com">Laravel</a>.</p>
+
+<p>In general we hate to hear that we are wrong and this affects our way of choosing and approaching programmming languages. 
+We prefer to have our code running at first and have have 20 iteractions to solve a bug than to just have our code running after 5 attemps and having it working correctly.</p>
+
+<p>I remember of my first semester at university learning Java and being frustrated that it simply wouldn’t compile “<em>just</em>” because a type was not quite right.</p>
+
+<p><strong>My programming languages timeline is something like this:</strong></p>
+
+<p><code class="highlighter-rouge">Pascal</code> &gt; <code class="highlighter-rouge">PHP</code> &gt; <code class="highlighter-rouge">SQL</code> &gt; <code class="highlighter-rouge">Javascript</code> &gt; <code class="highlighter-rouge">Assembly</code> &gt; <code class="highlighter-rouge">Java</code> &gt; <code class="highlighter-rouge">ShellScript</code> &gt; <code class="highlighter-rouge">C</code> &gt; <code class="highlighter-rouge">Haskell</code> &gt; <code class="highlighter-rouge">Objective-C</code> &gt; <code class="highlighter-rouge">Prolog</code> &gt; <code class="highlighter-rouge">NodeJS</code> &gt; <code class="highlighter-rouge">JESS</code> &gt; <code class="highlighter-rouge">JEE</code> &gt; <code class="highlighter-rouge">Ruby</code> &gt; <code class="highlighter-rouge">Swift</code> &gt; <code class="highlighter-rouge">Scala</code> &gt; <code class="highlighter-rouge">AngularJS</code></p>
+
+<p>At first <code class="highlighter-rouge">PHP</code> seemed amazing and my first professional projects were in <code class="highlighter-rouge">PHP</code> and I felt like such a coder but, at the same time, I always felt like I was always working around to reach my solution. <code class="highlighter-rouge">Javascript</code>/<code class="highlighter-rouge">JQuery</code> at the time looked like a monster that I was quite affraid to face… until I did.</p>
+
+<p>At university it was very interesting to have a look into <code class="highlighter-rouge">Assembly</code> and to understand in a very concrete low-level how it really works. 
+Next to it, learning <code class="highlighter-rouge">Java</code> felt like “the real deal”  I remember how our professors made us believe that <code class="highlighter-rouge">Java</code> was <strong>the one and only</strong>. I honestly thought it would be pretty useless to learn any other language.</p>
+
+<p>Until the procedural mother <code class="highlighter-rouge">C</code> came and I just loved it. Not that I would use it to develop common production software or so but just the fact that at every single moment you have to be conscious of side-effects and about the general structure of a process and memory managment… it just makes you more complete and better programmer.</p>
+
+<blockquote>
+  <p>Language shapes the way we think, and determines what we can think about. – <strong>Benjamin Lee Whorf</strong></p>
+</blockquote>
+
+<p><code class="highlighter-rouge">Haskell</code>, a purely functional and declarative programing language was one of those languages that conquered me by experience. 
+When we were first introduced to it I just thought we were losing our time learning some useless language while we could be improving our Java skills. But as I got to learn more of it, had to solve more exercises and had to write little programms a “uau, this is good” experience kept going on a steedy <em>crescendo</em>.<br />
+<code class="highlighter-rouge">Haskell</code> is <strong>by far my favourite programming language by all means</strong>: the way it blows your mind, takes you to new ways of thinking, the way it’s designed and makes you design software and how close to mathematics it feels in it’s elegance, assertivness and complexity (very differente from “mess” or “complicated”) it’s just remarkable. 
+The type system is just amazing. When it compiles it must be right and if at first you may get incredibly frustrated with the compiler always telling you off, with time you will get to just enjoy it and wish that every language had such type-system. That’s why <code class="highlighter-rouge">Haskell</code> is <strong>the</strong> language I’m committed to keep learning.
+Read <a href="https://www.quora.com/What-is-your-review-of-Haskell-programming-language">this review</a> and this <a href="http://stackoverflow.com/questions/775726/whats-the-fuss-about-haskell">SO post about it</a>.</p>
+
+<p>In production, I appreciate a language I can write large-scale software with. For example <code class="highlighter-rouge">Ruby</code> is just such a beautiful and magical OO language but I feel safer with static language with explicit types like <code class="highlighter-rouge">Java</code>.</p>
+
+<p>Ok, so what do I think about <code class="highlighter-rouge">Java</code>? 
+<code class="highlighter-rouge">7 languages in 7 weeks</code> says that Java is like having an older brother who is a lawyer; when you were young it was really cool but now it’s just boring. 
+<code class="highlighter-rouge">Java</code> doesn’t have the best design all around (static methods, util classes, primitive types vs  Objects vs Nulls), it’s verbouse and not magic at all. 
+At the same time newer versions of it do bring some improvements and in the overall it <em>allows</em> you to write good code (as it allows you to write terrible code) which makes it a good go.</p>
+
+<p><code class="highlighter-rouge">Prolog</code>, a logic programming language, was a true nerve cracking but I’m glad that I was introduced to it as it, again, changes your way of looking to programming, thinking and of approaching problems.</p>
+
+<blockquote>
+  <p>The limits of my language mean the limits of my world. – <strong>Ludwig Wittgenstein</strong></p>
+</blockquote>
+
+<p>Whatever language you use just don’t get stuck there and learn some other language, challenge yourself, your way of thinking, of programming, of solving problems. Leave your comfort zone and truely enjoy the craft of programming though all the different ways there are to do so.</p>
+
+<p>What’s next in the list? <code class="highlighter-rouge">Clojure</code>!</p>
+:ET

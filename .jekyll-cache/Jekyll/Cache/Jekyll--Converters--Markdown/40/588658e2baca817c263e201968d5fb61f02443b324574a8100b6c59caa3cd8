@@ -1,0 +1,6 @@
+I"�<blockquote>
+The difference between BDD and TDD is that BDD begins with a B and TDD begins with a T. 
+But seriously, the gotcha with TDD is that too many developers focused on the “How” when writing their unit tests, so they ended up with very brittle tests that did nothing more than confirm that the system does what it does.<br />
+BDD provides a new vocabulary and thus focus for writing a unit test. Basically it is a feature driven approach to TDD.
+</blockquote>
+:ET

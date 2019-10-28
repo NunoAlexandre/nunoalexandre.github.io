@@ -1,0 +1,100 @@
+I"|#<p>Naked code and naked data are a somewhat discrete code smell that spread quickly and that decrease the quality of a project. Let’s see why and how we can avoid them through wrapped code.</p>
+
+<h3 id="naked-data">Naked data</h3>
+
+<p>Naked data is data that is represented and passed using primitive types. Their domain is implicit or even hidden.
+This leads to three problems:</p>
+
+<ol>
+  <li>Poor type vocabulary</li>
+  <li>Low type safety</li>
+  <li>Bugs</li>
+</ol>
+
+<p>Let’s jump to an example. Suppose you are given the following function:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">runJob</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">runJob</span> <span class="n">projectId</span> <span class="n">companyId</span> <span class="n">jobType</span> <span class="n">priority</span> <span class="o">=</span> <span class="c1">-- do something</span></code></pre></figure>
+
+<p>Unless if you check the implementation of this function, you don’t know in which order to pass the arguments.
+Furthermore, <code class="highlighter-rouge">projectId</code> and <code class="highlighter-rouge">companyId</code> are actually just <code class="highlighter-rouge">Int</code>s, meaning they are seen as the same by readers and by the compiler.</p>
+
+<p>This program presents a very low vocabulary and opens up a whole world of errors such as:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">let</span> <span class="n">projectId</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kr">let</span> <span class="n">companyId</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="kr">let</span> <span class="n">jobType</span> <span class="o">=</span> <span class="s">"download"</span>
+<span class="kr">let</span> <span class="n">priority</span> <span class="o">=</span> <span class="s">"normal"</span>
+
+<span class="c1">-- wrong order</span>
+<span class="n">runJob</span> <span class="n">companyId</span> <span class="n">projectId</span> <span class="n">priority</span> <span class="n">jobType</span>
+
+<span class="kr">let</span> <span class="n">otherCompanyId</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">-- compiles and evaluates to True</span>
+<span class="n">companyId</span> <span class="o">==</span> <span class="n">projectId</span></code></pre></figure>
+
+<p>You might be thinking: “You can cover these cases through exhaustive testing”. That might help a little, but it’s way better to <strong>make it right by design</strong>.</p>
+
+<p>This example above could be made right by design by wrapping data in its own domain:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">newtype</span> <span class="kt">ProjectId</span> <span class="o">=</span> <span class="kt">ProjectId</span> <span class="kt">Int</span>
+<span class="kr">newtype</span> <span class="kt">CompanyId</span> <span class="o">=</span> <span class="kt">CompanyId</span> <span class="kt">Int</span>
+<span class="kr">data</span> <span class="kt">JobType</span> <span class="o">=</span> <span class="kt">Download</span> <span class="o">|</span> <span class="kt">Upload</span> <span class="o">|</span> <span class="kt">Save</span>
+<span class="kr">data</span> <span class="kt">Priority</span> <span class="o">=</span> <span class="kt">Low</span> <span class="o">|</span> <span class="kt">Normal</span> <span class="o">|</span> <span class="kt">High</span>
+
+<span class="n">runJob</span> <span class="o">::</span> <span class="kt">ProjectId</span> <span class="o">-&gt;</span> <span class="kt">CompanyId</span> <span class="o">-&gt;</span> <span class="kt">JobType</span> <span class="o">-&gt;</span> <span class="kt">Priority</span></code></pre></figure>
+
+<p>This way we have both a rich vocabulary and type safety, which avoids all the mistakes that were possible before.
+This sure adds a tiny overhead, but one thing I have been learning with my Team Lead <a href="https://nl.linkedin.com/in/robert-kreuzer-9a729027">Robert Kreuzer</a> is that life is made of tradeoffs. And here the <em>pros</em> are much stronger than the <em>cons</em>.</p>
+
+<h3 id="naked-code">Naked code</h3>
+
+<p>The concept of <em>naked code</em> is similar to the concept of <em>naked data</em>, but I’d say it’s slightly more subjective.</p>
+
+<p>Naked code is code written and implemented without a domain. It has the potential to be something on its own, but, unfortunately, it’s not.</p>
+
+<p>I have mainly three problems with naked code:</p>
+
+<ol>
+  <li>Harder to test</li>
+  <li>Hard to read</li>
+  <li>Impossible to reuse</li>
+</ol>
+
+<p>An example of naked code would be:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="cd">-- |  Active companies with failed jobs should be alerted.</span>
+<span class="n">getCompaniesToAlert</span> <span class="o">::</span> <span class="p">[</span><span class="kt">CompanyId</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Job</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">CompanyId</span><span class="p">]</span>
+<span class="n">getCompaniesToAlert</span> <span class="n">activeCompanies</span> <span class="n">allJobs</span> <span class="o">=</span>
+  <span class="n">intersect</span> <span class="n">activeCompanies</span> <span class="p">(</span><span class="n">nub</span> <span class="o">.</span> <span class="n">map</span> <span class="n">jobCompanyId</span> <span class="o">.</span> <span class="n">filter</span> <span class="p">((</span><span class="o">==</span> <span class="kt">Failed</span><span class="p">)</span> <span class="o">.</span> <span class="n">jobStatus</span><span class="p">)</span> <span class="o">$</span> <span class="n">allJobs</span><span class="p">)</span></code></pre></figure>
+
+<p>Good luck reading this, and, even worse, reading a system where code like this is the norm.
+For someone reading this, it’s unclear what this function is really about. I think of this kind of code like that kind of people who keep making parenthesis while telling a story and neither them neither you can understand where it is going.</p>
+
+<p>Instead, give every piece of knowledge and behaviour its own place and let composition be declarative and objective:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">getCompaniesToAlert</span> <span class="o">::</span> <span class="p">[</span><span class="kt">CompanyId</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Job</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">CompanyId</span><span class="p">]</span>
+<span class="n">getCompaniesToAlert</span> <span class="n">subscribedCompanies</span> <span class="n">allJobs</span> <span class="o">=</span>
+  <span class="n">intersect</span> <span class="n">subscribedCompanies</span> <span class="n">getCompaniesWithFailingJobs</span>
+
+<span class="n">getFailedJobs</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Job</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Job</span><span class="p">]</span>
+<span class="n">getFailedJobs</span> <span class="o">=</span> <span class="n">filter</span> <span class="p">((</span><span class="o">==</span> <span class="kt">Failed</span><span class="p">)</span> <span class="o">.</span> <span class="n">jobStatus</span><span class="p">)</span>
+
+<span class="n">getCompaniesWithFailingJobs</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Job</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">CompanyId</span><span class="p">]</span>
+<span class="n">getCompaniesWithFailingJobs</span> <span class="o">=</span> <span class="n">nub</span> <span class="o">.</span> <span class="n">map</span> <span class="n">jobCompanyId</span> <span class="o">.</span> <span class="n">getFailedJobs</span></code></pre></figure>
+
+<p>Again, this adds a small overhead, but the <em>pros</em> are more than the <em>cons</em> since the code is now:</p>
+
+<ol>
+  <li>Testable</li>
+  <li>Declarative</li>
+  <li>Readable</li>
+  <li>Reusable</li>
+</ol>
+
+<h3 id="salt--olive-oil">Salt &amp; Olive oil</h3>
+
+<p>This approach must be taken with a pinch of salt (and olive oil).
+Measure well the trade-off you are making in your specific case and choose accordingly. Sometimes, breaking everything to its own function is not the best route and it’s important to be balanced in this case.</p>
+:ET

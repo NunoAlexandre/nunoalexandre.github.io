@@ -1,0 +1,130 @@
+I"0)<p>Now back to mobile development (next to a million other things) at <a href="kidiyo.com">Kidiyo</a>,
+I was underwhelmed with the lack of support from the iOS SDK to force different
+landscapes across an app. In this blog I share a neat solution that works (at
+least) from iOS 9.0 onward.</p>
+
+<p><em>TL;DR</em>: Get <a href="https://gist.github.com/NunoAlexandre/a0cd5af9a5c1ea1933baf8a3c6b426f0">my Orientation extension</a>
+and check <a href="#bringing-it-all-together">how to use it</a>.</p>
+
+<p>Most SO answers suggest to override <code class="highlighter-rouge">preferredInterfaceOrientationForPresentation</code>,
+<code class="highlighter-rouge">supportedInterfaceOrientations</code>, and <code class="highlighter-rouge">shouldAutorotate</code>. These can be defined
+on <code class="highlighter-rouge">UIViewController</code>s and on <code class="highlighter-rouge">UINavigationController</code>s.</p>
+
+<p>I’d expect to be able to get it working out of the box by simply overriding
+<code class="highlighter-rouge">preferredInterfaceOrientationForPresentation</code> and <code class="highlighter-rouge">supportedInterfaceOrientations</code>
+on my <code class="highlighter-rouge">UIViewController</code>s and then having <code class="highlighter-rouge">UINavigationController</code> exposing those
+values from the visible view controller.</p>
+
+<p>That setup was insufficient.</p>
+
+<h3 id="the-problem">The problem</h3>
+
+<p>Let’s look at the following scenario.</p>
+
+<p><img src="/images/rotation-scenario.svg" /></p>
+
+<ul>
+  <li>A screen <code class="highlighter-rouge">A</code> <em>supports</em> all orientations but <em>prefers</em> portrait</li>
+  <li>A screen <code class="highlighter-rouge">B</code> only supports landscape</li>
+  <li>A user can go from <code class="highlighter-rouge">A</code> to <code class="highlighter-rouge">B</code> and back</li>
+</ul>
+
+<p>Setting <code class="highlighter-rouge">B</code>’s supported orientations to landscape did not force that screen
+to be shown in landscape if I’d come from <code class="highlighter-rouge">A</code> in portrait mode. Instead, I was
+kept in portrait in <code class="highlighter-rouge">B</code> until I rotated to landscape. From then on I no longer
+could rotate back to portrait, as intended from the beginning.</p>
+
+<p>Clearly, the SDK didn’t take the lead on forcing the orientation despite being
+aware what the current view controller supports.</p>
+
+<p>The way to force rotate a screen is by setting the device “orientation” value:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="o">&lt;</span><span class="kt">UIInterfaceOrientation</span><span class="o">&gt;.</span><span class="n">value</span><span class="p">,</span>
+                          <span class="nv">forKey</span><span class="p">:</span> <span class="s">"orientation"</span><span class="p">)</span></code></pre></figure>
+
+<p>Forcing rotation is easy, but there are a few caveats to cover.</p>
+
+<h3 id="caveats">Caveats</h3>
+
+<p>Note that <code class="highlighter-rouge">preferredInterfaceOrientationForPresentation</code> is of type
+<code class="highlighter-rouge">UIInterfaceOrientation</code> and that <code class="highlighter-rouge">supportedInterfaceOrientations</code> is of type
+<code class="highlighter-rouge">UIInterfaceOrientationMask</code>. The second defines the allowed range, while the
+first indicates which one, within that range, is the preferred.</p>
+
+<p>Having this in mind, it is now clear that <code class="highlighter-rouge">preferredInterfaceOrientationForPresentation</code>
+is the value to use when forcing rotation.</p>
+
+<p>It would seem like a good idea to always force the orientation to be what the
+visible <code class="highlighter-rouge">UIViewController</code> defined <code class="highlighter-rouge">preferredInterfaceOrientationForPresentation</code> to be.</p>
+
+<p>This approach works when moving from a screen with a broader set of supported orientations
+than the screen we are moving to. For instance, when moving from <code class="highlighter-rouge">A</code> to <code class="highlighter-rouge">B</code> in the
+scenario above.</p>
+
+<p>Such approach taints the user experience. When at the screen <code class="highlighter-rouge">B</code>, the user holds
+the device in landscape mode. By going back to <code class="highlighter-rouge">A</code>,  the screen
+gets rotated to portrait, even though <code class="highlighter-rouge">A</code> supports landscape.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>The solution, then, is to force rotation only when the screen we are moving to does
+not support the orientation we are in already.</p>
+
+<p>Unfortunately, <code class="highlighter-rouge">UIInterfaceOrientationMask</code> is an enum and not a list, so we can’t just
+check if it contains a <code class="highlighter-rouge">UIInterfaceOrientation</code>, and it doesn’t provide any function
+to do this out of the box either.</p>
+
+<p>Therefore, we need to extend it:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UIInterfaceOrientationMask</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">supports</span><span class="p">(</span><span class="n">_</span> <span class="nv">orientation</span><span class="p">:</span> <span class="kt">UIInterfaceOrientation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="nf">return</span> <span class="p">(</span><span class="n">orientation</span><span class="o">.</span><span class="n">isLandscape</span> <span class="o">&amp;&amp;</span> <span class="k">self</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="o">.</span><span class="n">landscape</span><span class="p">))</span>
+        <span class="o">||</span> <span class="p">(</span><span class="n">orientation</span><span class="o">.</span><span class="n">isPortrait</span> <span class="o">&amp;&amp;</span> <span class="k">self</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="o">.</span><span class="n">portrait</span><span class="p">))</span>
+  <span class="p">}</span>
+
+  <span class="kd">func</span> <span class="nf">misses</span><span class="p">(</span><span class="n">_</span> <span class="nv">orientation</span><span class="p">:</span> <span class="kt">UIInterfaceOrientation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">!</span><span class="nf">supports</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Now, when moving to a new <code class="highlighter-rouge">UIViewController</code>, we can check if the current
+orientation supports its <code class="highlighter-rouge">preferredInterfaceOrientationForPresentation</code>. If it
+doesn’t, we have to rotate to that preferred orientation:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UINavigationController</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">adjustOrientationIfNeeded</span><span class="p">()</span> <span class="p">{</span>
+   <span class="k">if</span> <span class="k">self</span><span class="o">.</span><span class="n">supportedInterfaceOrientations</span><span class="o">.</span><span class="nf">misses</span><span class="p">(</span><span class="nf">currentOrientation</span><span class="p">())</span> <span class="p">{</span>
+     <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span>
+       <span class="o">.</span><span class="nf">setValue</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">preferredInterfaceOrientationForPresentation</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span>
+                 <span class="nv">forKey</span><span class="p">:</span> <span class="s">"orientation"</span><span class="p">)</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="bringing-it-all-together">Bringing it all together</h3>
+
+<p>Now we have everything to have it working like a charm:</p>
+
+<ul>
+  <li>The View Controllers define both their preferred and supported and orientations.
+You can define this in a base class instead of having to define it in every single view controller.</li>
+  <li>The capacity to decide when to the screen needs to be rotated</li>
+</ul>
+
+<p>The last step is to have your <code class="highlighter-rouge">UINavigationController</code> implementing the <code class="highlighter-rouge">willShow</code>
+method from <code class="highlighter-rouge">UINavigationControllerDelegate</code> calling <code class="highlighter-rouge">adjustOrientationIfNeeded</code>.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">YourNavigationController</span><span class="p">:</span> <span class="kt">UINavigationControllerDelegate</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">navigationController</span><span class="p">(</span><span class="n">_</span> <span class="nv">navigationController</span><span class="p">:</span> <span class="kt">UINavigationController</span><span class="p">,</span>
+                            <span class="n">willShow</span> <span class="nv">viewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+                            <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nf">adjustOrientationIfNeeded</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Et voilá! You can checkout my whole <code class="highlighter-rouge">Orientation</code> extension and get done in no time:</p>
+
+<script src="https://gist.github.com/NunoAlexandre/a0cd5af9a5c1ea1933baf8a3c6b426f0.js"></script>
+
+:ET

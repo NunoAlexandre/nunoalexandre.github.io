@@ -1,0 +1,2 @@
+I"<p>I used to think of Haskell ADTs (Algebraic Data Types) as a sort of a final, flat type inheritance definition. Sometimes they are more like a base-class design in OO without the good bits. Here I show how we can overcome that by using <em>dependent types</em>.</p>
+:ET

@@ -1,0 +1,199 @@
+I"ZI<p>One of the main words to retain about lambda expressions is <strong>anonymous</strong>. A lambda expression is, basically, an anonymous function. 
+Lambdas Expressions are a normal feature in functional languages but just few time ago arrived into the Java world. Better late than never though!</p>
+
+<h2 id="why-is-it-important">Why is it important?</h2>
+<p>If you are like me, you will be pleased with writing as less code as possible without losing expressiveness. And that’s one of the great advantages of lambdas.</p>
+
+<p>It allows you to write shorter, more objective, more concise and more expressive code. And all this using functional programming style, which is cool!</p>
+
+<p>If you are familiar with <a href="https://www.google.pt/search?client=safari&amp;rls=en&amp;q=anynomous+classes&amp;ie=UTF-8&amp;oe=UTF-8&amp;gfe_rd=cr&amp;ei=FQTbV5ShFajA8geOw7-YBQ">Anynomous classes</a>, lambdas will feel like a breeze to you. 
+If you are not, no worries.</p>
+
+<h2 id="how-to-interpret-them">How to interpret them</h2>
+
+<p>We tend to feel overwhelmed when looking at code with some uncommon syntax, but this is very simple, <strong>really</strong>.</p>
+
+<p>Let’s first look into a simple method in Java:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">String</span> <span class="nf">hello</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"Hello "</span> <span class="o">+</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>From this, we read that we have this function named <strong>hello</strong> that receives a String argument (tagged <em>name</em>) and it returns a String by prepending “Hello “ to the argument.</p>
+
+<p>Notice the amount of code to do this.</p>
+
+<p>Lambda expressions look like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">argument</span> <span class="o">-&gt;</span> <span class="n">function</span> <span class="n">code</span></code></pre></figure>
+
+<p>Quite simple, right?</p>
+
+<p>So the function above, as a lambda expression, looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Hello "</span> <span class="o">+</span> <span class="n">name</span></code></pre></figure>
+
+<p>Pretty, right?</p>
+
+<h2 id="how-to-apply-them-not-yet">How to apply them (not yet)</h2>
+
+<p>From the example above, you might be wondering how you can actually use that lambda in order to produce something.</p>
+
+<p>That is one interesting point to discuss and uncover.</p>
+
+<p>Before that (believe me, it will be helpful), let me show you how lambda expressions are used a functional language like Haskell.</p>
+
+<p>In Haskell, the function equivalent to the method above looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">hello</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">hello</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Hello "</span> <span class="o">++</span><span class="p">)</span>
+<span class="c1">--or</span>
+<span class="n">hello</span> <span class="n">x</span> <span class="o">=</span> <span class="s">"Hello "</span> <span class="o">++</span> <span class="n">x</span> </code></pre></figure>
+
+<p>And the equivalent lambda expression to this is:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="s">"Hello "</span> <span class="o">++</span> <span class="n">x</span></code></pre></figure>
+
+<p>The point here is that I can apply both in the same way.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">ghci</span><span class="o">&gt;</span> <span class="n">hello</span> <span class="s">"world"</span>
+<span class="s">"Hello world"</span>
+
+<span class="n">ghci</span><span class="o">&gt;</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="s">"Hello "</span> <span class="o">++</span> <span class="n">x</span><span class="p">)</span> <span class="s">"world"</span>
+<span class="s">"Hello world"</span></code></pre></figure>
+
+<p><strong>In Java, this is not the case.</strong></p>
+
+<h2 id="how-to-use-lambdas-in-java">How to use lambdas in Java</h2>
+
+<p>I brought up the Anonymous Classes above because Lambda expressions have very much the same purpose.</p>
+
+<p>Oracle’s introductory paragraph <a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">about lambda expressions</a> states the following:</p>
+
+<blockquote>
+    One issue with anonymous classes is that if the implementation of your anonymous class is very simple, such as an interface that contains only one method, then the syntax of anonymous classes may seem unwieldy and unclear. In these cases, <u>you're usually trying to pass functionality as an argument to another method</u>, such as what action should be taken when someone clicks a button. <u>Lambda expressions enable you to do this</u>, to treat functionality as method argument, or code as data.
+</blockquote>
+
+<p>The key idea is <strong><em>trying to pass functionality as an argument</em></strong>.</p>
+
+<p>Before, this was eased through the use of Anonymous classes.</p>
+
+<h2 id="a-practical-example">A Practical Example</h2>
+
+<p>Consider the following example where:</p>
+
+<ul>
+  <li>you are accessing a web service</li>
+  <li>the methods available to fetch data from it might throw an exception</li>
+  <li>you want to map it to Optional<T> instead of having to deal with [nulls and exceptions](http://nunoalexandre.github.io/2016/08/31/why-optional-is-better-than-null) around your system.</T></li>
+</ul>
+
+<p><strong>1. I start by</strong> creating this <a href="http://stackoverflow.com/questions/36881826/what-is-use-of-functional-interface-in-java-8/36882003">functional interface</a>:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@FunctionalInterface</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="no">T</span> <span class="nf">result</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>In other words, a FallibleAction is an Object with a single method, <em>result</em>, that returns something of type T that might throw an Exception.</p>
+
+<p><strong>2. Then I create</strong> the mapping / adapter abstraction from the outside world os nulls and exceptions into the inside world of Optional:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Try</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">toGet</span><span class="o">(</span><span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">action</span><span class="o">.</span><span class="na">result</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><strong>3. Now it’s time</strong> to wrap the web service</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">AdaptedWebService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">SomeWebService</span> <span class="n">ws</span><span class="o">;</span> 
+
+    <span class="kd">public</span> <span class="nf">AdaptedWebService</span><span class="o">(</span><span class="kd">final</span> <span class="nc">SomeWebService</span> <span class="n">ws</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">ws</span> <span class="o">=</span> <span class="n">ws</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*** the juicy part ***/</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="nf">book</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">bookId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Album</span><span class="o">&gt;</span> <span class="nf">album</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">albumId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Movie</span><span class="o">&gt;</span> <span class="nf">movie</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">movieId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span></code></pre></figure>
+
+<p><br />
+<strong>3.1. With Anonymous Classes</strong> I would implement those methods like:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="nf">book</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">bookId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(</span><span class="k">new</span> <span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;()</span> <span class="o">{</span>
+             <span class="nd">@Override</span>
+             <span class="kd">public</span> <span class="nc">Book</span> <span class="nf">result</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                 <span class="k">return</span> <span class="n">ws</span><span class="o">.</span><span class="na">book</span><span class="o">(</span><span class="n">bookId</span><span class="o">);</span>
+             <span class="o">}</span>
+        <span class="o">});</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Album</span><span class="o">&gt;</span> <span class="nf">album</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">albumId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(</span><span class="k">new</span> <span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="nc">Album</span><span class="o">&gt;()</span> <span class="o">{</span>
+             <span class="nd">@Override</span>
+             <span class="kd">public</span> <span class="nc">Album</span> <span class="nf">result</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                 <span class="k">return</span> <span class="n">ws</span><span class="o">.</span><span class="na">album</span><span class="o">(</span><span class="n">albumId</span><span class="o">);</span>
+             <span class="o">}</span>
+        <span class="o">});</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Movie</span><span class="o">&gt;</span> <span class="nf">movie</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">movieId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(</span><span class="k">new</span> <span class="nc">FallibleAction</span><span class="o">&lt;</span><span class="nc">Movie</span><span class="o">&gt;()</span> <span class="o">{</span>
+             <span class="nd">@Override</span>
+             <span class="kd">public</span> <span class="nc">Movie</span> <span class="nf">result</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                 <span class="k">return</span> <span class="n">ws</span><span class="o">.</span><span class="na">album</span><span class="o">(</span><span class="n">movieId</span><span class="o">);</span>
+             <span class="o">}</span>
+        <span class="o">});</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>This is already much better than to have to create specific classes implementing FallibleAction for each of this actions (and there are only three here, now imagine how 10 would look).</p>
+
+<h3 id="and-finally">And finally…!</h3>
+
+<p>Still, this is a lot of code and a lot of repetition.</p>
+
+<p><strong>So this is how this methods look by using lambda expressions</strong> instead of Anonymous classes to pass functionality as an argument:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="nf">book</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">bookId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">ws</span><span class="o">.</span><span class="na">book</span><span class="o">(</span><span class="n">bookId</span><span class="o">));</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Album</span><span class="o">&gt;</span> <span class="nf">album</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">albumId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">ws</span><span class="o">.</span><span class="na">album</span><span class="o">(</span><span class="n">albumId</span><span class="o">));</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Movie</span><span class="o">&gt;</span> <span class="nf">movie</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Long</span> <span class="n">movieId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Try</span><span class="o">.</span><span class="na">toGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">ws</span><span class="o">.</span><span class="na">movie</span><span class="o">(</span><span class="n">movieId</span><span class="o">));</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Doesn’t this look beautiful? 
+We (not) just reduced the amount of code by about 13 lines and made it highly expressive, concise and objective.</p>
+
+<p><strong>Note:</strong>
+ A Java lambda in the form () -&gt; … means that it has no arguments.
+An example with argument is applied like this, where it receives an Integer and returns that plus one:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span></code></pre></figure>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So lambda expressions in Java actually are an anonymous object with a single method, being represented by what that method does.</p>
+
+<p>Love the lambda!</p>
+:ET

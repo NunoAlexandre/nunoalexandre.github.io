@@ -1,0 +1,158 @@
+I"j7<p>“But it works!” is a small big excuse to avoid excellence and to show our attitude towards code: either we just don’t think it deserves all that much care or we think of if as a mystery box - so lucky we are that it is working!</p>
+
+<p>If we get to the point of saying this and not really think that it is necessary to do any refactoring, either there is a very good reason or we are just not professional and we have let the code go wrong too long.</p>
+
+<p>We must be able to look at our code and be sure of what it does.<br /> 
+Our functions must be concise, short, objective.</p>
+
+<h3 id="example-1---some-math">Example 1 - Some Math</h3>
+<p>What are the differences between these two functions?</p>
+
+<figure class="highlight"><pre><code class="language-math" data-lang="math">f(x) = x + (x-sqrt(x^2)) + (x*2)/x</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-math" data-lang="math">f(x) = x + 2</code></pre></figure>
+
+<p>In terms of their result, they do exactly the same (<strong>#A</strong>) : they sum 2 to a given number. But they differ in what they <em>don’t do</em>.
+One is obvious, the other is not. One does exactly what it must, the other does more than the required to accomplish the goal, where more is less.</p>
+
+<p>Why wouldn’t you write it as simple as it can be?</p>
+
+<p>(<strong>#A</strong>) Did you fall into the trap? It is pretty easy to, and that is why it is important to avoid this.
+The two functions output the same for positive numbers but they act differently for numbers equal to 0 or less.</p>
+
+<h3 id="clean-code-is-simple">Clean code is simple</h3>
+
+<p>Complicated solutions complicate everything. They are hard to read, hard to grasp. Therefore, they are harder to test and to prove correct.</p>
+
+<p>The requirements of the software that we develop change often and sometimes change considerably. 
+This means that our code must change along, and we can either just change what we think that - apparently(!) - is enough to satisfy the new requirements or we go a bit deeper and rethink the code in terms of the new problem to solve.</p>
+
+<p>  I found myself many times ending up with really messy solutions, with a bunch of complete unnecessary code, specially when solving some hairy bugs. It is not easy to take a step back and rethink the code but it is absolutely worthy to do so.</p>
+
+<p>If we are afraid to take the second way, that is pretty revealing and shouldn’t be kept. This fear of breaking something is valid, mainly when developing a large-scale system or when the language used or the design is side effects based. That is why automated testing is so important: 
+they take away the need of being afraid of changing the code and leave you alone with your code culture.</p>
+
+<p>If we systematically take the first way we are feeding ignorance and create a place to code to rot, because the end solution will be the result of parts of many previous solutions.</p>
+
+<p>Another way of ending up with code like this can happen simply when one writes more code than necessary, ending up being super obvious, redundant or not very objective.</p>
+
+<h3 id="example-2---isthree-">Example 2 - isThree ?</h3>
+
+<p>Consider this function that checks if a given number is the number 3:</p>
+
+<p>In Haskell:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">isThree</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isThree</span> <span class="mi">3</span> <span class="o">=</span> <span class="kt">True</span>
+<span class="n">isThree</span> <span class="kr">_</span> <span class="o">=</span> <span class="kt">False</span></code></pre></figure>
+
+<p>or even:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">isThree</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isThree</span> <span class="n">x</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">3</span> <span class="kr">then</span> <span class="kt">True</span> <span class="kr">else</span> <span class="kt">False</span></code></pre></figure>
+
+<p>Or in Java:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">isThree</span> <span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">else</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><br />
+What is wrong? It happens to be that this code is neither concise, short or objective. At least not as it can go.
+“But it works!”. Yes, it does, but why shouldn’t we be open to improve our code as good engineers/developers/programmers?</p>
+
+<p>For the Java version, this refactored version is not enough:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">isThree</span> <span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>First, there is still a place for error since you still can misplace the <code class="highlighter-rouge">true : false</code> and second, this is unnecessary.
+If what we want is to evaluate a logic condition and output its result, we shouldn’t be calculating the condition result and based on that return a value that is directly related. If we wanted to do something based on that condition, that a different story.</p>
+
+<p>Consider the steps taken when calling <code class="highlighter-rouge">isThree(3)</code>:<br /></p>
+<ol>
+  <li>return 3 == 3 ? true : false;<br /></li>
+  <li>return true ? true : false;<br /></li>
+  <li>return true;</li>
+</ol>
+
+<p>This translate “if x equals to 3 return true, otherwise return false”. <br />
+What about simply “return x equals to 3”? <br /></p>
+
+<p>So in Haskell we would have:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">isThree</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isThree</span> <span class="o">=</span> <span class="p">(</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span></code></pre></figure>
+
+<p>And in Java:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">boolean</span> <span class="n">isThree</span> <span class="p">(</span><span class="n">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">return</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><strong>Avoid unnecessary computation.</strong> It will make everyone happier and the code cleaner.</p>
+
+<h3 id="example-3---iseven">Example 3 - isEven</h3>
+
+<p>Let’s now check if a given number is even:</p>
+
+<p>in Java:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEven</span><span class="o">(</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">)</span> <span class="o">{</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+	<span class="kt">boolean</span> <span class="n">isEven</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="k">for</span> <span class="o">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="o">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span> <span class="o">)</span> <span class="o">{</span>
+		<span class="n">isEven</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="n">x</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="n">isEven</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>in Haskell:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">isEven</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isEven</span> <span class="n">x</span> <span class="o">=</span> <span class="n">elem</span> <span class="n">absX</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="o">..</span><span class="n">absX</span><span class="p">]</span>
+	<span class="kr">where</span> <span class="n">absX</span> <span class="o">=</span> <span class="n">abs</span> <span class="n">x</span></code></pre></figure>
+
+<p>… “But it works”! Yes, it does, but why would we want this to be our code when it can be this simple instead? </p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEven</span><span class="o">(</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">)</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">isEven</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">isEven</span> <span class="n">x</span> <span class="o">=</span> <span class="n">mod</span> <span class="n">x</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> </code></pre></figure>
+<p> </p>
+
+<h3 id="example-4---not-making-use-of-the-language">Example 4 - Not making use of the language</h3>
+
+<p>It is also important to be aware of what the language we are using can do for us, otherwise we end up doing things like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">getList</span><span class="o">()</span> <span class="o">{</span>
+	<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">newList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="n">newList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="n">newList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>instead of this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">getList</span><span class="o">()</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">list</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>The first version does the work, but that is not how we want it.</p>
+
+<p><strong>Imagine that this situation gets repeated all around your code: you will end up taking 10 times more to read it, with 5 times more lines of code and with (much more) uncertainty.</strong></p>
+
+<p>If the language doesn’t support something specific that you need to do all around, encapsulate it and then you can use it in a clean way.</p>
+
+<p>Little bad things together become terrible so avoid the “But it works” excuse and refactor your code instead, making it simpler and cleaner.<br />Don’t do it only for yourself but also for your teammates and for the sake of the sotware you are developing together as a team.</p>
+
+:ET

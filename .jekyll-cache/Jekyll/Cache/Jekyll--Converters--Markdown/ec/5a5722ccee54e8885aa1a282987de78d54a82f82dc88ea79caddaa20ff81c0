@@ -1,0 +1,65 @@
+I"�<p>Another great year right about to end. A year of significant transitions. 365 days of steady growth and good things to remember.</p>
+
+<h3 id="becoming-a-father">Becoming a father</h3>
+
+<p>Words can’t really describe what it is to be a father. It puts <em>everything</em> into perspective. Countless nights of lousy sleep paid by the purest smile in the morning, the insane love challenge called diapers, and seeing this little human being acquiring new and more sophisticated features by the day it’s just an unbelievable journey.</p>
+
+<p>The way kids learn is an excellent space for developers to explore. Their capacity to humbly observe, retain and persevere through failures it’s insane. Seeing how they take on bigger and bigger challenges by the week, it’s really inspiring and reminds me to stay foolish and hungry.</p>
+
+<p><img src="/images/babyandme.jpg" /><br />
+<small>Baby and me enjoying a beautiful sunset in Southern Portugal</small></p>
+
+<h3 id="leaving-channable">Leaving Channable</h3>
+
+<p>A few months into being a father, a startup building a platform with games and other content for kids from 2 to 6 contacting me to become their Lead Developer was a hard one to take.</p>
+
+<p>At Channable, I found the rare and priceless chance to use Haskell at work and being part of a Product-based company. I keep hearing people saying that my eyes sparkle when I talk about Channable, and that’s no surprise to me. I was part of an outstanding team of engineers who shared the same high standards and eagerness to learn, an environment for thick and accelerated learning. A place where hype and flashy new <del>cool</del> stuff are not a constant distraction from things that actually matter.</p>
+
+<p>I could write a whole book on this. Working with such outstanding people is an experience I hope never to forget. Working next to the best leaves no room to be less. Working on super challenging and exciting problems at work is a remarkable privilege, more rewarding than any money. Being surrounded by excellence the way I did is a place I wish everyone to get into. A place where your convictions are questioned, your approaches are reviewed, and your standards and focus are lifted.</p>
+
+<p>It was not just roses, though. At times, I felt incredibly overwhelmed. For real. And not being able to get out of that spiral was one of the most painful experiences I went through in my career. Learning to deal with it and come out of it stronger, one of the best personal lessons ever taken. Having the best wife in the world, a great leader and great colleagues made it all so much better!</p>
+
+<p>Channable will definitely forever be in my mind and heart. Thanks for this great ride!</p>
+
+<p><img src="/images/channableinfrateam.jpeg" /><br />
+<small>Me and my (Infrastructure) Team at Channable</small></p>
+
+<h3 id="joining-kidiyo">Joining Kidiyo</h3>
+
+<p>In the midst of hunting monads during the day and diapers during the night,  Kidiyo found me and proposed to me becoming their Lead Developer.</p>
+
+<p>Kidiyo aims to be a platform with responsible, fun and educative content for kids from 2 to 6 years old.</p>
+
+<p>In July, this new adventure started! So much has happened since then that it’s hard to believe that it’s been only five months. Setting code reviews, a bug tracker, sprints, a proper git convention, leveraging the standards and get everyone motivated to do the best work they have been a great mix. Migrating the development of the apps and games from outsourcing to in-house development was one of the primary goals of the company and the first to be achieved. Having refactored about 30% of almost two years of outsourced development turned out to be a surprisingly good learning experience. Having so much to do and no time to lose revealed to be a great antidote against my tendency to <a href="https://www.freebsd.org/doc/en/articles/mailing-list-faq/bikeshed.html">bikeshed</a>, as well as my anxiety to start writing.</p>
+
+<p>Creating an outstanding workplace and product is much harder than being part of one. Having an extensive contribution to that objective is energising but equally challenging. Your focus needs to be sharper than a knife while keeping the ability to not close doors too early than could make you survive and thrive.</p>
+
+<p>At Kidiyo, I found a broad and rich challenge, as well as an equally diverse and eager team which I am very much looking forward to keeping fighting alongside next year to make Kidiyo a remarkable product for kids and families all over the world.</p>
+
+<p><img src="/images/kidiyoteam.jpg" /><br />
+<small>One of the many daily pictures at Kidiyo with just a part of the team!</small></p>
+
+<h3 id="other-highlights">Other highlights</h3>
+
+<ul>
+  <li>
+    <p>My first world-wide open source contribution, <a href="https://nunoalexandre.com/2018/02/04/redesigning-haskell-docs">Redesigning Haskell Docs</a> - started a year ago - was merged and went live in both the Hackage and Haddock projects. Getting your work out to such a big audience turned out to be a sweet learning experience. Thank you, everyone, for having got it going so constructively and helped to get it merged!</p>
+  </li>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=rI8tNMsozo0&amp;t=93s">“Simplicity Matters, By Rich Hickey”</a> was probably the best talk I digested this year. It was a turning point for me, helping me to identify what is and what isn’t relevant and to measure good code and tech by objective heuristics rather than by impressions. Thanks, <a href="https://ruudvanasseldonk.com/">@Ruud</a>!</p>
+  </li>
+  <li>
+    <p>A mind-blowing presentation by <a href="https://github.com/fatho">Fabian Thorand</a> on (Haskell) Lenses. Thanks, champion!</p>
+  </li>
+</ul>
+
+<h3 id="2019">2019</h3>
+
+<p>In 2019, I hope to learn to keep my principles turned on even when under stress. I will be working on not getting my eagerness to deliver and impatience with delays on the way of quality.</p>
+
+<p>I will be finishing the Type-Driven Development with Idris, and I am interested in revisiting Prolog and Logic Programming in general.</p>
+
+<p>And, as always, I will be logging my journey along the way here :)</p>
+
+<p>For those with whom I worked with this year, a sincere <em>thank you</em>! Let’s bring software development forward and improve our ways.</p>
+:ET

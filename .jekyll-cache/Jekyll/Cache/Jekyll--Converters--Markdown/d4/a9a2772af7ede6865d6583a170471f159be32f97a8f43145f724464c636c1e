@@ -1,0 +1,142 @@
+I"�3<p>Pattern Matching is a beautiful way to specify the different behaviours a function has depending on its arguments.</p>
+
+<p>By other words, Pattern Matching is the dispatch mechanism of deciding the correct definition of a function to be applied based on the presence of the parts of a defined pattern.</p>
+
+<p>This might sound a bit too high level, or confusing, but it’s pretty straightforward and since it has roots in mathematical notations, you might have seen it before:</p>
+
+<p><img src="/images/function-definition.png" /></p>
+
+<p>The definition of this function is very obvious. The key point here is to understand that although we have “if’s” in there, this is not the same as an if-else. X(1) is defined to return 0, and X for any other argument is defined to return 1.</p>
+
+<p>In Haskell, this very same function is defined as:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">f</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">f</span> <span class="kr">_</span> <span class="o">=</span> <span class="mi">1</span></code></pre></figure>
+
+<p>The <code class="highlighter-rouge">_</code> is called <em>wildcard</em>. It is used when the argument is irrelevant for the function behaviour and return value.</p>
+
+<p>In Java, we would do:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">f</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Although the Haskell equivalent is arguably more elegant and readable, this one in Java looks alright. But note that if the function happens to have to deal with more cases, the Java solution has to change to either if-else or switch-cases, which will become ugly.</p>
+
+<h3 id="it-is-not-a-switch-case">It is NOT a switch-case</h3>
+
+<p>Pattern matching is not really the same as a switch-case. They are fundamentally different.</p>
+
+<p>A switch-case reads as <em>“given x, case it matches this value, perform this computation”</em> while that pattern matching reads as <em>“the function f, given an argument that matches this pattern, returns the following”</em>.</p>
+
+<h2 id="on-lists">On Lists</h2>
+
+<p>The previous example is a classic pattern matching on primitive types.
+But there is much more.</p>
+
+<p>Imagine that having a list of numbers, we want to divide every two elements, in sequence.
+If the second element of the pair is 0, the first should be divided by 7.
+If there is one left alone, it is divided by 3.</p>
+
+<p>So we have to think about:</p>
+
+<ul>
+  <li>the empty list case</li>
+  <li>the case of having a list with a single element</li>
+  <li>the case where the second element is 0</li>
+  <li>the default case</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">everyTwo</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">everyTwo</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">everyTwo</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="mi">0</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">everyTwo</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span>
+<span class="n">everyTwo</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span> <span class="o">:</span> <span class="n">everyTwo</span> <span class="n">xs</span></code></pre></figure>
+
+<p>Isn’t this neat?</p>
+
+<h2 id="on-custom-types">On Custom Types</h2>
+
+<p>This means the ability to pattern match a custom type by checking its fields/parts.</p>
+
+<p>For example, being Singer a type that has a name, the function <code class="highlighter-rouge">singVerse</code> will be different if the person singing is Michael Jackson or 50 Cent, otherwise, it will solely be the literal verse:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Singer</span> <span class="o">=</span> <span class="kt">Singer</span> <span class="p">{</span><span class="n">name</span> <span class="o">::</span> <span class="kt">String</span><span class="p">}</span> <span class="kr">deriving</span> <span class="kt">Show</span>
+
+<span class="n">singVerse</span> <span class="o">::</span> <span class="kt">Singer</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">singVerse</span> <span class="p">(</span><span class="kt">Singer</span> <span class="s">"Michael Jackson"</span><span class="p">)</span> <span class="n">verse</span> <span class="o">=</span> <span class="n">verse</span> <span class="o">++</span> <span class="s">" hihi!"</span>
+<span class="n">singVerse</span> <span class="p">(</span><span class="kt">Singer</span> <span class="s">"50 Cent"</span><span class="p">)</span> <span class="n">verse</span> <span class="o">=</span> <span class="n">verse</span> <span class="o">++</span> <span class="s">" yeahh"</span>
+<span class="n">singVerse</span> <span class="kr">_</span> <span class="n">verse</span> <span class="o">=</span> <span class="n">verse</span></code></pre></figure>
+
+<p><em><small>Haskell programmer: yeah, this can be simplified by omitting the verse and making the general case returning the id function. For the purpose of the example, clarity is more important.</small></em></p>
+
+<p>In Java, this would look like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Singer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Singer</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">singVerse</span><span class="o">(</span><span class="nc">String</span> <span class="n">verse</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"Michael Jackson"</span><span class="o">))</span> <span class="o">{</span>
+               <span class="k">return</span> <span class="n">verse</span> <span class="o">+</span> <span class="s">" hihi!"</span><span class="o">;</span>
+       <span class="o">}</span>
+       <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"50 Cent"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">verse</span> <span class="o">+</span> <span class="s">" yeahh"</span><span class="o">;</span>
+       <span class="o">}</span>
+
+       <span class="k">return</span> <span class="n">verse</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><strong>Note:</strong> this serves for the example. In the context of a real project, you should consider the strategy pattern here.</p>
+
+<p>By looking at both solutions, do you see how different they are and how pretty and more maintainable the first is?</p>
+
+<h2 id="on-polymorphism">On Polymorphism</h2>
+
+<p>The next step is pattern matching in order to achieve polymorphism.</p>
+
+<p>Consider different shapes and how you calculate their area.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Shape</span> <span class="o">=</span> <span class="kt">Rectangle</span> <span class="kt">Double</span> <span class="kt">Double</span> <span class="o">|</span> <span class="kt">Square</span> <span class="kt">Double</span> <span class="o">|</span> <span class="kt">Circle</span> <span class="kt">Double</span>
+
+<span class="n">area</span> <span class="o">::</span> <span class="kt">Shape</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
+<span class="n">area</span> <span class="p">(</span><span class="kt">Rectangle</span> <span class="n">width</span> <span class="n">height</span><span class="p">)</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
+<span class="n">area</span> <span class="p">(</span><span class="kt">Square</span> <span class="n">sideLength</span><span class="p">)</span> <span class="o">=</span> <span class="n">sideLength</span><span class="o">^</span><span class="mi">2</span>
+<span class="n">area</span> <span class="p">(</span><span class="kt">Circle</span> <span class="n">r</span><span class="p">)</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">^</span><span class="mi">2</span></code></pre></figure>
+
+<p>It’s very clear and straightforward.</p>
+
+<p>I would translate this to Java by having an interface Shape containing double area();```  and Rectangle, Square and Circle as implementations.</p>
+
+<p>However, I do prefer the way it can be done in Haskell. In five lines we have all of this logic defined in a clean and clear way.</p>
+
+<h2 id="on-filtering">On Filtering</h2>
+
+<p>Pattern matching can also be used as a filter.</p>
+
+<p>Imagine we have a list of <code class="highlighter-rouge">Shape</code>s and we want to get only the <code class="highlighter-rouge">Circle</code>s ones:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">onlyCircles</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Shapes</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Circles</span><span class="p">]</span>
+<span class="n">onlyCircles</span> <span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Circle</span> <span class="n">r</span> <span class="o">|</span> <span class="kt">Circle</span> <span class="n">r</span> <span class="o">&lt;-</span> <span class="n">shapes</span><span class="p">]</span></code></pre></figure>
+
+<h2 id="on-binding">On Binding</h2>
+
+<p>In Haskell, you can also apply pattern matching when binding values to a synonym.</p>
+
+<p>Let’s imagine the where you want to check if the first and last element of a given list are the same:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">firstEqualsLast</span> <span class="o">::</span> <span class="kt">Eq</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">firstEqualsLast</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">False</span>
+<span class="n">firstEqualsLast</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">f</span> <span class="o">==</span> <span class="n">l</span>
+   <span class="kr">where</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">head</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">last</span><span class="p">)</span> <span class="n">xs</span></code></pre></figure>
+
+<p>Note that <code class="highlighter-rouge">(head &amp;&amp;&amp; last) xs</code> return a tuple, which is matched by (f,l).</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Pattern matching really is a joyful feature.
+It doesn’t fit every problem but it is no doubt a neat and joyful way of writing beautiful, declarative and readable code.</p>
+:ET

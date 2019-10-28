@@ -1,0 +1,65 @@
+I"<p>One of the first impressions most people mention having about Haskell is that it looks scary. Not just the concepts involved are overwhelming, but the documentation pages are not properly user-friendly and welcoming. Last December I decided to take action and propose a new design to the Hackage and the Haddock repositories.</p>
+
+<p><strong>Edit:</strong> find the reddit thread about this blog post <a href="https://www.reddit.com/r/haskell/comments/7vatew/redesigning_haddock_docs_and_hackage_pages/">here</a>.</p>
+
+<p>More than a year ago I started playing with <a href="https://elixir-lang.org/"><code class="highlighter-rouge">Elixir</code></a> and I noticed quickly that all its official pages look consistent and welcoming. And after seven months working with Haskell daily at work, I realized that our community really misses something of that kind: a consistent, friendly and welcoming look.</p>
+
+<p>Very recently some big names in the Haskell words, namely Simon Peyton Jones, have come forward with <a href="https://github.com/simonmar/ecosystem-proposals/blob/slurp/proposals/0000-slurp.rst">a proposal called <code class="highlighter-rouge">SLURP</code></a>: a <em>Single Liberal Unified Registry of Haskell Packages</em>. In that proposal they say:</p>
+
+<blockquote>
+  <p>Hackage has been extraordinarily successful as a single repository
+through which to share Haskell packages. (…) But in recent years there has
+been increasing friction over,</p>
+
+  <ul>
+    <li>(..)</li>
+    <li>Hackage’s features, <strong>especially the visual presentation</strong> and package
+documentation.</li>
+  </ul>
+</blockquote>
+
+<p>What a coincidence and what a timing to take action! I found it significant that even to the big Haskell researchers the visual presentation of the current hackage is rather lacking behind.</p>
+
+<h3 id="pull-requests">Pull requests</h3>
+
+<p>You can find my pull requests here:</p>
+
+<ul>
+  <li><a href="https://github.com/haskell/hackage-server/pull/648">hackage</a></li>
+  <li><a href="https://github.com/haskell/haddock/pull/721">haddock</a></li>
+</ul>
+
+<h3 id="preview">Preview</h3>
+
+<p>Using the links below you can preview how my latest changes look like on the given pages, as well how those pages currently look like.
+I am hosting the preview pages myself, therefore those pages will keep on being updated accordingly to the changes I push. This is a better way to let others preview and actually try the changes compared to screenshots, which I was doing before.</p>
+
+<h4 id="hackage-preview-pages">Hackage preview pages</h4>
+
+<ul>
+  <li><a href="/pets/hackage/home.html" target="_blank">Hackage homepage</a> (<a href="https://hackage.haskell.org" target="_blank">before</a>)</li>
+  <li><a href="/pets/hackage/browse.html" target="_blank">Hackage browse page</a> (<a href="https://hackage.haskell.org/packages/browse" target="_blank">before</a>)</li>
+  <li><a href="/pets/hackage/monoid-extras.html" target="_blank">Monoid.Extras package</a> (<a href="https://hackage.haskell.org/package/monoid-extras" target="_blank">before</a>)</li>
+</ul>
+
+<h4 id="haddock-preview-pages">Haddock preview pages</h4>
+
+<ul>
+  <li><a href="/pets/haddock/Control.Lens.Cons.html" target="_blank">Control.Lens.Cons</a> (<a href="https://hackage.haskell.org/package/lens-4.16/docs/Control-Lens-Cons.html" target="_blank">before</a>)</li>
+  <li><a href="/pets/haddock/Control.Lens.Operators.html" target="_blank">Control.Lens.Operators</a> (<a href="https://hackage.haskell.org/package/lens-4.16/docs/Control-Lens-Operators.html" target="_blank">before</a>)</li>
+  <li><a href="/pets/haddock/Control.Lens.Tutorial.html" target="_blank">Control.Lens.Tutorial</a> (<a href="https://hackage.haskell.org/package/lens-tutorial-1.0.3/docs/Control-Lens-Tutorial.html" target="_blank">before</a>)</li>
+  <li><a href="/pets/haddock/Numeric.Kalman.html" target="_blank">Numeric.Kalman</a> (<a href="https://hackage.haskell.org/package/kalman-1.0.0.2/docs/Numeric-Kalman.html" target="_blank">before</a>)</li>
+</ul>
+
+<h3 id="feedback">Feedback</h3>
+
+<p>Thanks to <a href="https://arianvp.me">Arian</a>, a wave of people have come to find my pull requests and drop their feedback.</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My colleague Nuno has taken a stab at redesigning hackage and haddock UI and would love to have your feedback <a href="https://t.co/2UM6O7mBIT">https://t.co/2UM6O7mBIT</a> <a href="https://t.co/7WMX2VzAFM">pic.twitter.com/7WMX2VzAFM</a></p>&mdash; Arian van Putten (@ProgrammerDude) <a href="https://twitter.com/ProgrammerDude/status/956807886889472001?ref_src=twsrc%5Etfw">January 26, 2018</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>So far the majority seems very positive about the new look&amp;feel, but there is also feedback preferring the current theme.
+The number one argument is that the current theme is dense in information, making it more suitable for quick glances and content searching.</p>
+
+<p>What’s your opinion? Drop your comments here, by email or on the pull requests linked above.</p>
+:ET
