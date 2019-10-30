@@ -565,3 +565,29 @@ blockquote {
         margin-top: 0px;
     }
 }
+
+.screenshots {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+
+  .column {
+    width: 40%;
+    border-radius: 15px;
+  }
+
+  .column + .column {
+    margin-left: $spacing-unit / 2;
+  }
+}
+
+img.medium {
+  max-width: 75%;
+  max-height: 65vh;
+}
+
+img.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
