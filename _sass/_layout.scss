@@ -568,12 +568,14 @@ blockquote {
 
 .screenshots {
   display: flex;
+  display:-webkit-flex;
   width: 100%;
   overflow-x: auto;
 
   .column {
     width: 40%;
-    height: auto;
+    height: 100%;
+
     border-radius: 15px;
   }
 
