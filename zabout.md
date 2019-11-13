@@ -11,7 +11,7 @@ Hi! I am Nuno Alexandre, a Portuguese living in The Netherlands. I'm a husband, 
 <p><img width="100%" title="Nuno hiking in Austria." src="/images/about-nuno-alexandre.jpeg"/></p>
 
 
-I am an enthusiast software developer aspiring software craftsmanship. I’m a polyglot programmer with a fondness for the functional paradigm, dependent types, and type-systems. Beautiful code, cool programming technology, and great team spirit are my bread & butter.
+I am an enthusiast software developer with a passion for startups and design. I’m a polyglot programmer with a fondness for the functional paradigm. Beautiful code, cool programming technology, and excellent team spirit are my bread & butter.
 
 I keep improving myself by devouring books, blogs, academic papers, talks about all things software, by working on side-projects to get a concrete understanding of some concept or technology, and by contributing to open-source projects.
 

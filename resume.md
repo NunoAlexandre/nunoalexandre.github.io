@@ -5,8 +5,7 @@ comments: false
 permalink: /resume/
 ---
 
-
-I am an enthusiast software developer aspiring software craftsmanship. I’m a polyglot programmer with a fondness for the functional paradigm, dependent types, and type-systems. Beautiful code, cool programming technology, and excellent team spirit are my bread & butter.
+I am an enthusiast software developer with a passion for startups and design. I’m a polyglot programmer with a fondness for the functional paradigm. Beautiful code, cool programming technology, and excellent team spirit are my bread & butter.
 
 <h2>Work Experience</h2>
 
@@ -23,21 +22,25 @@ I am an enthusiast software developer aspiring software craftsmanship. I’m a p
     <div class="description">
       Kidiyo aims to develop fun and thoughtful games from children from 0 to 6 years old,
       providing them with a healthy and safe environment to play, explore and learn, both
-      online and offline. <br><br>
-
-      I was responsible for:
+      online and offline. At Kidiyo, I have:
       <ul>
-        <li>building and managing an in-house team of developers</li>
-        <li>designing and developing the whole technical infrastructure and apps</li>
-        <li>contributing to the roadmap and business case</li>
-        <li>linking psychologists, child experts, designers and developers</li>
-        <li>professionalizing the overall workflow and standards</li>
+        <li>moved all the development in-house from a 3rd party company within a week</li>
+        <li>built and managed an in-house team of developers</li>
+        <li>designed and developed the whole technical infrastructure and apps</li>
+        <li>contributed to the business case and roadmap using OKRs</li>
+        <li>linked psychologists, child experts, designers and developers</li>
+        <li>professionalized the overall workflow and standards</li>
       </ul>
     </div>
     <div class="tags">
       <code class="highlighter-rouge">Swift</code>
       <code class="highlighter-rouge">Kotlin</code>
       <code class="highlighter-rouge">Firebase</code>
+      <code class="highlighter-rouge">DSL</code>
+      <code class="highlighter-rouge">Lead</code>
+      <code class="highlighter-rouge">Python</code>
+      <code class="highlighter-rouge">Ruby</code>
+      <code class="highlighter-rouge">TypeScript</code>
       <code class="highlighter-rouge">NodeJS</code>
     </div>
   </li>
