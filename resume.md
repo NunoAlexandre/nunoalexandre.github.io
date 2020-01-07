@@ -10,7 +10,28 @@ I am an enthusiast software developer with a passion for startups and design. Iâ
 <h2>Work Experience</h2>
 
 <ul class="timeline">
-
+  <li class="item">
+    <span class="logo">
+      <a href="https://monadic.xyz">
+        <img src="/images/monadic-icon.svg"/>
+      </a>
+    </span>
+    <span class="title">Software Engineer</span>
+    <div class="period">Since January 2020</div>
+    <div class="description">
+      Monadic is a group of technologists who in 2017 set out to build the future of free and open-source software collaboration. My focus is on the radicle.xyz project, specifically in the Radicle Registry, a distributed ledger that serves as the coordination and economic layer for the Radicle platform.
+    </div>
+    <div class="tags">
+      <code class="highlighter-rouge">Rust</code>
+      <code class="highlighter-rouge">Substrate</code>
+      <code class="highlighter-rouge">Decentralization</code>
+      <code class="highlighter-rouge">Crypto</code>
+      <code class="highlighter-rouge">Blockhain</code>
+      <code class="highlighter-rouge">Haskell</code>
+      <code class="highlighter-rouge">IPFS</code>
+      <code class="highlighter-rouge">Web 3.0</code>
+    </div>
+  </li>
   <li class="item">
     <span class="logo">
       <a href="https://kidiyo.com">
