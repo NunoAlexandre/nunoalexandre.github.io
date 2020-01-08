@@ -7,7 +7,7 @@
 
 # Site settings
 title: Nuno Alexandre
-email: nunombalexandre@gmail.com
+email: hi@nunoalexandre.com
 description: An aspiring software craftsman's blog
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://nunoalexandre.com" # the base hostname & protocol for your site
@@ -18,3 +18,4 @@ permalink: :year/:month/:day/:title
 markdown: kramdown
 fullname: Nuno Miguel Bento Alexandre
 kvk_number: 76893081
+vat_id: 000044631219
