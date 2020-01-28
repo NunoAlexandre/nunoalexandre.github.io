@@ -17,5 +17,6 @@ permalink: :year/:month/:day/:title
 # Build settings
 markdown: kramdown
 fullname: Nuno Miguel Bento Alexandre
+company_name: Nuno Alexandre
 kvk_number: 76893081
-vat_id: 000044631219
+vat_id: NL003127468B30
