@@ -65,7 +65,7 @@
    font-weight: 400;
    font-style: normal;
    color: rgba(0, 0, 0, 0.44);
-   font-size: $base-font-size - 4;
+   font-size: $base-font-size - 5;
    letter-spacing: 0;
    text-decoration: none;
    background: #fafafa;
@@ -198,20 +198,21 @@ background: transparent;
 .post-list {
     margin-left: 0;
     list-style: none;
+    font-size: $base-font-size;
 
     > li {
-        margin-bottom: $spacing-unit;
+        margin-bottom: $spacing-unit/3;
     }
 
    .post {
       .title {
          margin: 0px;
+         display: inline-block;
       }
 
       .post-link {
          display: block;
          clear: both;
-         font-size: 27px;
          line-height: 31px;
          font-family: $base-font-family;
          font-weight: 700;
@@ -233,7 +234,6 @@ background: transparent;
 }
 
 .post-list .post-meta {
-   font-size: $base-font-size - 2;
    @include media-query($on-palm) {
       font-size: $base-font-size - 3;
    }
@@ -251,7 +251,7 @@ background: transparent;
     color: $grey-color;
     font-weight: 400;
     margin-top: 4.5px;
-    font-family: $base-font-family;
+    font-family: monospace;
 }
 
 .mid-dot-divider {
@@ -466,7 +466,7 @@ h1.post-title {
     border-radius: 50%;
 }
 
-.post-list, .post {
+.post-list, .post:first-of-type {
    margin-top: $spacing-unit * 1.5;
 }
 
@@ -546,7 +546,7 @@ p + p {
 }
 
 li.post {
-   margin-bottom: $spacing-unit * 2.33;
+  margin-bottom: $spacing-unit;
 }
 
 blockquote {
