@@ -487,12 +487,6 @@ iframe {
    max-width: 100%;
 }
 
-.post-content a {
-    font-size: 0.963em;
-    color: $brand-color;
-
-}
-
 .social-media-list li {
     display: inline-block !important;
 }
@@ -527,10 +521,6 @@ iframe {
 .icon--rss svg, .icon--mail svg {
    width: 20px;
    height: 20px;
-}
-
-a.page-link:hover {
-  color: $brand-color;
 }
 
 .gist + p {
