@@ -6,11 +6,16 @@ comments: true
 id: /about/
 ---
 
+<p>
 Hi! My name is Nuno Alexandre, a Portuguese living in The Netherlands. I'm a husband, a father,
 and a thinker. Often called an old soul, my interests float around programming, music, 
 philosophy, sports, neuroscience, design, and weightlifting.
+</p>
 
-Discover what's beyond the {{ site.description }}.
+<p>
+Discover what's beyond the <a href="/">{{ site.description }}</a> and <a href="/resume">the resume</a>.
+</p>
+
 <p><img width="100%" title="Nuno hiking in Austria." src="/images/about-nuno-alexandre.jpeg"/></p>
 
 <div class="two-column-grid">
