@@ -119,6 +119,11 @@ background: transparent;
 .site-footer {
     border-top: 1px solid $grey-color-light;
     padding: $spacing-unit 0;
+
+    .credits {
+      color: $grey-color;
+      text-align: center;
+    }
 }
 
 .footer-heading {
@@ -591,7 +596,7 @@ img.centered {
   margin: $spacing-unit * 2 0;
 
   h3 {
-    margin-top: 0px;    
+    margin-top: 0px;
   }
 }
 
