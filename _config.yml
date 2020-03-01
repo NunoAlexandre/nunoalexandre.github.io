@@ -8,7 +8,7 @@
 # Site settings
 title: Nuno Alexandre
 email: hi@nunoalexandre.com
-description: An aspiring software craftsman's blog
+description: Builder of software, product focused, designer wannabe
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://nunoalexandre.com" # the base hostname & protocol for your site
 github_username: nunoalexandre

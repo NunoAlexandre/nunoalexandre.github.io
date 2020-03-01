@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<div class="home">
+    <h1 class="post-title">Posts</h1>
+    <ul class="post-list">
+    {% for post in site.posts %}
+    <li class="post">
+      <span class="post-meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{ post.date | date: "%b %d, %Y" }}
+        </time>
+        <span class="mid-dot-divider">•</span>
+      </span>
+      <span class="title">
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </span>
+      <span class="mid-dot-divider">•</span>
+      <span class="post-meta">
+        <span class="reading-time">
+          {{ post.content | number_of_words | divided_by:180 }} min read
+        </span>
+      </span>
+      <span class="mid-dot-divider">•</span>
+      <div class="tags">
+        {% for category in post.categories %}
+           <code class="highlighter-rouge">{{ category }}</code>
+        {% endfor %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

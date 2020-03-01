@@ -5,9 +5,21 @@ comments: false
 permalink: /resume/
 ---
 
-I am an enthusiast software developer with a passion for startups and design. I’m a polyglot programmer with a fondness for the functional paradigm. Beautiful code, cool programming technology, and excellent team spirit are my bread & butter.
+Having started as a web designer, soon I felt attracted towards the engineering problems 
+more commonly found in backend engineering. 
 
-<h2>Work Experience</h2>
+My objective at the start of my career was to get a solid touch in different areas,
+such as mobile and web app development, and in using different tech that would stretch 
+my intellect; Then I looked into transitioning into a more product oriented setup, 
+backend engineering, and leading or self-governed roles.
+
+In the future I dream of building my own company around a product.
+
+<p>
+  <em>
+    Learn more about me as a <a href="/resume>">{{ site.description }}</a> and more <a href="/about">about me</a> as a person.
+  </em>
+</p>
 
 <ul class="timeline">
   <li class="item">

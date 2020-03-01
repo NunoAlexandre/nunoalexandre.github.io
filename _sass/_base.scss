@@ -103,7 +103,12 @@ a {
     }
 
     &:hover {
-        color: $brand-color;
+        color: $text-color;
+        text-shadow:
+            -3px 0px 3px yellow,
+            3px 0px 3px yellow,
+            6px 0px 6px yellow,
+            -6px 0px 6px yellow;
     }
 }
 
@@ -227,4 +232,8 @@ pre {
 
 .round {
   border-radius: 50%;
+}
+
+.centered {
+    text-align: center;
 }

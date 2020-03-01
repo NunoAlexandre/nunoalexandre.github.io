@@ -3,26 +3,150 @@ layout: default
 ---
 
 <div class="home">
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li class="post">
-        <h2 class="title">
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-        <div class="post-meta">
-           <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-               {{ post.date | date: "%b %-d, %Y" }}
-           </time>
-           <span class="mid-dot-divider">•</span>
-           <span class="reading-time">
-               {{ post.content | number_of_words | divided_by:180 }} min read
-            </span>
-        </div>
-         <div class="excerpt">
-            <p>{{post.excerpt}}</p>
-         </div>
-      </li>
-    {% endfor %}
-  </ul>
+  <p>
+    Hi! My name is Nuno, I am an enthusiast software developer with a passion for startups and design.
+    I’m a polyglot programmer with a fondness for the functional paradigm. Beautiful code, cool programming
+    technology, and excellent team spirit are my bread & butter.
+  </p>
 
-</div>
+  <div class="table-of-contents">
+    <p>-
+      <a href="#builder-of-software">Builder of software</a>,
+      <a href="#product-focused">product focused</a>,
+      <a href="#designer-wannabe">designer wannabe</a>
+      -
+      </p>
+  </div>
+
+  <div id="builder-of-software">
+    <h2>Builder of Software</h2>
+    <p style="font-family: monospace;">There are a handful of principles that guide the way I build, maintain, and deliver software.</p>
+
+    <div class="two-column-grid">
+      <div>
+        <h3>Robustness</h3>
+        <p>
+          Controlled side-effects, type-safety, immutable data, proper error handling, small functions,
+          simplicity, seamless refactoring, thorough testing, excellent readability, well-written
+          documentation, attent code reviews, clean git history, clear specs and roadmaps, continuous
+          integration and delivery, reproducible builds, fast iterations. That's what I'm all in for.</p>
+      </div>
+        <div>
+          <h3>Diversity</h3>
+          <p>
+            Moved by the joy of learning new ways of thinking, Haskell, Rust, Elixir, Swift,
+            Python, C, and Objective-C are some of the techs I loved learning and using in production.
+            However flexible, I'm particularly fond of the functional paradigm and backend
+            engineering, specially the design of apis, domain-specific languages, and
+            distributed and decentralized systems, where the most interesting computing problems are.
+          </p>
+        </div>
+        <div>
+          <h3>Pragmatism</h3>
+          <p>
+            Software is all about trade-offs, so I appreciate and work the skill
+            of pragmatism as the quality of dealing with a problem in a sensible way that
+            suits the conditions that really exist, rather than following dogmas or bare ideals.
+            "First make it work, then make it beautiful, and if really necessary make it fast"
+            by Joe Amstrong is, therefore, the process guiding my way of solving problems.
+          </p>
+        </div>
+        <div>
+          <h3>Team effort</h3>
+          <p>
+            Wolfs hunt together. I believe that our best potential is leveraged when working in
+            solid, trust-based, safe, transparent, and dynamic teams where the standards are high
+            and where everyone has the improvement and support of each other in their best interest.
+            Raised playing team sports, excellent team spirit are my bread & butter and a key factor
+            for enjoyable work.
+          </p>
+        </div>
+        <div>
+          <h3>Open source</h3>
+          <p>
+            When I received my first free Linux distribution as a late teenager, I was astonished that
+            a free operating system - that anyone in the world could contribute to - had just
+            brought my old pc back to life and outperform a mainstream, closed, and corporate alternative
+            costing $300 a license. I felt moved by that experience and have always worked in environments
+            where open source is at the core of the culture. Now proudly working on <ref="https://radicle.xyz">Radicle</a>,
+            an open-source, secure peer-to-peer code collaboration without intermediaries.
+          </p>
+        </div>
+    </div>
+  </div>
+
+  <div id="product-focused">
+    <h2>Product Focused</h2>
+    <p>Beautiful tech to build beautiful products.</p>
+
+    <div class="two-column-grid">
+        <div>
+          <h3>Products over Projects</h3>
+          <p>
+            During a few years of consultancy, working in different projects every other month,
+            it became clear that my heart was in products. Moved to product companies by Joel
+            Spolsky, I see in products the opportunity to witness the long-term consequences
+            of design and implementation decisions and to keep bringing value week after week to
+            end-users.
+          </p>
+        </div>
+        <div>
+          <h3>Small environments</h3>
+          <p>With an aquired passion for startups, my preference lays in small environments moved by
+            great taste and vision focused around a product, where there are clear OKRs guiding and
+            contextualizing the much work to do, where everyone is accountable and able to make
+            a real impact in the course of the product and company.
+          </p>
+        </div>
+        <div>
+          <h3>Tech as a means to an end</h3>
+          <p>
+            I sure enjoy learning and getting lost in the internals of programming languages. However,
+            seeing the meaning and purpose of the work I do is fundamental to me. Working on products
+            that truly mean to make a difference in the world is, therefore, my deepest aim.
+          </p>
+        </div>
+    </div>
+  </div>
+
+  <div id="designer-wannabe">
+    <h2>Designer wannabe</h2>
+    <p>Fine designers and artists have my deepest respect and whenever possible I get
+      in touch with their craft and learn from them. </p>
+    <div class="two-column-grid">
+        <div>
+          <h3>Typography</h3>
+          <p>
+            For some reason, I have always paid some caring attention to typography.
+            Be it in school reports, presentations, art, posters, street signs,
+            books, you name it. The Introduction to Typography course by the California
+            Institute of the Arts brought shape and formal thinking to this passion of mine.
+          </p>
+        </div>
+        <div>
+          <h3>UI & UX</h3>
+          <p>Having started off as a web designer, my UI designer side is still around. I have
+            <a href="https://nunoalexandre.com/2018/02/04/redesigning-haskell-docs">redesigned the Haskell docs</a>,
+            <a href="https://nunoalexandre.com/2019/10/30/the-new-kidiyo-menu">designed the new Kidiyo app menu</a>,
+            <a href="https://arochalife.com">A Rocha Life</a>'s website,
+            the <a href="https://docs.channable.com/api/v1/#introduction">Channable API documentation</a>,
+            this very blog, and more. The UI & UX courses I followed during my bachelor taught me
+            a good deal around what makes a great experience, something I am always on the lookout for.</p>
+        </div>
+        <div>
+          <h3>Visuals</h3>
+          <p>
+            No more efficient designing visuals than elephants riding bikes,
+            somehow I pulled a logo for the <a href="https://github.com/channable/icepeak">Icepeak - Fast JSON document
+            store written in Haskell</a>, an open-source project I contributed to.
+            Definitly something I'd like to get better at.
+          </p>
+        </div>
+    </div>
+
+    <p class="centered">
+      <em>
+        See also <a href="/resume>">my resume</a> and read more <a href="/about">about me</a>.
+      </em>
+    </p>
+  </div>
