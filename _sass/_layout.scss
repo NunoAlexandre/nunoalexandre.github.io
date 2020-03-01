@@ -31,10 +31,6 @@
         display: none;
     }
 
-    @include media-query($on-palm) {
-      text-align: left;
-    }
-
     .page-link {
         color: $text-color;
         line-height: $base-line-height;
@@ -582,6 +578,10 @@ img.centered {
 .home {
   margin-top: $spacing-unit * 2;
 
+  @include media-query($on-palm) {
+    margin-top: $spacing-unit;
+  }
+
   .table-of-contents {
     text-align: center;
     padding: $spacing-unit*2 0 $spacing-unit 0;
@@ -594,6 +594,10 @@ img.centered {
   grid-column-gap: $spacing-unit * 1.5;
   grid-row-gap: $spacing-unit * 1.5;
   margin: $spacing-unit * 2 0;
+
+  @include media-query($on-palm) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   h3 {
     margin-top: 0px;
