@@ -16,7 +16,7 @@ philosophy, sports, neuroscience, design, and weightlifting.
 Discover what's beyond the <a href="/">{{ site.description }}</a> and <a href="/resume">the resume</a>.
 </p>
 
-<p><img width="100%" title="Nuno hiking in Austria." src="/images/about-nuno-alexandre.jpeg"/></p>
+<p><img width="100%" title="Cover picture" src="/images/about-cover.jpg"/></p>
 
 <div class="two-column-grid">
       <div>
