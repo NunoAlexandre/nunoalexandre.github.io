@@ -32,8 +32,8 @@ permalink: /resources/
 ### Blogs
 
 * [Stephen Diehl](http://www.stephendiehl.com/)
+* [Raidcle Comunity](http://radicle.community)
 * [Channable's Tech Blog](https://tech.channable.com)
-* [Ruud van Asseldonk](https://ruudvanasseldonk.com)
 * [Coding Horror](http://blog.codinghorror.com)
 * [Martin Fowler](http://www.martinfowler.com)
 * [Chad Fowler](http://chadfowler.com)
@@ -42,8 +42,8 @@ permalink: /resources/
 * [Clean Coder](http://blog.cleancoder.com)
 * [Ruud van Asseldonk](https://ruudvanasseldonk.com)
 * [Arian van Putten](https://arianvp.me)
-* [Laurens Duijvesteijn](http://www.duijf.io/)
-
+* [Laurens Duijvesteijn](http://www.duijf.io)
+* [David Soff](https://davidsoff.nl)
 
 
 ### Studying online
