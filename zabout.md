@@ -22,7 +22,7 @@ Discover what's beyond the <a href="/">{{ site.description }}</a> and <a href="/
       <div>
         <h3>Husband & Father</h3>
         <p>
-        My wife and kid are the dearest, sweest, and most precious part of my life.
+        My wife and kid are the dearest, sweetest, and most precious part of my life.
         No job, ridiculous deadline, or money come close to blur this priority.
         Seeing my kid grow and aquire new skills day after day is not only a privilige
         but also a great lesson I identify a lot to learn from.
