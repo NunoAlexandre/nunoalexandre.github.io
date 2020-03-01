@@ -8,7 +8,7 @@ id: /about/
 
 <p>
 Hi! My name is Nuno Alexandre, a Portuguese living in The Netherlands. I'm a husband, a father,
-and a thinker. Often called an old soul, my interests float around programming, music, 
+and a thinker. Often called an old soul, my interests float around programming, music,
 philosophy, sports, neuroscience, design, and weightlifting.
 </p>
 
@@ -31,8 +31,8 @@ Discover what's beyond the <a href="/">{{ site.description }}</a> and <a href="/
       <div>
         <h3>Music</h3>
         <p>
-        I am a big fan of B Fachada, Bobby Mcferrin, Kurt Vile, The War on Drugs, Miles Davis, 
-        and Jeff Buckley. I enjoy many more but these are the artists whose discography I listen 
+        I am a big fan of B Fachada, Bobby Mcferrin, Kurt Vile, The War on Drugs, Miles Davis,
+        and Jeff Buckley. I enjoy many more but these are the artists whose discography I listen
         to a good number of times a year, on vinyl, cd, or digital. Mildly obsessed with hi-fi audio.
         </p>
       </div>
@@ -40,10 +40,10 @@ Discover what's beyond the <a href="/">{{ site.description }}</a> and <a href="/
         <h3>Mens sana in corpore sano</h3>
         <p>
         As a follower of the greek ideal of pursuing both intellectual and bodily excellence,
-        I divide and prioritize my time developing the two. Having played federated sports 
-        since my childhood while excelling at school, I value the two aspects of my existence 
-        and make sure I keep both in balance. I played Roller Hockey for over a decade, 
-        a few years of Basketball at school, and a lot of ping-pong at work. Nowadays, 
+        I divide and prioritize my time developing the two. Having played federated sports
+        since my childhood while excelling at school, I value the two aspects of my existence
+        and make sure I keep both in balance. I played Roller Hockey for over a decade,
+        a few years of Basketball at school, and a lot of ping-pong at work. Nowadays,
         I am a passionate weightlifter.
         </p>
       </div>
@@ -58,9 +58,9 @@ Discover what's beyond the <a href="/">{{ site.description }}</a> and <a href="/
       <div>
       <h3>Eternal student</h3>
       <p>
-        I keep improving myself by devouring books, blogs, academic papers, talks about all things 
-        software, by working on side-projects to get a concrete understanding of some concept or 
-        technology, by working with some of the best in the industryand by contributing to 
+        I keep improving myself by devouring books, blogs, academic papers, talks about all things
+        software, by working on side-projects to get a concrete understanding of some concept or
+        technology, by working with some of the best in the industryand by contributing to
         open-source projects.
       </p>
       </div>
